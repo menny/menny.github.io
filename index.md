@@ -18,13 +18,14 @@ title: Menny Even-Danan
 <li><a href="http://www.speakingpal.com">SpeakingPal</a> - an mLearning startup.</li>
 <li><a href="/posts.html">Blog</a> - a pretty static system and software blog.</li>
 </ul>
-
+<!-- not ready
 <ul class="raised">
 <li><strong>...finds interesting:</strong></li>
 <li><a href="http://www.google.com/reader/shared/mennyed" target="_blank">Reader</a> - articles from the web.</li>
 <li><a href="http://picasaweb.google.com/mennyed" target="_blank">Picasa</a> - photos from the world.</li>
 <li><a href="http://forrst.com/people/menny/posts" target="_blank">Forrst</a> - snippets from me and others.</li>
 </ul>
+-->
 </td>
 </tr>
 </table>
