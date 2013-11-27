@@ -1,0 +1,26 @@
+---
+layout: post
+title: A Tiny XmlWriter or Why Not to Use Java's XML Framework
+date:   2010-11-15 12:00:00
+permalink: /p/29
+categories: [android, java]
+tags: [lean-and-mean, tips, startup]
+---
+<p>We are now at the final stages of releasing our first public version of <a href="http://speakingpal.com" target="_blank">SpeakingPal</a> and go over content and finalize interfaces and data structures.</p>
+
+<p>
+This can be a very tedious job: we find some kind of error in XML structures and content types, then go to fix this, just to realize we forgot something (this is how it is in a very small startup...) - then redefine the XML structures and try again.
+While at it, I try to be as <a href="http://blogoscoped.com/archive/2005-08-24-n14.html" target="_blank">lazy</a> as possible and write <a href="http://en.wikipedia.org/wiki/Eating_your_own_dog_food">dogfood kinda tools</a> to do the work for me. This time, I wanted to write a small Java application (I use Java where others use scripting languages) for creating the required XML structures, but I couldn't remember how to use Java's very extensive XML framework, so I googled for "<a href="http://www.google.com/search?q=java+xmlwriter">Java XmlWriter</a>", and first came something I didn't expect: <a href="http://www.generationjava.com/docs/XmlWriter/XmlWriter.java.html">source code</a> for a tiny XML files writer. I browsed over the code, and loved it immediately! It was short, and clear, and did almost everything I need.</p>
+<p>So, I decided to use this code for my XML generating tool instead of using Java's XML framework, which, I'm sure, handles all the possible errors, and all the special <a href="http://xmmssc-www.star.le.ac.uk/SAS/xmmsas_20070308_1802/doc/param/node24.html">escape </a><a href="http://tntluoma.com/sidebars/codes/">codes</a>, and every XML <a href="http://download.oracle.com/javase/1.4.2/docs/api/javax/xml/transform/Transformer.html">format</a> you may want, etc, etc.
+The reasons I've decided to use this code and not Java's are:
+<ol>
+<li>It is beautiful: no really! It is so simple, and so small, and has 80% of the features you may need, and had a very straight-forward API, I just had to use it.</li>
+<li>It is small: our company is creating client applications for Android, Symbian and Blackberry, all uses Java as a programming language, and all are mobile platforms which are low on resources.</li>
+<li>It is fast: it doesn't do anything else but write XML nodes since it assumes you will not make structure/syntax errors while building your XML, and you will not try to add exotic data or characters.</li>
+</ol>
+</p>
+<p>
+For mobile platforms <code>Simple+Small+Fast = GOOD!</code> So, it may not the best for complex applications, but it is very good for resources-limited devices.
+Anyhow, <a href="https://github.com/menny/Java-very-tiny-XmlWriter/blob/master/XmlWriter.java">here</a> is the source code for you to also enjoy (as Henri's code, my code is also BSD licensed). I'm sure there are many other such <a href="http://sourceforge.net/projects/txml/">tiny</a>-<a href="http://maol.su-fun.com/Kava_Doc/kava/xml/TinyXML.html">xml</a>-like classes.
+The source code I found was very out-dated. <a href="http://www.yandell.org/henri/">Henri Yandell</a> (the original coder) has moved the source to <a href="http://code.google.com/p/osjava/">Google Code</a> and continued evolving the code (and many other projects). Jump over there to see if you might need something. I will :)
+</p>
