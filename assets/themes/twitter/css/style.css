@@ -72,6 +72,14 @@ code {
   float: left; 
 }
 
+.posts {
+	list-style-type: none;
+}
+
+.posts h2 {
+  text-align: center;
+}
+
 /* posts index */
 .post > h3.title {
   position: relative;
