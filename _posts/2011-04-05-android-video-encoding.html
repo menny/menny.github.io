@@ -1,0 +1,82 @@
+---
+layout: post
+title: Creating videos for Android devices
+date:   2011-04-05 12:00:00
+permalink: /2011/04/Creating-videos-for-Android-devices
+categories: [android]
+tags: [tips, video]
+---
+<p>Encoding the perfect video for mobile devices is always hard: you want a small sized file, with high quality, and a codec which will work on all devices, no matter how <a href="http://www.zdnet.com/blog/open-source/androids-biggest-worry-fragmentation/8022" target="_blank">fragmented the platform is</a>.</p>
+
+<p>Android supports a very nice set of <a href="http://developer.android.com/guide/appendix/media-formats.html" target="_blank">video and audio formats</a>. We see that support for H264 and AAC is available in all Android versions, but with some limitations: H264 is only supported in baseline profile and AAC is supported in MP4 container, and while testing we encountered some more limitations, like inability to play DCT-DECIMATTION encoded files.<br/>
+I want to share the <a href="http://www.ffmpeg.org" target="_blank">FFMpeg</a> encoding configuration which worked for us.</p>
+<h2>FFMpeg configuration</h3>
+<p>
+We used H264, 20fps, 200kbps baseline profile, and AAC single channel 32kbps. 2 passes encoding was used.
+</p>
+<h3>Preset files</h3>
+<p>
+FFMpeg supports preset files to help removing the endless flags from the command line:<br>
+<strong><u>First pass preset file (named 'libx264-android_firstpass.ffpreset')</u></strong>
+<pre><code>coder=1
+flags=+loop
+cmp=+chroma
+partitions=+parti8x8+parti4x4+partp8x8+partb8x8
+me_method=dia
+subq=2
+me_range=16
+g=250
+keyint_min=25
+sc_threshold=40
+i_qfactor=0.71
+b_strategy=1
+qcomp=0.6
+qmin=10
+qmax=51
+qdiff=4
+bf=0
+refs=1
+directpred=1
+trellis=0
+flags2=-bpyramid-mixed_refs-wpred-dct8x8-fastpskip
+wpredp=0
+rc_lookahead=30</code></pre>
+<strong><u>Second pass preset file (named 'libx264-android_baseline.ffpreset')</u></strong>
+<pre><code>coder=0
+flags=+loop
+cmp=+chroma
+partitions=+parti8x8+parti4x4+partp8x8+partb8x8
+me_method=dia
+subq=2
+me_range=16
+g=250
+keyint_min=25
+sc_threshold=40
+i_qfactor=0.71
+b_strategy=1
+qcomp=0.6
+qmin=10
+qmax=51
+qdiff=4
+bf=0
+refs=1
+directpred=1
+trellis=0
+flags2=-bpyramid-mixed_refs-wpred-dct8x8-fastpskip
+wpredp=0
+rc_lookahead=30</code></pre>
+</p>
+<h3>Encoding</h3>
+<p>
+From FFMpeg folder run the following command for the first pass:
+<pre><code>bin\ffmpeg -i source_video_file.avi -vcodec libx264 -r 20 -s 320x240 -b 220k -bt 240k -pass 1 -fpre presets\libx264-android_firstpass.ffpreset -y -an NUL.mp4</code></pre>
+For the second pass (and actual encoding):
+<pre><code>bin\ffmpeg -i source_video_file.avi -strict experimental -acodec aac -ar 16000 -ab 32k -ac 1 -vcodec libx264 -r 20 -s 320x240 -b 220k -bt 240k -pass 2 -fpre presets\libx264-android_baseline.ffpreset -y target_video_file.mp4</code></pre>
+<h3>Notes</h3>
+<ol>
+<li>The FFMpeg version I used has <i>experimental</i> support for AAC, so I used the <strong><i>-strict experimental</i></strong> flag in the second pass</li>
+<li>I know that some versions of FFMpeg do not accept the <strong><i>-fpre</i></strong> option to specify the preset file, and requires <strong><i>-vpre</i></strong></li> option instead. Just copy the profile files into the <strong>presets</strong> folder, and use <strong><i>android_baseline</i></strong> instead of <strong><i>presets\libx264-android_baseline.ffpreset</i></strong>
+<li>If you want to stream these video files, you'll need to add hints tracks. <a href="http://mp4creator.sourceforge.net/" target="_blank">MP4Creator</a> is a great tool that can add those hint tranks. Don't forget to add hints for both the video track and the audio track.</li>
+<li>If you see this warning in FFMpeg conversion: "<i>Incompatible pixel format 'bgr24' for codec 'libx264', auto-selecting format 'yuv420p'</i>", then <b>IT WONT WORK IN ANDROID</b>! I noticed this warning when editing video files with <a href="http://www.techsmith.com/camtasia/" target="_blank">Camtasia</a>. Switching to <a href="http://www.pitivi.org/" target="_blank">Piviti</a> fixed the issue.</li>
+</ol>
+</p>
