@@ -1,0 +1,15 @@
+---
+layout: post
+title: Dynamic Copyright Year Text
+date:   2011-01-02 12:00:00
+permalink: /p/65
+categories: []
+tags: [tips, things-i-forget]
+---
+<p>Have you remembered to changed the copyright text?</p>
+
+<p>Well, I didn't. So now I have this code in the company's website footer: 
+{% highlight php %}
+<?php echo date("Y",time());?>
+{% endhighlight %}
+<p>Fuck the CPU cycles.</p>

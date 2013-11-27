@@ -18,13 +18,14 @@ Since most of our users are using mobile devices, we wanted to make it easy:
 </ul>
 How safe is it? Well, as I see it, we still get 16 in the power of 10 permutations (A..P ten times), which are <a href="http://vault.benbenson.com/data/001/md5/section5.html">very nicely distributed</a>, the <a href="http://en.wikipedia.org/wiki/Birthday_problem">Birthday Paradox</a> does not apply here (since the hash is not used to 'hide' the source, but to 'certify' the source. I think...), and it is very easy on the users' eye.
 So we have an MD5 string (e.g. <strong>37aa53dc03fd0a18617bda509c243012</strong>), and we want to get a human readable, type-able string (e.g. <strong>JNAALJDCGJ</strong>). Here is the PHP code we used (I take not responsibility for any MD5 or this code limitations!):
-<pre><code>function md5_shrinking($md5_signature)
+{% highlight PHP %}
+function md5_shrinking($md5_signature)
 {
 	//the input of this function is an MD5 hex (easily created with PHP's function md5($string) )
 	//actually, it doesn't have to be MD5 string. It can be anything from a random number
 	//to SHA1 to a specially crafted string/
 	//I want to do this:
-	// 37aa53dc03fd0a18617bda509c243012 -&gt; JNAALJDCGJ
+	// 37aa53dc03fd0a18617bda509c243012 -> JNAALJDCGJ
 	//sub-stringing to 10: easier on users
 	$trimmed_md5 = substr($md5_signature, 0, 10);
 	//upper-case so users will read it easily
@@ -35,7 +36,8 @@ So we have an MD5 string (e.g. <strong>37aa53dc03fd0a18617bda509c243012</strong>
 	//And converting the letter O to X, so users will not confuse it with zero
 	$regex_trimmed_md5 = preg_replace('/(O)/', 'X', $regex_trimmed_md5);
 	return $regex_trimmed_md5;
-}</code></pre>
+}
+{% endhighlight %}
 <h3>Security issues:</h3>
 <ul>
 <li>Append a <a href="http://en.wikipedia.org/wiki/Salt_%28cryptography%29">salt</a> string to your MD5 input! It will make you feel safer :)</li>
