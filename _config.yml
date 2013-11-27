@@ -1,3 +1,16 @@
 name: Let Me Explain Myself...
 markdown: redcarpet
 pygments: true
+tagline: Programming tricks, software design, and system architecture blog
+production_url : http://menny.github.io
+author :
+  name : Menny Even Danan
+  github : menny
+comments :
+    provider : disqus
+    disqus :
+      short_name : menny
+analytics :
+    provider : google 
+    google : 
+        tracking_id : 'UA-19733018-1'
