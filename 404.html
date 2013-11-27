@@ -1,13 +1,13 @@
 ---
 layout: page
 header : The DarkNet! Ah, no. Nothing to see here, move along.
+title: HTTP/1.1 404 Not Found
 ---
 {% include JB/setup %}
-<h1>HTTP/1.1 404 Not Found</h1>
-<p>There's nothing more heart-breaking than a broken link...</br>
-Want to start over at <a href="/">home</a>?</br>
-Or maybe read one of the latest posts?</p>
-
+<p class="subtitle">There's nothing more heart-breaking than a broken link...</p>
+<hr>
+<p>Want to start over at <a href="/">home</a>?</p>
+<p>Or maybe read one of the latest posts?
 <ul>
 {% for post in site.posts limit:5 %} 
 <li>  
@@ -17,3 +17,4 @@ Or maybe read one of the latest posts?</p>
 </li>  
 {% endfor %}  
 </ul>
+</p>
