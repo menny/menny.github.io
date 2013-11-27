@@ -6,6 +6,14 @@ header : The DarkNet! Ah, no. Nothing to see here, move along.
 <h1>HTTP/1.1 404 Not Found</h1>
 <p>There's nothing more heart-breaking than a broken link...</br>
 Want to start over at <a href="/">home</a>?</br>
-Or maybe to check out one of the posts?</p>
-{% assign posts_collate = site.posts %}
-{% include JB/posts_collate %}
+Or maybe read one of the latest posts?</p>
+
+<ul>
+{% for post in site.posts limit:5 %} 
+<li>  
+		   <span>{{ post.date | date_to_string }}</span> &raquo;  
+		   <a href="{{ BASE_PATH }}{{ post.url }}">  
+		   {{ post.title }}</a>  
+</li>  
+{% endfor %}  
+</ul>
