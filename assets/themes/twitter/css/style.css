@@ -51,8 +51,23 @@ code {
 .container-narrow > hr {
   margin: 10pt 0; }
 
-.navbar .nav {
-  float: right; }
+.navbar ul {
+	padding-top: 10px;
+	list-style-type: none;
+}
+
+.navbar li {
+	display:inline;
+	margin: 5pt;
+}
+
+.navbar .nav_right {
+  float: right; 
+}
+  
+.navbar .nav_left {
+  float: left; 
+}
 
 /* posts index */
 .post > h3.title {
