@@ -1,0 +1,42 @@
+---
+layout: post
+title: Android resources and device fragmentation
+date:   2011-03-17 12:00:00
+permalink: /2011/03/Android-resources-and-device-fragmentation
+categories: [android]
+tags: [tips, nightmare]
+---
+<p>With all those Android devices out there, as a developer you bound to encounter one that is really annoying.</p>
+
+<p>The <a href="http://uk.store.creative.com/entertainment-devices-mp3-players/ziio-7/948-20231.aspx?utm_source=uk.creative.com&utm_medium=Banner&utm_content=HomepageMHL_Ziio7&utm_campaign=ProductAd_Ziio7" target="_blank">ZiiO 7"</a> is such: It is an Android 2.1 tablet with a 'large', 'long', 'mdpi' resources qualifiers, which makes it an odd device. Most tablets are marked as 'large', 'hdpi', so they use the same resources (specifically, drawables) as other Android hdpi devices.</p>
+
+<h3>Naive solution</h3>
+<p>To make the UI look good, the ZiiO7 requires some of the hdpi drawables and some of the mdpi resources, so the only way to do it is by creating a new folder in the application resources folder named 'drawable-large-mdpi', and copy there the mdpi or hdpi images.</p>
+<p>This is nice, but since we also want to support 'large-hdpi', and since Android has a very strict <a href="http://developer.android.com/guide/topics/resources/providing-resources.html" target="_blank">"How Android Finds the Best-matching Resource"</a>, it means that we also need to create 'drawable-large-hdpi' folder to handle hdpi tables (like the Samsung Tab) - which will result in a huge APK, due to resources duplication, and a maintenance nightmare when revisiting the icons. We don't want that nightmare, right?</p>
+
+<h3>The best solution I found</h3>
+<p>After looking around, I noticed <a href="http://developer.android.com/guide/topics/resources/providing-resources.html#AliasResources" target="_blank">the resource alias</a> option in Android aapt mechanism.
+Basically, I can make a resource reference to another resource by providing an XML instead of PNG file. The XML will be of type 'bitmap' and will point to a real drawable:</p>
+{% highlight xml %}
+<?xml version="1.0" encoding="utf-8"?>
+<bitmap xmlns:android="http://schemas.android.com/apk/res/android"
+    android:src="@drawable/icon_ca" />
+{% endhighlight %}
+
+<p>or, if the image is a <a href="http://developer.android.com/guide/topics/resources/drawable-resource.html#NinePatch" target="_blank">9 patch</a>, you should use:</p>
+{% highlight xml %}
+<?xml version="1.0" encoding="utf-8"?>
+<nine-patch xmlns:android="http://schemas.android.com/apk/res/android"
+    android:src="@drawable/image_ca" />
+{% endhighlight %}
+
+<h3>How to</h3>
+I wanted to have the images in 'drawable-large-hdpi' and 'drawable-large-mdpi' are the same as in 'drawable-hdpi':
+<ol>
+<li>In the <b>'drawable-hdpi'</b> I'll rename all the files to <b>[real_resource_name]_hdpi.png</b> and move them to <b>'drawable-nodpi'</b> folder. It is important to move them to the nodpi folder, since we do not want Android resize them.</b></li>
+<li>Create a new XML file named <b>[real_resource_name].xml</b> with the alias text mention above. <b>Remember that it needs to point to the renamed file! In our example '[real_resource_name]_hdpi.png'</b></li>
+<li>Copy the newly created XML file to 'drawable-hdpi', 'drawable-large-hdpi' and 'drawable-large-mdpi' folders.</li>
+<li>Run you application to see that it all works. You might want to delete some of the resource, or point them to a different resource. I, for instance, wanted that some of the images ZiiO7 uses are mdpi.</li>
+</ol>
+<h3>Why it is not perfect</h3>
+This is the part I hate most about this solution - now I'm required to provide drawables based on the size of the screen, where in a perfect world, I would provide images based on the screen density, and the layouts should change based on the screen size...
