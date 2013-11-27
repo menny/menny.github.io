@@ -1,0 +1,47 @@
+---
+layout: post
+title: Easy on the eye MD5-generated signature*
+date:   2010-11-26 12:00:00
+permalink: /p/29
+categories: [php]
+tags: [tips]
+---
+<p>At my <a href="http://speakingpal.com">work</a>, we employ light-weighted content licensing by applying <a href="http://en.wikipedia.org/wiki/MD5">MD5</a> over a crafted string. MD5 is quite long, and includes letters and digits, or example:
+<code>MD5("<a title="The quick brown fox jumps over the lazy dog" href="http://en.wikipedia.org/wiki/The_quick_brown_fox_jumps_over_the_lazy_dog">The quick brown fox jumps over the lazy dog</a><strong>.</strong>") = e4d909c290d0fb1ca068ffaddf22cbd0</code>
+Since most of our users are using mobile devices, we wanted to make it easy:
+</p>
+
+<ul>
+<li>only alphabets - so the user will not be required to switch layouts (alphabet&lt;-&gt;numbers)</li>
+<li>all uppercase - so it will be easy to read, and clear.</li>
+<li>replace the letter O - so the user will not confuse it with the digit zero.</li>
+</ul>
+How safe is it? Well, as I see it, we still get 16 in the power of 10 permutations (A..P ten times), which are <a href="http://vault.benbenson.com/data/001/md5/section5.html">very nicely distributed</a>, the <a href="http://en.wikipedia.org/wiki/Birthday_problem">Birthday Paradox</a> does not apply here (since the hash is not used to 'hide' the source, but to 'certify' the source. I think...), and it is very easy on the users' eye.
+So we have an MD5 string (e.g. <strong>37aa53dc03fd0a18617bda509c243012</strong>), and we want to get a human readable, type-able string (e.g. <strong>JNAALJDCGJ</strong>). Here is the PHP code we used (I take not responsibility for any MD5 or this code limitations!):
+<pre><code>function md5_shrinking($md5_signature)
+{
+	//the input of this function is an MD5 hex (easily created with PHP's function md5($string) )
+	//actually, it doesn't have to be MD5 string. It can be anything from a random number
+	//to SHA1 to a specially crafted string/
+	//I want to do this:
+	// 37aa53dc03fd0a18617bda509c243012 -&gt; JNAALJDCGJ
+	//sub-stringing to 10: easier on users
+	$trimmed_md5 = substr($md5_signature, 0, 10);
+	//upper-case so users will read it easily
+	$upper_trimmed_md5 = strtoupper($trimmed_md5);
+	//converting the digits to alphabets. And I'm going to convert to letters after F (no doubles with
+	//HEX A-F letters.
+	$regex_trimmed_md5 = preg_replace('/(\d)/e', 'chr(\\1+71)', $upper_trimmed_md5);
+	//And converting the letter O to X, so users will not confuse it with zero
+	$regex_trimmed_md5 = preg_replace('/(O)/', 'X', $regex_trimmed_md5);
+	return $regex_trimmed_md5;
+}</code></pre>
+<h3>Security issues:</h3>
+<ul>
+<li>Append a <a href="http://en.wikipedia.org/wiki/Salt_%28cryptography%29">salt</a> string to your MD5 input! It will make you feel safer :)</li>
+<li>Make sure you understand the <a href="http://www.google.com/search?q=md5+collision+chance">MD5</a> and <a href="http://forr.st/~Cfg">this function</a> limitations, and see if they are acceptable for your purpose (as mentioned above - I take no responsibility!)</li>
+<li>The sub-stringing increases the chances of collisions. This is the cost you'll pay for a human readable/type-able string.</li>
+<li>I <em>ONLY </em>think that the Birthday Paradox does not apply here, but I'm no mathematician. It could be.</li>
+</ul>
+
+<h6>*note: can be applied to any string.</h6>
