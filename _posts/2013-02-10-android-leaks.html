@@ -1,0 +1,62 @@
+---
+layout: post
+title: Android Memory Leaks OR Different Ways to Leak
+date:   2013-02-10 12:00:00
+permalink: /2013/02/Android-Memory-Leaks-OR-Different-Ways-to-Leak
+categories: [android]
+tags: [tips, video, AnySoftKeyboard, memory leaks]
+---
+<p>A few weeks ago I released <a href="https://plus.google.com/b/112371284450211079595/112371284450211079595/posts/MXGFUrZK7kV">version 85</a> of AnySoftKeyboard and soon after, crash reports started to hit my email box. It usually happens - mostly because I forget to test a feature, or just because the specific device decided it is time to crash (<a href="http://stackoverflow.com/questions/12732929/android-app-crashes-on-some-random-devices-targetinvocationexception" target="_blank">it happens</a>, really! The floor is crooked). But this time, all the crashes were of the same nature, and were many, about 5-10 a day.</br>
+The crashes were due to <a href="http://developer.android.com/reference/java/lang/OutOfMemoryError.html" target="_blank">OutOfMemoryError</a> (a.k.a, OOM), which usually means a memory leak in Android (<i>why?</i> Unlike a desktop, an Android device has very little heap to play with and leaking will fill that little space quickly), I started to look for them.</p>
+
+<p><b><u>TL;DR:</u>&nbsp;</b>If I was able to recreate this crash on my devices, I would have find the cause immediately, and just fix the 6th cause in this list. But, I wasn't able to reproduce it (<i>why?</i> later on that), and it took me some time to understand that the reporting users want me to fix it, and are willing to help!</p>
+
+<h2>Cause 1: Context Leak</h2>
+The most common leak in Android is the <a href="http://developer.android.com/reference/android/content/Context.html" target="_blank">Context</a> leak (here is a great <a href="http://android-developers.blogspot.com/2009/01/avoiding-memory-leaks.html" target="_blank">explanation</a>). Although all the examples are talking about Activity leaking, a Service (which AnySoftKeyboard is) has the same problems as Activity in that regard.
+<h3>Solution</h3>
+It's a no-brainer, but tedious: where ever I used a Context object, I made sure that instance is the Application's Context  - <a href="http://developer.android.com/reference/android/content/Context.html#getApplicationContext()" target="_blank">getApplicationContext()</a>.
+
+<h2>Cause 2: The Handler Leak OR the Inner Class</h2>
+The <a href="http://docs.oracle.com/javase/tutorial/java/javaOO/nested.html" target="_blank">inner-class</a> (a.k.a. <i>nested classes</i>) in Java has an implicit property where it keeps a reference to its outer class, this is why you can call outer-class's functions in the inner-class scope. As long as the Handler is alive, so is the outer-class, and in my case - the whole Input Method Service, which in turn holds the entire tree!</br>
+One thing to note, once there are no messages in the Handler's loop, it will go out of reference in the Main Looper, and if there are no other references to it, well, it will be collected, with its implicit outer-class. <i>So what is the problem?</i> you may ask, and you are right. The problem is that some of the messages are delayed (or just still in queue), and as long as there is a message in the queue, the Handler will not be collected, so even if the OS will decide to kill AnySoftKeyboard (say, orientation change) and create a new one, the old <b>one is still in memory</b>, and we have two full trees at the same time. Maybe not for long, but enough time to cause OOM on some devices.
+<h3>Solution</h3>
+Very simple: gone over all the inner-classes I had (including the Handlers) and made sure they are static classes, and if they required a reference to the the outer-class, I used <a href="http://developer.android.com/reference/java/lang/ref/WeakReference.html" target="_blank">WeakReference</a>:</br>
+<script src="https://gist.github.com/menny/4747886.js"></script></br>
+In the code snippet above, I used a WeakReference field to keep a pointer to the main AnySoftKeyboard instance. By using this pattern I was able to call methods of AnySoftKeyboard, but also made sure I was not keeping AnySoftKeyboard from being garbage-collected if needed.</br>
+Do remember that if using this pattern it is required to check that the weak reference is still pointing to something (e.g., not null).
+
+<h2>Cause 3: The Drawable Callback</h2>
+<p>Most of the <a href="http://developer.android.com/reference/android/graphics/drawable/Drawable.html" target="_blank">Drawables</a> I use are not attached to Views, but some are, and since I keep reference to the drawables objects, this was still a possible leak. <i>Why?</i> The drawable requires that its client (usually a View) will implement the <a href="http://developer.android.com/reference/android/graphics/drawable/Drawable.Callback.html" target="_blank">Drawable.Callback</a> interface, which is used by the Drawable to perform animation related tasks. So, if the View is removed from the window/activity, but Drawable is still referenced, then the View is still referenced too, and will not be garbage-collected.</p>
+<h3>Solution</h3>
+I explicitly unbind the drawables when the keyboard's View is no longer needed:
+<script src="https://gist.github.com/menny/4748000.js"></script>
+This was, actually, not required in my case since the only reference to the Drawable was the View which is the Callback for the Drawable.</br>
+<a href="https://github.com/menny/AnySoftKeyboard/commit/28e7fc0899510fc4f231cf8f3429f8ac8e4765f2" target="_blank">Commit</a> (look for changes in <i>AnyKeyboardBaseView.java</i>).
+
+<h2>Cause 4: The External Context</h2>
+This is special for AnySoftKeyboard, most apps do not reference to an external package's Context, but since AnySoftKeyboard supports external packages (i.e., language packs, themes, etc.), I was keeping a reference to that external Context always: let's say you use three languages (not very rare or the users of AnySoftKeyboard), and want to use the <a href="https://play.google.com/store/apps/details?id=com.anysoftkeyboard.theme.ics&hl=en" target="_blank">Ice Cream Sandwich theme</a>, you'll end up with <b>four</b> external Context objects sitting around in AnySoftKeyboard heap. This is quite a waste, since most of the time I use the external Context only once or twice!
+<h3>Solution</h3>
+I moved the external from an explicit reference, to a WeakReference, and added the package's name to class's fields so I'll be able to create the context if needed.</br>
+<a href="https://github.com/menny/AnySoftKeyboard/blob/ba12763e7c6e0d484b6bb4cac777a3ad6297580e/src/com/anysoftkeyboard/addons/AddOnImpl.java" target="_blank">Commit</a>.
+
+<h2>Cause 5: The Too Large Objects</h2>
+<i>Key background, Shift, Control, Enter, Space, Tab, Cancel, Globe, Microphone, Settings, Arrows</i> and more. All these are Drawables which were loaded into the keyboard View, and were kept in memory. About 15 of them, and some with various states (like the Enter key, which has a Normal, Search, Done, Go, etc states, each a full drawable). That's not a leak, but it is still a lot of memory for some devices - HTC Desire will not allow more than 32MB of heap, for example.
+<h3>Solution</h3>
+I created a <a href="https://github.com/menny/AnySoftKeyboard/blob/master/src/com/anysoftkeyboard/keyboards/views/DrawableBuilder.java" target="_blank">DrawableBuilder</a> class which have all the information required to get the drawable. This way, if the layout does not use a specific icon, it will not be loaded into memory.</br>
+<a href="https://github.com/menny/AnySoftKeyboard/commit/6ea97d8055875dfe1217bc6d6f0fb2e74e63f2c8" target="_blank">Commit</a>.
+
+<h2>Cause 6: The Database Connection</h2>
+After I fixed all the issues above, the app was still crashing on some devices. I had no idea where to look anymore, I was sure there was a leak, and it very elusive, maybe even vendor specific (although the crashes came from many vendors, and various OS versions), so I added to the <a href="http://developer.android.com/reference/java/lang/Thread.html#setDefaultUncaughtExceptionHandler(java.lang.Thread.UncaughtExceptionHandler)" target="_blank">UncaughtExceptionHandler</a> a code that check of the thrown Exception type, and if it is OutOfMemoryError, I asked the framework do create a <a href="http://developer.android.com/reference/android/os/Debug.html#dumpHprofData(java.lang.String)" target="_blank">memory dump</a>:</br>
+<script src="https://gist.github.com/4689035.js"></script>
+I found the leak easily using <a href="http://www.eclipse.org/mat/" target="_blank">Eclipse Memory Analyzer (a.k.a, MAT)</a>: the leak was a Database Connection Transport, and a huge one, each such transport used 0.5MB (for that user - since he had a large user-dictionary), and it leaked every time the user switched language! It was leaking due to a race-condition.
+<h3>The Race Condition</h3>
+When a dictionary is created, it loads its words list using an <a href="http://developer.android.com/reference/android/os/AsyncTask.html" target="_blank">AsyncTask</a> (so it wont hold up the UI thread), but when the list is long and the device is slow, the dictionary's <i>close</i> method (which is called when the language changes) may be called before the loading is done, hence not closing anything!
+<p>
+So, if it happens always why haven't I recreated it on my devices? Some flavors (Samsung devices and <a href="http://www.cyanogenmod.org/" target="_blank">CyanogenMod</a>) could handle that release automatically (there is a finalizer in Java, you know), and they did. Some vendors did not. I had a Samsung, a Motorola and a device running CyanogenMod. Moreover, my devices are fast just enough, and used a small words list. Bummer, ah? Ya..
+</p>
+<h3>Solution</h3>
+Just closed the database connection: by ensuring the related functions use monitors.</br>
+<a href="https://github.com/menny/AnySoftKeyboard/commit/de9dcaa6b57f8b74d1f2a067b745ab3315997b27" target="_blank">Commit</a> and <a href="https://github.com/AnySoftKeyboard/AnySoftKeyboard/commit/c2d74fff434ef9bd05d051a20d4b117b553928df" target="_blank">commit</a>.
+
+<h2>The End</h2>
+<a href="https://plus.google.com/112371284450211079595/posts/FmmRc8EpthF">v95</a>
