@@ -1,0 +1,43 @@
+body {
+  font-size: small;
+}
+
+.subtitle{ 
+  font-size: 110%;
+}
+
+h1 {
+  font-size: 150%;
+}
+h2 {
+  font-size: 135%;
+}
+h3 {
+  font-size: 125%;
+}
+h4, h5, h6 {
+  font-size: 115%;
+}
+
+.photo {
+  -webkit-border-radius: 2pt;
+  -moz-border-radius: 2pt;
+  border-radius: 2pt;
+  margin: 4pt;
+}
+
+.rotated {
+	-webkit-box-shadow: none;
+	-moz-box-shadow: none;
+	box-shadow: none;
+	-webkit-transform: rotate(1deg);
+	-moz-transform: rotate(1deg);
+	-o-transform: rotate(1deg);
+	transform: rotate(1deg);
+}
+
+/*card*/
+.raised {
+	margin-bottom: 12pt;
+	padding: 4pt 4pt 4pt 4pt;
+}
