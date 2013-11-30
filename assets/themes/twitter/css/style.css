@@ -111,3 +111,7 @@ code {
 .bio ul{
   list-style: none;
 }
+
+.feeds {
+  text-align: center;
+}
