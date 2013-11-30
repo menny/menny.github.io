@@ -28,6 +28,14 @@ p {
   max-width: 600pt; 
 }
 
+.navbar .nav_right {
+  float: right; 
+}
+  
+.navbar .nav_left {
+  float: left; 
+}
+
 .photo {
   -webkit-border-radius: 3pt;
   -moz-border-radius: 3pt;

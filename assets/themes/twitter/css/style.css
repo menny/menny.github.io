@@ -50,14 +50,6 @@ code {
 	margin: 5pt;
 }
 
-.navbar .nav_right {
-  float: right; 
-}
-  
-.navbar .nav_left {
-  float: left; 
-}
-
 .posts {
 	list-style-type: none;
 }
