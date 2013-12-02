@@ -52,6 +52,6 @@ h4, h5, h6 {
 
 /*card*/
 .raised {
-	margin-bottom: 12pt;
+	margin: 0pt 0pt 12pt 0pt;
 	padding: 4pt 4pt 4pt 4pt;
 }
