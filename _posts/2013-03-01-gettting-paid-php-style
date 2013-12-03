@@ -1,0 +1,26 @@
+---
+layout: post
+title: In App Purchase Verification using PHP OR Making sure you ain't getting ripped off, PHP style!
+date:   2013-03-01 12:00:00
+permalink: /2012/03/In-App-Purchase-Verification-using-PHP-OR-Making-sure-you-ain-t-getting-ripped-off-PHP-style
+disqus_url: http://evendanan.net/2012/03/In-App-Purchase-Verification-using-PHP-OR-Making-sure-you-ain-t-getting-ripped-off-PHP-style
+categories: [php, android, iOS]
+tags: [I hate PHP,getting paid]
+---
+<p>At&nbsp;<a href="http://www.speakingpal.com/" title="" target="_blank">SpeakingPal</a>&nbsp;we offer our&nbsp;<a href="https://market.android.com/details?id=com.speakingpal.speechtrainer.sp">apps</a>&nbsp;<a href="http://itunes.apple.com/us/app/speakingpal-english-tutor/id437219346?mt=8&amp;uo=4" title="" target="">for</a>&nbsp;<a href="https://market.android.com/details?id=com.speakingpal.speechtrainer.ets.ets" title="" target="">free</a>, and provide customers ways to extend content availability via in-app purchase. In our case, in-app purchase is build from two parts: the first, is the client's &nbsp;integration with the device's apps services (AppStore in iOS, Market in Android), the second is the server-side verification of the in-app receipt, avoiding trickery of the&nbsp;<a href="http://jailbreakstory.com/2011/09/crack-in-app-purchases-in-ios-with-iap-cracker/" title="" target="_blank">client's app</a>.</p>
+
+<p>Client-side code samples are in&nbsp;abundance, and usually are very well documented (well, of course, the OS vendor wants to get paid, no?). But the other side, the server-side, is not well documented and lack samples, although considered a&nbsp;<a href="http://developer.android.com/guide/market/billing/billing_best_practices.html" title="" target="">best-practice</a>.</p>
+
+<h3>Android</h3>
+<p>Android dev-site suggests making the in-app&nbsp;verification&nbsp;at the server-side as safer, but does not provide any code sample.<br>Google <a href="http://developer.android.com/guide/market/billing/billing_overview.html" title="" target="_blank">method</a> of in-app verification is via digital signatures verification: You provide a nonce, they give you a receipt with that nonce prefixed and a&nbsp;<a href="http://en.wikipedia.org/wiki/RSA_(algorithm)#Signing_messages" title="" target="_blank">RSA-SHA1</a>&nbsp;signature on that text. The key used for signing is defined in your Market developer console. With that public key, the signed receipt and the signature, you can verify that the receipt is real, that is, produced by the Market service.</p>
+<p>Verifying an&nbsp;<a href="http://php.net/manual/en/function.openssl-verify.php" title="" target="_blank">RSA-SHA1 signature is simple in PHP</a>, but tricky. Here is a&nbsp;<i>working</i>&nbsp;code:</p>
+<script src="https://gist.github.com/1985010.js?file=verify_market_in_app.php"></script>
+
+<h3>iOS</h3>
+<p>Apple went with something else; verifying the AppStore receipt is done by asking iTunes' servers whether a receipt is real: after in-app is done, device's AppStore service gives you a base64 encoded receipt, which you'll send to iTunes' servers, and get a json response about the validity of the receipt. Here's a snippet:</p>
+<script src="https://gist.github.com/1985010.js?file=verify_appstore_in_app.php"></script>
+
+<h3>PayPal</h3>
+<p>PayPal actually provide all the information you need, in several programming languages, i.e.,&nbsp;<a href="https://cms.paypal.com/us/cgi-bin/?cmd=_render-content&amp;content_ID=developer/e_howto_admin_IPNImplementation" title="" target="_blank">IPN verification</a>. I see no reason to paste here snippets.</p>
+
+<p style="font-size: 20px; ">Enjoy!</p>
