@@ -27,10 +27,23 @@
     <div class="content">
       {{ content }}
     </div>
+    
+	<!-- sharing is fun, it is good for you, you should try it out -->
+	<div class="sharing-buttons">
+		<!-- Google Plus sharing -->
+		<div class="g-plus" data-action="share" data-annotation="vertical-bubble" data-height="60"></div>
 
-  
-
+		<script type="text/javascript">
+		  (function() {
+		    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+		    po.src = 'https://apis.google.com/js/platform.js';
+		    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+		  })();
+		</script>
+	</div>
+	<!-- I dont want pagination at the moment
     <hr>
+    
     <div class="pagination">
       <ul>
       {% if page.previous %}
@@ -46,6 +59,7 @@
       {% endif %}
       </ul>
     </div>
+    -->
     
     <hr>
     {% include JB/comments %}
