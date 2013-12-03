@@ -116,3 +116,12 @@ code {
 .feeds {
   text-align: center;
 }
+
+.sharing-buttons ul {
+	list-style-type: none;
+}
+
+.sharing-buttons li {
+	display:inline;
+	margin-left: 6pt;
+}
