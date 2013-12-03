@@ -7,7 +7,9 @@ disqus_url: http://evendanan.net/2012/03/In-App-Purchase-Verification-using-PHP-
 categories: [php, android, iOS]
 tags: [I hate PHP,getting paid]
 ---
-<p>At&nbsp;<a href="http://www.speakingpal.com/" title="" target="_blank">SpeakingPal</a>&nbsp;we offer our&nbsp;<a href="https://market.android.com/details?id=com.speakingpal.speechtrainer.sp">apps</a>&nbsp;<a href="http://itunes.apple.com/us/app/speakingpal-english-tutor/id437219346?mt=8&amp;uo=4" title="" target="">for</a>&nbsp;<a href="https://market.android.com/details?id=com.speakingpal.speechtrainer.ets.ets" title="" target="">free</a>, and provide customers ways to extend content availability via in-app purchase. In our case, in-app purchase is build from two parts: the first, is the client's &nbsp;integration with the device's apps services (AppStore in iOS, Market in Android), the second is the server-side verification of the in-app receipt, avoiding trickery of the&nbsp;<a href="http://jailbreakstory.com/2011/09/crack-in-app-purchases-in-ios-with-iap-cracker/" title="" target="_blank">client's app</a>.</p>
+<p>At&nbsp;<a href="http://www.speakingpal.com/" title="" target="_blank">SpeakingPal</a>&nbsp;we offer our&nbsp;<a href="https://market.android.com/details?id=com.speakingpal.speechtrainer.sp">apps</a>&nbsp;<a href="http://itunes.apple.com/us/app/speakingpal-english-tutor/id437219346?mt=8&amp;uo=4" title="" target="">for</a>&nbsp;<a href="https://market.android.com/details?id=com.speakingpal.speechtrainer.ets.ets" title="" target="">free</a>, and provide customers ways to extend content availability via in-app purchase.</p>
+
+<p>In our case, in-app purchase is build from two parts: the first, is the client's &nbsp;integration with the device's apps services (AppStore in iOS, Market in Android), the second is the server-side verification of the in-app receipt, avoiding trickery of the&nbsp;<a href="http://jailbreakstory.com/2011/09/crack-in-app-purchases-in-ios-with-iap-cracker/" title="" target="_blank">client's app</a>.</p>
 
 <p>Client-side code samples are in&nbsp;abundance, and usually are very well documented (well, of course, the OS vendor wants to get paid, no?). But the other side, the server-side, is not well documented and lack samples, although considered a&nbsp;<a href="http://developer.android.com/guide/market/billing/billing_best_practices.html" title="" target="">best-practice</a>.</p>
 
@@ -23,4 +25,4 @@ tags: [I hate PHP,getting paid]
 <h3>PayPal</h3>
 <p>PayPal actually provide all the information you need, in several programming languages, i.e.,&nbsp;<a href="https://cms.paypal.com/us/cgi-bin/?cmd=_render-content&amp;content_ID=developer/e_howto_admin_IPNImplementation" title="" target="_blank">IPN verification</a>. I see no reason to paste here snippets.</p>
 
-<p style="font-size: 20px; ">Enjoy!</p>
+<p>Enjoy!</p>
