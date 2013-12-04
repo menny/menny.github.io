@@ -1,0 +1,34 @@
+---
+layout: post
+title: Font Metrics in Java OR How, the hell, Should I Position This Font?!
+date:   2011-12-19 12:00:00
+permalink: /2011/12/Font-Metrics-in-Java-OR-How-the-hell-Should-I-Position-This-Font
+disqus_url: http://evendanan.net/2011/12/Font-Metrics-in-Java-OR-How-the-hell-Should-I-Position-This-Font
+categories: [android]
+tags: [anysoftkeyboard, font]
+---
+<p>I'm working on a new feature for <a href="https://market.android.com/details?id=com.menny.android.anysoftkeyboard" title="" target="_blank">AnySoftKeyboard</a>,&nbsp;where it will 'hint' the user about what lays behind long-pressing a key.</p>
+
+<p>I've decided that the best UX I can provide, is to draw a small character, at the bottom-right corner of the key, showing the long-press output, or "..." in case there are lots of them. It will probably look like this:<br/>
+<img src="https://lh5.googleusercontent.com/-5S4erP83MQ8/Tu8RPs7XVbI/AAAAAAAAg-Q/IL4sbnNJy-8/s288/screenshot-1324290297408.jpg" alt="hinting hinting HO, cool" title="hinting hinting HO, cool" align="none"><br/>
+</p>
+
+<p>So, I had to figure out how to position the character there. Java/Android provides a nice service called <a href="http://developer.android.com/reference/android/graphics/Paint.FontMetrics.html" title="" target="_blank">FontMetrics</a>, which provide general metrics on the font, 
+like what is the tallest glyph (character), lowest glyph, etc.</p>
+
+<p>Since the hint is very small, I had to make sure the position is precised. So I've dived into the definitions of those metrics, 
+and their values, and cooked up a small <a href="https://github.com/menny/FontMetrics-Visualization/downloads" title="" target="_blank">Android app</a> which
+visualizing the metrics, and since an image is worth 37.5 tweets, I give you a screenshot:<br/>
+<img src="https://lh4.googleusercontent.com/-NvhvlDvSlds/Tu8Nf4sx3EI/AAAAAAAAg9w/-o7zBGD0rCg/s800/font_metrics_screenshot.png" alt="An image is worth 37.5 tweets" title="An image is worth 37.5 tweets">
+</p>
+<p>Here is FontMetrics in layman lingo:
+<ul>
+  <li><u>baseline:</u>&nbsp;the base of your font drawing. Your text will be drawn ABOVE this X.</li>
+  <li><u>top:</u>&nbsp;the maximum distance above the baseline for the tallest glyph. Since it is ABOVE the baseline, it is a negative value!</li>
+  <li><u>ascent:</u>&nbsp;this is the recommended space above the baseline you should make for a line of this text. Again, above the baseline, so negative.</li>
+  <li><u>descent:</u>&nbsp;this is the recommended space below the baseline you should keep for text, since some characters (e.g, y) are drawn some below the baseline.</li>
+  <li><u>bottom:</u>&nbsp;this is the lowest glyph space below the baseline.</li>
+  <li><u>leading:</u> I haven't included that in the image (or the app) since it is usually 0. But, to make the post complete, <i>leading</i> is the recommended extra space to add between two line of text. I think that the reason that it is usually defined as none, is because <i>bottom</i> (or <i>top</i>) takes care of the extra space needed.</li>
+</ul>
+</p>
+
