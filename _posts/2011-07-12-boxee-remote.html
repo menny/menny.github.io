@@ -1,0 +1,40 @@
+---
+layout: post
+title: My Boxee Remote OR How Cool is Open Source!
+date:   2011-07-12 12:00:00
+permalink: /2011/07/My-Boxee-Remote-OR-How-Cool-is-Open-Source
+disqus_url: http://evendanan.net/2011/07/My-Boxee-Remote-OR-How-Cool-is-Open-Source
+categories: [android]
+tags: [boxee]
+---
+<p>For the last year I've been using <a href="http://www.boxee.tv" target="_blank">Boxee</a> as my media center application, and it rulez!!11! 
+I encourage you all to try it out. But this is not the point of this post. I'm going to talk about remote controlling Boxee.</p>
+
+<p>My Boxee is installed on a Linux machine, and I controlled it with <a href="https://market.android.com/details?id=net.supware.boxee" target="_blank">Supware's Boxee Remote</a>, a 
+simple gesture based remote control: swipes (navigating) or a tap (select). As you can understand, you don't need to look at the remote UI, or to remember where each action button is located on the 
+UI: just swipe! And with Boxee exceptional UI/UX the whole experience has totally won the <a href="http://en.wikipedia.org/wiki/Wife_acceptance_factor" target="_blank">WAF!</a></p>
+
+<p>For a few months everything went great. Some remote crashes from time to time, but all in all, it was good. 
+And then my curious side got the best of me: I found out that <a href="http://www.supware.net/">Supware's</a> remote is actually <a href="http://boxeeremote.googlecode.com">open-sourced</a>, which was the incentive to start hacking it. 
+I fixed a few <a href="http://code.google.com/p/boxeeremote/source/detail?r=74" target="_blank">issues</a>, and added some too and sent a patch to Supware. But it was not integrated very well, mostly because the guy had a new daughter (<i>CONGRATS!</i>), and had very little time to play with a working project.</p>
+
+<h3>Open Source rulez!</h3>
+<p>How hard is it to write my own Boxee remote? <b>Not so much!</b><br>
+I took Supware's <a href="http://code.google.com/p/boxeeremote/source/browse/" title="" target="_blank">code</a> for reference, browsed Boxee's official iPhone remote control <a href="http://www.boxee.tv/" title="" target="_blank">code</a>, 
+browsed XBMC <a href="ftp://ohnopublishing.net/distfiles/svn-src/xbmc/trunk/xbmc/lib/libGoAhead/XBMChttp.cpp" title="" target="_blank">code</a> and <a href="http://wiki.xbmc.org/index.php?title=Web_Server_HTTP_API" title="" target="_blank">API</a> and read Boxee 
+<a href="http://developer.boxee.tv/Remote_Control_Interface#Remote_Control_Interface" title="" target="_blank">remote API</a>.<br>Coded for a few hours (took base64 code from <a href="http://iharder.net/base64" title="" target="_blank">iharder</a>), 
+and that's it! I have my own version!</p>
+
+<h3>Features</h3>
+<ul>
+  <li>Automatically detecting your Boxee server</li>
+  <li>Navigate via swipe gestures</li>
+  <li>Selecting via tapping</li>
+  <li>Running media poster as remote background</li>
+  <li>Media control buttons (just for fun)</li>
+  <li>Notification icon when media is playing (showing media title, and allow quick return to the remote activity upon clicking it)</li>
+  <li>Pausing running media upon phone call</li>
+  <li>And probably more!</li>
+</ul>
+
+<p>Currently, this remote App is <span class="strikethrough">not published to the Market</span> <a href="https://play.google.com/store/apps/details?id=net.evendanan.android.thumbremote">here</a>. It is available at my <a href="https://github.com/menny/Boxee-Thumb-Remote" title="" target="_blank">Github</a> account.</p>

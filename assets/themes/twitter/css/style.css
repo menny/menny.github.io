@@ -125,3 +125,7 @@ code {
 	display:inline;
 	margin-left: 6pt;
 }
+
+.strikethrough {
+  text-decoration: line-through;
+}
