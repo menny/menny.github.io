@@ -1,0 +1,104 @@
+---
+layout: post
+title: Backward compatibility in Android OR How I made a 2.2 Android APK run under 1.5!
+date:   2011-04-27 12:00:00
+permalink: /2011/04/Backward-compatibility-in-Android-OR-How-I-made-a-2-2-Android-APK-run-under-1-5
+disqus_url: http://evendanan.net/2011/04/Backward-compatibility-in-Android-OR-How-I-made-a-2-2-Android-APK-run-under-1-5
+categories: [android]
+tags: [frankenrobot, anysoftkeyboard, source code]
+---
+<p><b>Update:</b> I've refined the process, and produced an Android jar which can be used in your project to achieve the resource-qualifier based injection! Check it out at <a href="https://github.com/menny/FrankenRobot" target="_blank">FrankenRobot project page</a>!.</p>
+
+<p>As the the maintainer of <a href="http://softkeyboard.googlecode.com" target="_blank">AnySoftKeyboard</a>, I'm obligated to create a product which works flawlessly on various Android OS versions, starting with 1.5, and to provide advanced features as the underlying OS provides. Luckily, the Android platform provides several ways to create products which are backward compatible, e.g., custom resources per API version and Java's reflection.
+</p>
+<p>
+In this post I'll show how backward compatibility is done in AnySoftKeyboard, and how advanced features like multi-touch, <a href="http://developer.android.com/reference/android/app/backup/BackupAgent.html" target="_blank">Backup Agent</a>, Contacts dictionary, and more, are consumed without crashing the application due to <a href="http://download.oracle.com/javase/1.4.2/docs/api/java/lang/ClassNotFoundException.html" target="_blank">ClassNotFoundException</a> or <a href="http://download.oracle.com/javase/1.4.2/docs/api/java/lang/NoSuchMethodException.html" target="_blank">NoSuchMethodException</a>.
+</p>
+<h2>Overview</h2>
+<p>
+The main Android feature I use for achieving backward compatibility, is the ability to <a href="http://developer.android.com/guide/topics/resources/providing-resources.html#AlternativeResources" target="_blank">provide API level specific resources</a>, along with a nifty software engineering (a.k.a, object oriented programming). Java's reflection is also used, but scarcely.
+</p>
+<h2>Practice</h2>
+<h3>Contacts dictionary checkbox</h3>
+<p>
+The ability to query the <a href="http://developer.android.com/reference/android/provider/ContactsContract.Contacts.html" target="_blank">contacts list in Android was introduced in version 2 (a.k.a API Level 5)</a>, so I wanted to limit its settings in devices with API Level 3 (OS 1.5) and 4 (OS 1.6).<br/>
+This was done by providing a specific dictionary settings layout file for devices running API 5 (where the 'Contacts dictionary' checkbox is enabled) and a different layout file for devices running API 4 or 3  (where the 'Contacts dictionary' checkbox is disabled, and marked off).<br/>
+</p>
+<img src="https://lh4.googleusercontent.com/_YI66aqZG43M/TbbTBpwjIGI/AAAAAAAAbJc/pK9ucWFs6JU/s800/dictionary_pref.jpg"/><br/>
+<p>In the image above, you see two folders, one for API 4 and the other for API 5. When inflating the Dictionary Settings layout, the file <i>'prefs_dictionaries.xml'</i> is searched. Android will locate the best match starting with the device's API level, and then searching for lower API levels, so, if my device is API 6, Android will look for <i>'prefs_dictionaries.xml'</i> under <i>layout-v6</i> and since it is not there, it will look under <i>layout-v5</i>. In my case, it will stop there since the file was found, but if it wasn't there, it would have continue the search. In API 4 devices, it will start with <i>layout-v4</i> folder.</p>
+<p>In API 4 <i>'prefs_dictionaries.xml'</i> I've disabled the dictionary by including this XML layout:</p>
+<pre><code>&lt;CheckBoxPreference
+		android:key=&quot;@string/settings_key_use_contacts_dictionary&quot;
+		android:title=&quot;@string/use_contacts_dictionary&quot;
+		android:persistent=&quot;true&quot;
+		android:defaultValue=&quot;false&quot;
+		android:summaryOn=&quot;@string/use_contacts_dictionary_not_supported_summary&quot;
+		android:summaryOff=&quot;@string/use_contacts_dictionary_not_supported_summary&quot;
+		android:clickable=&quot;false&quot; android:selectable=&quot;false&quot; android:enabled=&quot;false&quot;/&gt;
+</code></pre> 
+<p>While in API 5 <i>'prefs_dictionaries.xml'</i> I've enabled it with this XML layout:</p>
+<pre><code>&lt;CheckBoxPreference
+		android:key=&quot;@string/settings_key_use_contacts_dictionary&quot;
+		android:title=&quot;@string/use_contacts_dictionary&quot;
+		android:persistent=&quot;true&quot;
+		android:defaultValue=&quot;@bool/settings_default_contacts_dictionary&quot;
+		android:summaryOn=&quot;@string/use_contacts_dictionary_on_summary&quot;
+		android:summaryOff=&quot;@string/use_contacts_dictionary_off_summary&quot;/&gt;
+</code></pre> 
+
+<h3>Keyboard view</h3>
+<p>
+The Keyboard View is the main UI and input object in AnySoftKeyboard: in some Android versions it should provide multitouch capabilities, in some should not, in some it should query the motion events in one way, in others in a different way.<br/>
+To get this done, I've used a nifty trick: I use the Android's resources tree decision mechanism (the same mechanism I used in the dictionary settings layout inflation) to create an object which encapsulate the required behavior. The difference in behavior are:
+<ol>
+<li>Multitouch capability detection.</li>
+<li><a href="http://developer.android.com/reference/android/view/MotionEvent.html" target="_blank">MotionEvent</a> query functions.</li>
+<li>and <a href="http://developer.android.com/reference/android/view/GestureDetector.html" target="_blank">GestureDetector</a> creation.</li>
+</ol>
+These functions are grouped together using the <i>DeviceSpecific</i> interface. API levels 3, 5, 7 and 8 require different behavior, so I created four classes which implement that interface. The concrete class is created by inflating a API level specific layout, which I called <i>FactoryView</i>, and then calling a factory method in that view:<br/>
+Here is a simple class diagram to explain what I mean:<br/>
+<img src="https://lh3.googleusercontent.com/_YI66aqZG43M/Tbe4pWEW3pI/AAAAAAAAbLA/79FIxI5qceY/s640/AnySoftKeyboardDeviceSpecificclassdiagram.jpg"/><br/>
+My resources tree looks like this:<br/>
+<img src="https://lh3.googleusercontent.com/_YI66aqZG43M/TbbaE3SRb7I/AAAAAAAAbJ0/w55j9aZzFcs/s800/device_specific_tree.jpg" /><br/>
+The <i>device_specific.xml</i> file inflates the required FactoryView, which in turn used to create the concrete <i>DeviceSpecific</i> instance.<br/>
+This inflation is done in the application onCreate method, which ensures that the <i>DeviceSpecific</i> instance exists before anything requires it.<br/>
+Upon request for a layout inflation, Android will search for the most suitable layout, e.g., if I'm running under Android 1.5, which is API level 3, Android will first look for the requested layout under the folder 'layout-v3', and if it finds it there, it will load it, if not, it will search for it under 'layout'. If I'm running Android 2.2, it will search for the layout under the folder 'layout-v8', then 'layout-v7' and so on, till the default folder.<br/>
+Each of those layout files points to a different class, e.g., 'layout-v8/device_specific.xml' points to <i>'com.anysoftkeyboard.devicespecific.FactoryView_V8'</i>:</p>
+<pre><code>&lt;com.anysoftkeyboard.devicespecific.FactoryView_V8
+        xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;
+        android:id=&quot;@+id/DeviceSpecific&quot;
+        android:layout_width=&quot;fill_parent&quot;
+        android:layout_height=&quot;fill_parent&quot;
+        /&gt;
+</code></pre> 
+<i>FactoryView_V8</i> instantize <i>DeviceSpecific_V8</i> which includes code conforms to API level 8. What did I achieve from this? The ability to use higher API level MotionEvent methods, and query functions! The higher the level, the more functionality I can use. In v3 I can only get X,Y and event type (up, down, move, etc) while in v8 I can also get pointer ID, better multitouch capability detection and more.
+</p>
+<p>Note that I haven't used ANY Java's <a href="http://code.google.com/p/android-smspopup/source/browse/trunk/SMSPopup/src/net/everythingandroid/smspopup/wrappers/ContactWrapper.java?r=312" target="_blank">reflection<a/> <a href="http://stackoverflow.com/questions/4552250/how-to-support-multiple-android-version-in-your-code" target="_blank">methods</a>, or <a href="http://android-developers.blogspot.com/2010/07/how-to-have-your-cupcake-and-eat-it-too.html" target="_blank">lazy loading technics (which are implementation specific!)</a>. I find my method to be much more elegant.</p>
+
+<h3>Tap sound</h3>
+<p>In AnySoftKeyboard, the user can select enabling click sound upon pressing a key (this option is off by default). Upon a key press, the keyboard will take the sound level of the system, and use it to produce the click sound.<br/>
+In pre-Eclair times, the sound leel was [0..8], while in post-Eclair it is [0..1]. To support this API change, I query the OS for its API Level, and performs the necessary calculation according to the API level:</p>
+<pre><code>//pre-eclair
+// volume is between 0..8 (float)
+//eclair
+// volume is between 0..1 (float)
+if (Workarounds.getApiLevel() &gt;= 5)
+{
+	fxVolume = ((float)volume)/((float)maxVolume);
+}
+else
+{
+	fxVolume = 8*((float)volume)/((float)maxVolume);
+}
+</code></pre>
+<p>That's it.</p>
+<h2>Conclusion</h2>
+<p>By leveraging on Android's API Level specific resource mechanism, I was able to easily provide a keyboard for Android devices running 1.5 up to 2.2 or higher with no ugly reflection code (which may break), and no lazy loading technics (which may not work in some optimized Java implementations), and still use advance system functions as the OS provides.<br/>
+You can always see the source code of AnySoftKeyboard <a href="https://github.com/AnySoftKeyboard/AnySoftKeyboard" target="_blank">here</a>.<br/>
+<h3>Notes</h3>
+<ol>
+<li>Android 1.5 and 1.6 only match resources with this qualifier when it exactly matches the platform version. This is a <a href="http://developer.android.com/guide/topics/resources/providing-resources.html#KnownIssues" target="_blank">known issue</a>.</li>
+<li>Providing density specific resources (i.e., <i>drawable-hdpi</i>) is not supported in  Android 1.5, so make sure you provide the default too (i.e., <i>drawable</i>). The default resources are considered as mdpi,  normal qualifiers.</li>
+</ol>
+
+<p>Good luck.</p>
