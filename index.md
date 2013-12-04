@@ -7,9 +7,9 @@ description: Menny Even-Danan is the proud father of Hagar and Netta, husband to
 <table itemscope itemtype="http://data-vocabulary.org/Person" border="0" class="bio">
 <tr>
 <td>
-  <h1><span itemprop="name">{{ page.title }}</span>{% if page.tagline %} <small>{{ page.tagline }}</small>{% endif %}</h1>
+  <h1><span itemprop="givenName">Menny</span> <span itemprop="familyName">Even-Danan</span>{% if page.tagline %} <small>{{ page.tagline }}</small>{% endif %}</h1>
 </td>
-<td><img class="photo raised rotated" src="http://www.gravatar.com/avatar/fffa64472512e3e9df3519c06428224b?s=160" alt="this is me, when I was young, back in 2010."/></td>
+<td><img class="photo raised rotated" src="http://www.gravatar.com/avatar/fffa64472512e3e9df3519c06428224b?s=160" alt="this is me, when I was young, back in 2010." itemprop="image"/></td>
 </tr>
 <tr>
 <td>
@@ -17,8 +17,8 @@ description: Menny Even-Danan is the proud father of Hagar and Netta, husband to
 <li><strong>&hellip;does:</strong></li>
 <li><a href="http://anysoftkeyboard.github.io" itemprop="affiliation">AnySoftKeyboard</a> - highly customizable, <a href="https://market.android.com/search?q=anysoftkeyboard&c=apps">plugins</a> based virtual keyboard for the Android OS.</li>
 <li><a href="http://www.speakingpal.com" itemprop="affiliation">SpeakingPal</a> - an mLearning startup.</li>
-<li><a href="https://play.google.com/store/apps/details?id=com.americanexpress.android.acctsvcs.us">American Express</a> - Making <i>Android</i> work for the cardholders.</li>
-<li><a href="/blog.html">Blog</a> - a pretty static system and software blog.</li>
+<li><a href="https://play.google.com/store/apps/details?id=com.americanexpress.android.acctsvcs.us" itemprop="worksFor">American Express</a> - Making <i>Android</i> work for the cardholders.</li>
+<li><a href="/blog.html" itemprop="url">Blog</a> - a pretty static system and software blog.</li>
 </ul>
 <!-- not ready
 <ul class="raised">
@@ -29,7 +29,7 @@ description: Menny Even-Danan is the proud father of Hagar and Netta, husband to
 </ul>
 -->
 
-<p>A <span itemprop="title">software engineer</a>, programing enthusiast, technology seeker. Not a <i>real blogger</i>. Father for Hagar and Netta. Husband to Erela Portugaly.<br/>
+<p>A <span itemprop="title">software engineer</a>, programing enthusiast, technology seeker. Not a <i>real blogger</i>. Father for <span itemprop="children">Hagar</span> and <span itemprop="children">Netta</span>. Husband to <span itemprop="spouse">Erela Portugaly.</span><br/>
 <span itemprop="address" itemscope
       itemtype="http://data-vocabulary.org/Address">I live in <span itemprop="locality">New York</span>, <span itemprop="region">NY</span>.</span>
 </p>
