@@ -1,0 +1,77 @@
+---
+layout: post
+title: Fingerpainting app for Hagar OR Multitouch sample code
+date:   2011-08-03 12:00:00
+permalink: /2011/08/Fingerpainting-app-for-Hagar-OR-Multitouch-sample-code
+disqus_url: http://evendanan.net/2011/08/Fingerpainting-app-for-Hagar-OR-Multitouch-sample-code
+categories: [android]
+tags: [tips, multitouch, kids]
+---
+<p>In preparation for a five hours flight with my year and a half daughter Hagar, I thought of all kind of toys I could bring along so the confined space wont drive her nuts; 
+I brought a dull (a.k.a Julia), and a toy&nbsp;stroller for Julia <i>(fun fact: in the UK, stroller is called <a href="http://www.yourdictionary.com/pushchair" title="Pushchair" target="_blank">'pushchair'</a>)</i>&nbsp;,
+ some books, and a rattle. I also wanted to bring papers and crayons for her to paint with, but didn't want to totally vandalize the airplane :)</p>
+ 
+<p>So, what better than a fingerpainting app for Android to play with while on the flight?</p>
+
+<p>A free, fun, simple and multi-touch supporting app in the Market is not an easy thing to find, and after noticing that Google provides <a href="http://developer.android.com/resources/samples/ApiDemos/src/com/example/android/apis/graphics/FingerPaint.html" title="" target="_blank">sample code</a> for such app, I decided to build one by myself.</p>
+
+<p>It took an hour to improve Google's sample code to include multi-touch. And about five minutes of Hagar's <a href="http://developer.android.com/tools/help/monkeyrunner_concepts.html">playing</a> with it to notice that I had a bug there! I didn't handle the pointers ID correctly. Fixing wasn't too difficult, 
+and pretty much straight-forward, but I wanted to share it, mostly because non of the posts I found about multi-touch noted it.</p>
+
+<h3>Technical stuff*</h3>
+<p><small>*For simplicity, I'm only talking about API 8.</small><br/>
+Android's <a href="http://developer.android.com/reference/android/view/MotionEvent.html" title="" target="_blank">MotionEvent</a> will be delivered to the <i>onTouchEvent</i> function on event Up, Down, and Move events; where Up and Down will 
+provide information about the relevant pointer only, and Move will provide information about ALL active pointers. 
+In other words, when you get a <i>MotionEvent.ACTION_DOWN, MotionEvent.ACTION_POINTER_DOWN, MotionEvent.ACTION_UP, MotionEvent.ACTION_POINTER_UP</i>&nbsp;action from&nbsp;<i>getActionMasked</i> 
+function you should only handle the specific pointer (given by <i>getActionIndex</i>) , and when you get a&nbsp;<i>MotionEvent.ACTION_MOVE</i> action, you should handle ALL pointers in the event. 
+Also, it is important to notice that each pointer has an index (the index of the pointer in the event's data list - <b>this may change!</b>), 
+and an ID (which <b>will not change</b> for the life time of touch point).</p>
+<pre><code>@Override
+    public boolean onTouchEvent(MotionEvent event) {
+
+    	switch (event.getActionMasked()) {
+
+        case MotionEvent.ACTION_DOWN:
+        case MotionEvent.ACTION_POINTER_DOWN:
+        	touch_start(event.getX(event.getActionIndex()), event.getY(event.getActionIndex()), event.getPointerId(event.getActionIndex()));
+            invalidate();
+            break;
+
+        case MotionEvent.ACTION_MOVE:
+        	for(int pointerIndex=0; pointerIndex&lt;event.getPointerCount(); pointerIndex++)
+        	{
+        		final int pointerId = event.getPointerId(pointerIndex);
+        		float pointerX = event.getX(pointerIndex);
+                float pointerY = event.getY(pointerIndex);
+                
+                touch_move(pointerX, pointerY, pointerId);
+                invalidate();
+        	}
+            break;
+
+        case MotionEvent.ACTION_UP:
+        case MotionEvent.ACTION_POINTER_UP:
+            touch_up(event.getPointerId(event.getActionIndex()));
+            invalidate();
+            break;
+    	}
+        
+        return true;
+    }</code></pre>
+
+<p>In the code above:
+<ul>
+  <li>On&nbsp;<i>ACTION_DOWN:</i>&nbsp;I created a new <a href="http://developer.android.com/reference/android/graphics/Path.html" title="" target="_blank">Path</a> object associated with the pointer's ID (<i>event.getPointerId(event.getActionIndex())</i>)</li>
+  <li>On&nbsp;<i>ACTION_MOVE:</i>&nbsp;I added a path point for ALL pointers.</li>
+  <li>On&nbsp;<i>ACTION_UP:</i>&nbsp;I removed the pointer (by its ID) from the tracked pointers map.</li>
+</ul>
+
+<h3>Notes:</h3>
+<ul>
+  <li>Always reference a pointer to its ID! Index is only used for retrieving pointer information (like its X, Y coordinates) from the MotionEvent object.</li>
+  <li>Up and Down actions should be used to start/stop tracking code (I'm using it to create a Path object and to associate a color to the pointer)</li>
+  <li>Move action's object contain information about ALL active pointers. You can get the count of active pointers using the <i>getPointerCount</i> function. You should iterate ALL active pointers since Android will not tell you which pointer has moved, and furthermore, the event will be called at a regular intervals, so sometimes you may notice that there are no changes in the pointers' coordinates and some times more than one pointer will have new coordinates.</li>
+</ul>
+
+<h3>Epilogue</h3>
+As always, you can find my code at <a href="https://github.com/menny" title="My GitHub profile" target="_blank">github</a> account.
