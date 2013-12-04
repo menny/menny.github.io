@@ -76,7 +76,8 @@ code {
 /* post-full*/
 .post-full .date {
   margin-bottom: 10pt;
-  font-weight: bold; }
+  font-weight: bold; 
+}
 
 /* tag_box */
 .tag_box {
@@ -99,10 +100,8 @@ code {
 
 .tag_box a span {
   vertical-align: super;
-  font-size: 0.4em; }
-
-.tag_box a:hover {
-  background-color: #e5e5e5; }
+  font-size: 0.4em; 
+}
 
 .tag_box a.active {
   background: #57A957;
