@@ -8,10 +8,10 @@ title: Let Me Explain Myself&hellip;
 <div id="home">
   <section itemscope itemtype="http://schema.org/Blog">
   <h1><span itemprop="name">{{ site.title }}</span><small> - <span itemprop="description">{{site.tagline}}</span></small></h1>
-  <ul class="posts">
+  <ul class="posts" itemprop="blogPosts">
     {% for post in site.posts %}
       <li class="raised">
-        <article itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
+        <article itemscope itemtype="http://schema.org/BlogPosting">
             <span itemprop="dateCreated">{{ post.date | date_to_string }}</span></br>
             <h2><a href="{{ post.url }}" itemprop="url"><span itemprop="headline">{{ post.title }}</span></a></h2>
             <p><span itemprop="description">{{ post.excerpt }}</span></p>
