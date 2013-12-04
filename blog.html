@@ -7,14 +7,14 @@ title: Let Me Explain Myself&hellip;
 
 <div id="home">
   <section itemscope itemtype="http://schema.org/Blog">
-  <h1 itemprop="name">{{ site.title }}<small> - <span itemprop="description">{{site.tagline}}</span></small></h1>
+  <h1><span itemprop="name">{{ site.title }}</span><small> - <span itemprop="description">{{site.tagline}}</span></small></h1>
   <ul class="posts">
     {% for post in site.posts %}
       <li class="raised">
         <article itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
-            <span itemprop="dateCreated"{{ post.date | date_to_string }}</span></br>
+            <span itemprop="dateCreated">{{ post.date | date_to_string }}</span></br>
             <h2><a href="{{ post.url }}" itemprop="url"><span itemprop="headline">{{ post.title }}</span></a></h2>
-            <p itemprop="description">{{ post.excerpt }}</p>
+            <p><span itemprop="description">{{ post.excerpt }}</span></p>
         </article>
       </li>
     {% endfor %}
