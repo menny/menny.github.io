@@ -5,16 +5,20 @@ layout: default
 {% include JB/setup %}
 
 <div id="home">
-  <h1>{{ site.title }}<small> - {{site.tagline}}</small></h1>
-  	   	
+  <section itemscope itemtype="http://schema.org/Blog">
+  <h1 itemprop="name">{{ site.title }}<small> - <span itemprop="description">{{site.tagline}}</span></small></h1>
   <ul class="posts">
     {% for post in site.posts %}
-      <li class="raised">{{ post.date | date_to_string }}</br>
-        <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
-        <p>{{ post.excerpt }}</p>
+      <li class="raised">
+        <article itemprop="blogPosts" itemscope itemtype="http://schema.org/BlogPosting">
+            <span itemprop="dateCreated"{{ post.date | date_to_string }}</span></br>
+            <h2><a href="{{ post.url }}" itemprop="url"><span itemprop="headline">{{ post.title }}</span></a></h2>
+            <p itemprop="description">{{ post.excerpt }}</p>
+        </article>
       </li>
     {% endfor %}
   </ul>
+  </section>
   
   <div class="feeds">
     <a href="/rss.xml"><img src="/assets/rssfeed.gif" alt="feed for all!"/></a>
