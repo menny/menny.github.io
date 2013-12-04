@@ -44,10 +44,11 @@ h4, h5, h6 {
 	-webkit-box-shadow: none;
 	-moz-box-shadow: none;
 	box-shadow: none;
-	-webkit-transform: rotate(1deg);
+/*	no rotation in mobile
+    -webkit-transform: rotate(1deg);
 	-moz-transform: rotate(1deg);
 	-o-transform: rotate(1deg);
-	transform: rotate(1deg);
+	transform: rotate(1deg);*/
 }
 
 /*card*/
@@ -59,4 +60,8 @@ h4, h5, h6 {
 .sharing-buttons {
 	text-align: center;
 	margin: 8pt 4pt 8pt 4pt;
+}
+
+.bio-extra {
+  margin-top: 8pt;
 }
