@@ -45,11 +45,6 @@ code {
 	list-style-type: none;
 }
 
-.navbar li {
-	display:inline;
-	margin: 5pt;
-}
-
 .posts {
 	list-style-type: none;
 	margin: 0pt 0pt 0pt 0pt;

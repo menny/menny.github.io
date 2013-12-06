@@ -19,12 +19,15 @@ h4, h5, h6 {
   font-size: 115%;
 }
 
+.navbar li {
+}
+
 .navbar .nav_right {
-  float: none; 
+  float: right; 
 }
   
 .navbar .nav_left {
-  float: none; 
+  float: left; 
 }
 
 .container-narrow {

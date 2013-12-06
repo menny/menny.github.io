@@ -28,6 +28,11 @@ p {
   max-width: 600pt; 
 }
 
+.navbar li {
+	display:inline;
+	margin: 5pt;
+}
+
 .navbar .nav_right {
   float: right; 
 }
