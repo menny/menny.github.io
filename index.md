@@ -9,7 +9,7 @@ description: Menny Even-Danan is the proud father of Hagar and Netta, husband to
 <td>
   <h1><span itemprop="name"><span itemprop="givenName">Menny</span> <span itemprop="familyName">Even-Danan</span></span>{% if page.tagline %} <small>{{ page.tagline }}</small>{% endif %}</h1>
 </td>
-<td><img class="photo raised rotated" src="http://www.gravatar.com/avatar/fffa64472512e3e9df3519c06428224b?s=160" alt="this is me, when I was young, back in 2010." itemprop="image"/></td>
+<td><img class="bio-photo raised rotated" src="http://www.gravatar.com/avatar/fffa64472512e3e9df3519c06428224b?s=160" alt="this is me, when I was young, back in 2010." itemprop="image"/></td>
 </tr>
 <tr>
 <td>

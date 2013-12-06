@@ -35,29 +35,33 @@ h4, h5, h6 {
   margin-right: 4pt; 
 }
 
-
-.photo {
-  -webkit-border-radius: 2pt;
-  -moz-border-radius: 2pt;
-  border-radius: 2pt;
-  margin: 4pt;
-}
-
 .rotated {
 	-webkit-box-shadow: none;
 	-moz-box-shadow: none;
 	box-shadow: none;
-/*	no rotation in mobile
-    -webkit-transform: rotate(1deg);
-	-moz-transform: rotate(1deg);
-	-o-transform: rotate(1deg);
-	transform: rotate(1deg);*/
+    -webkit-transform: rotate(4deg);
+	-moz-transform: rotate(4deg);
+	-o-transform: rotate(4deg);
+	transform: rotate(4deg);
 }
 
 /*card*/
 .raised {
 	margin: 0pt 0pt 12pt 0pt;
 	padding: 4pt 4pt 4pt 4pt;
+}
+
+.bio-photo {
+  -webkit-border-radius: 2pt;
+  -moz-border-radius: 2pt;
+  border-radius: 2pt;
+  margin: 4pt;
+  
+  padding: 2pt 2pt 6pt 2pt;
+  
+  border-style:solid;
+  border-width:1px;
+  border-color:black;
 }
 
 .sharing-buttons {
