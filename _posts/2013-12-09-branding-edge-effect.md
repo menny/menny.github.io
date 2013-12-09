@@ -15,43 +15,18 @@ This even gets weirder, when Android 2.3 has a green edge-effect, while Android 
 ## The Cause ##
 The _EdgeEffect_ class uses a [_Drawable_](https://android.googlesource.com/platform/frameworks/base/+/android-4.4.1_r1/core/res/res/drawable-xxhdpi/overscroll_glow.png) resource (an OS's resource, not yours, _hint, hint, Google_), which provides the glow effect, this resource is loaded internally
 by the EdgeEffect class:
-```
-public EdgeEffect(Context context) {
-        final Resources res = context.getResources();
-        mEdge = res.getDrawable(R.drawable.overscroll_edge);
-        mGlow = res.getDrawable(R.drawable.overscroll_glow);
-```
-And the size of the glow (how much the user _over-pulled_ the list) is calculated during ```draw(Canvas)``` call:
-```
-public boolean draw(Canvas canvas) {
-...
-        int glowBottom = (int) Math.min(
-                mGlowHeight * mGlowScaleY * mGlowHeight / mGlowWidth * 0.6f,
-                mGlowHeight * MAX_GLOW_HEIGHT);
-        if (mWidth < mMinWidth) {
-            // Center the glow and clip it.
-            int glowLeft = (mWidth - mMinWidth)/2;
-            mGlow.setBounds(glowLeft, 0, mWidth - glowLeft, glowBottom);
-        } else {
-            // Stretch the glow to fit.
-            mGlow.setBounds(0, 0, mWidth, glowBottom);
-        }
+{% gist 7878762 EdgeEffect_ctor.java %}
 
-        mGlow.draw(canvas);
-...        
-```
+And the size of the glow (how much the user _over-pulled_ the list) is calculated during ```draw(Canvas)``` call:
+{% gist 7878762 EdgeEffect_draw.java %}
+
 There is no way to change the drawable resource (_hint one, Google._), or apply a filter on the drawable (_hint two, Google._). A shame.
 
 ## Solution - Hacker style ##
 What can be done? I'm going to _hack_ my way into branding this drawable. I'll take advantage of the fact that the Drawable instance is shared, and not mutate (which makes sense, right?)
 and I'll load that Drawable in my code, and apply a filter on it:
-```
-static void brandGlowEffect(Context context, int brandColor) {
-      int glowDrawableId = context.getResources().getIdentifier("overscroll_glow", "drawable", "android");
-      Drawable androidGlow = context.getResources().getDrawable(glowDrawableId);
-      androidGlow.setColorFilter(brandColor, PorterDuff.Mode.MULTIPLY);
-}
-```
+{% gist 7878762 brandGlowEffect.java %}
+
 ### What just happened? ###
 The name of the glow resource has never changed in Android's history (so far), (line 1) so I'll get its identification,
 (line 2) load the Drawable, which is shared instance across my Application, thus the same one EdgeEffect is using,
@@ -60,18 +35,8 @@ The name of the glow resource has never changed in Android's history (so far), (
 ### What about the overscroll_edge resource ###
 The edge-effect is broken to two drawables: the glow (*overscroll_glow*), and the edge (*overscroll_edge*). This method allows the EdgeEffect class to stretch just the glow, and keep the edge crisp.
 To brand the edge (you'll probably want to do that too), use this revised method, which brand both the glow and the edge:
-```
-static void brandGlowEffect(Context context, int brandColor) {
-      //glow
-      int glowDrawableId = context.getResources().getIdentifier("overscroll_glow", "drawable", "android");
-      Drawable androidGlow = context.getResources().getDrawable(glowDrawableId);
-      androidGlow.setColorFilter(brandColor, PorterDuff.Mode.MULTIPLY);
-      //edge
-      int edgeDrawableId = context.getResources().getIdentifier("overscroll_edge", "drawable", "android");
-      Drawable androidEdge = context.getResources().getDrawable(edgeDrawableId);
-      androidEdge.setColorFilter(brandColor, PorterDuff.Mode.MULTIPLY);
-}
-```
+{% gist 7878762 brandGlowEffect_full.java %}
+
 
 ## Pitfalls ##
  * Android may decide to change the name of the resource, in which case you'll need to change the call to ```getIdentifier```
