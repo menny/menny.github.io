@@ -9,6 +9,9 @@ Lately, I've become some sort of a branding obsessed; colors, font sizes, UI lan
 I can hardly look at an App these days without pulling on my hairs and scream "God, oh God, why would they use inconsistent, non-brand colors!"
 Ya, but that's my problem. Your is another: how to brand the [EdgeEffect](http://developer.android.com/reference/android/widget/EdgeEffect.html) glow, ah?
 
+**TL;DR;** Use the gist [here](https://gist.github.com/menny/7878762#file-brandgloweffect_full-java).
+
+
 Weird as it sounds, Android does not provide any method to change (or brand) the _hitting-the-wall_ feedback glow effect in its widget (ListView, GridView, ScrollView, etc.), and will only use the OS's color.
 This even gets weirder, when Android 2.3 has a green edge-effect, while Android 3+ uses a blueish (Holo) color, and KitKat (v4.4) uses a gray glow effect (ironic fact: Android team changed the color of the glow effect so the Holo color will not collide with your branding, although, gray is colliding just as well, IMHO).
 
