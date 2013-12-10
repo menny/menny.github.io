@@ -20,7 +20,7 @@ I've decided to separate the App by API level: API 3, API 4-6, and API 7+. Why t
 
 ### API 3 - Android v1.5 ###
 Devices still running Android 1.5 are very [old](http://en.wikipedia.org/wiki/HTC_Dream). They are very limited on internal storage, RAM and CPU power.
-I've decided to create a special [build](https://github.com/AnySoftKeyboard/AnySoftKeyboard/tree/API3) for those phones: minimal resources (just MDPI), and removed all code that does not support this API level.
+I've decided to create a special [build](https://github.com/AnySoftKeyboard/AnySoftKeyboard/tree/API3) for those phones: minimal resources (just MDPI), just ARM jni, and removed all code that does not support this API level.
 I was able to reduce the size of the APK from 3.2MB to 2.1MB, which is very helpful for owners of those devices.
 
 This is the _AndroidManifest_ file for this build:
@@ -29,7 +29,7 @@ This is the _AndroidManifest_ file for this build:
 ### API 4-6 - Android v1.6-v2.0 ###
 These devices are usually much [better](http://en.wikipedia.org/wiki/Motorola_Droid). But due to OS limitations, they can not support
 modern UI language (like the ActionBar). So, here, I've decided to also create a separate [build](https://github.com/AnySoftKeyboard/AnySoftKeyboard/tree/API4_6) for these API levels. 
-Again, reduced set of resources (MDPI and HDPI), and reduced set of functionality (e.g., no voice input).
+Again, reduced set of resources (MDPI and HDPI), a few more jni libs, and reduced set of functionality (e.g., no voice input).
 
 This is the _AndroidManifest_ file for this build:
 {% gist 7893053 AndroidManifest_API4.xml %}
