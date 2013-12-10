@@ -42,9 +42,10 @@ This is the _AndroidManifest_ file for this build:
 
 ### Things to Note ###
 You'll notice that for an higher API level, there is an higher _versionCode_:
- * ```android:minSdkVersion="3"``` has ```android:versionCode="112"```
- * ```android:minSdkVersion="4"``` has ```android:versionCode="113"```
- * ```android:minSdkVersion="7"``` has ```android:versionCode="114"```
+
+ * First APK is for ```android:minSdkVersion="3"```, and has ```android:versionCode="112"```.
+ * Second APK is for ```android:minSdkVersion="4"```, and has ```android:versionCode="113"```.
+ * Third APK is for ```android:minSdkVersion="7"```, and has ```android:versionCode="114"```.
  
 This is required in case the user's device will get an OS upgrade that requires an APK for an higher API level, 
 e.g., say your HTC G1 is running Android 1.5, and then, one glory morning, you are pushed with an OS upgrade to Android 1.6,
