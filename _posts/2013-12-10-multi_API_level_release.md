@@ -5,9 +5,9 @@ date:   2013-12-10 10:29:00
 categories: [android]
 tags: [tips, anysoftkeyboard]
 ---
-Up until recentrly, [AnySoftKeyboard](http://anysoftkeyboard.github.io) was supporting Android devices all the way back to 1.5 in a single APK.
+Up until recently, [AnySoftKeyboard](http://anysoftkeyboard.github.io) was supporting Android devices all the way back to 1.5 in a single APK.
 Mostly, it worked fine, and I was able to use [FrankenRobot](http://evendanan.net/2011/04/Backward-compatibility-in-Android-OR-How-I-made-a-2-2-Android-APK-run-under-1-5/)
-to utilize higher API levels features succesfully. But there was a cost.
+to utilize higher API levels features successfully. But there was a cost.
 
 **TL; DR;**, you can check out this screen-shot, which explains a lot.
 
@@ -61,5 +61,4 @@ IMAGE here
 How's that for _A picture is worth 37.5 tweets!_!
 
 Good luck.
-
 
