@@ -9,7 +9,7 @@ Up until recently, [AnySoftKeyboard](http://anysoftkeyboard.github.io) was suppo
 Mostly, it worked fine, and I was able to use [FrankenRobot](http://evendanan.net/2011/04/Backward-compatibility-in-Android-OR-How-I-made-a-2-2-Android-APK-run-under-1-5/)
 to utilize higher API levels features successfully. But there was a cost.
 
-**TL; DR;**, you can check out this screen-shot, which explains a lot.
+**TL; DR;**, you can check out [this screen-shot](https://lh6.googleusercontent.com/--sfgL7VjzbE/Uqc_eTbtugI/AAAAAAABVlg/VlDicW7uERY/s1800/multiple_API_versions_releasing.png), which explains a lot.
 
 Android 1.5 can not support the [Support Library](http://developer.android.com/tools/support-library/index.html) (which includes the Fragment support), and Android 1.6 till 2.0 can not support
 the App-Compact library (which includes the ActionBar), so providing a single APK for all devices had it cost: no modern UI/UX.
@@ -56,7 +56,7 @@ your APK, it is required the that new APK will have a higher _versionCode_. Got 
 After you have your APKs built, each with its own ```android:minSdkVersion``` and ```android:maxSdkVersion```, you can upload them to the _Play Store_.
 You should see something like this:
 
-IMAGE here
+![Play Store multiple APKs release](https://lh6.googleusercontent.com/--sfgL7VjzbE/Uqc_eTbtugI/AAAAAAABVlg/VlDicW7uERY/s1000/multiple_API_versions_releasing.png "Note the versionCode and the API levels")
 
 How's that for _A picture is worth 37.5 tweets!_!
 
