@@ -5,12 +5,11 @@ date:   2013-12-09 13:07:00
 categories: [android, branding]
 tags: [tips, hacx]
 ---
-Lately, I've become some sort of a branding obsessed; colors, font sizes, UI language, they all seem _so_ important to me now, 
+Lately, I've become sort of branding obsessed; colors, font sizes and types, UI language, they all seem _so_ important to me, 
 I can hardly look at an App these days without pulling on my hairs and scream "God, oh God, why would they use inconsistent, non-brand colors!"
 Ya, but that's my problem. Your is another: how to brand the [EdgeEffect](http://developer.android.com/reference/android/widget/EdgeEffect.html) glow, ah?
 
 **TL;DR;** Use the gist [here](https://gist.github.com/menny/7878762#file-brandgloweffect_full-java).
-
 
 Weird as it sounds, Android does not provide any method to change (or brand) the _hitting-the-wall_ feedback glow effect in its widget (ListView, GridView, ScrollView, etc.), and will only use the OS's color.
 This even gets weirder, when Android 2.3 has a green edge-effect, while Android 3+ uses a blueish (Holo) color, and KitKat (v4.4) uses a gray glow effect (ironic fact: Android team changed the color of the glow effect so the Holo color will not collide with your branding, although, gray is colliding just as well, IMHO).
@@ -46,3 +45,9 @@ To brand the edge (you'll probably want to do that too), use this revised method
  * The shared instance may be unloaded from memory, so remember to call the ```brandGlowEffect``` after each creation of EdgeEffect (after creation of ListView, GridView, ScrollView, or your own instance of EdgeEffect), best place will be in the Activity's ```onCreate```, right after setting the layout.
  * I'll emphasis the first point (since this is the core of the hack, and it's a _reflection_ kind of solution, thus dangerous): make sure this method works on the target Android version you had in mind. I take no responsibility!
  
+## Branding - The Technical Challenge ##
+An App should be useful, easy to use, effective, beautiful, stable. It should also be unique, and represent its creator. This is where _Branding_ comes in -
+a way to express and show yourself in the App UI: colors, Type-face and font sizes, language, behavior, icons and graphics, etc.
+
+I'll try to post more about this subject, but not from a marketing, design, or decision (reason) standpoint. Instead I'll show you _how_, technically, to brand your App. 
+E.g., in this post I've shown how to change the color of Android's build-in Edge-Effect, you can use this method to change the glow color to your brand's main (or secondary) color! What ever that color maybe (which is a design decision).
