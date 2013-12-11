@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Multiple API Level APK Release a.k.a 
+title: Multiple API Level APK Release a.k.a I'm Done With Legacy
 date:   2013-12-10 10:29:00
 categories: [android]
 tags: [tips, anysoftkeyboard]
