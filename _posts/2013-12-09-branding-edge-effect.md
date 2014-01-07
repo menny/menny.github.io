@@ -11,8 +11,8 @@ Ya, but that's my problem. Your is another: how to brand the [EdgeEffect](http:/
 
 **TL;DR;** Use the gist [here](https://gist.github.com/menny/7878762#file-brandgloweffect_full-java).
 
-Weird as it sounds, Android does not provide any method to change (or brand) the _hitting-the-wall_ feedback glow effect in its widget (ListView, GridView, ScrollView, etc.), and will only use the OS's color.
-This even gets weirder, when Android 2.3 has a green edge-effect, while Android 3+ uses a blueish (Holo) color, and KitKat (v4.4) uses a gray glow effect (ironic fact: Android team changed the color of the glow effect so the Holo color will not collide with your branding, although, gray is colliding just as well, IMHO).
+It is usually pretty easy to change colors, sizes, etc. for widgets which are in your App's real estate (e.i., not the OS's chrome: notification bar icons, for example), but, weird as it sounds, Android does not provide any method to change (or brand) the _hitting-the-wall_ feedback glow effect in its widget (ListView, GridView, ScrollView, etc.), and will only use the OS's color.
+This even gets weirder, when Android 2.3 has a green edge-effect, while Android 3+ uses a blueish (Holo) color, and KitKat (v4.4) uses a gray glow effect (ironic fact: Android team changed the colors of the chrome in KitKat to a nuetral gray color, so it will not collide with your branding, although, a gray Edge-Effect inside your App's UI is clearly colliding, IMHO).
 
 ## The Cause ##
 The _EdgeEffect_ class uses a [_Drawable_](https://android.googlesource.com/platform/frameworks/base/+/android-4.4.1_r1/core/res/res/drawable-xxhdpi/overscroll_glow.png) resource (an OS's resource, not yours, _hint, hint, Google_), which provides the glow effect, this resource is loaded internally
