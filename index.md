@@ -16,8 +16,7 @@ description: Menny Even-Danan is the proud father of Hagar and Netta, husband to
 	<ul class="raised">
 		<li><strong>&hellip;does:</strong></li>
 		<li><a href="http://anysoftkeyboard.github.io" itemprop="affiliation">AnySoftKeyboard</a> - highly customizable, <a href="https://market.android.com/search?q=anysoftkeyboard&c=apps">plugins</a> based virtual keyboard for the Android OS.</li>
-		<li><a href="http://www.speakingpal.com" itemprop="affiliation">SpeakingPal</a> - an mLearning startup.</li>
-		<li><a href="https://play.google.com/store/apps/details?id=com.americanexpress.android.acctsvcs.us" itemprop="worksFor">American Express</a> - Making <i>Android</i> work for the cardholders.</li>
+		<li><a href="https://www.spotify.com/us/" itemprop="affiliation">Spotify</a> - making your music _Discovery_ experience awesome.</li>
 		<li><a href="/blog.html" itemprop="url">Blog</a> - a pretty static system and software blog.</li>
 	</ul>
 	<!-- not ready
