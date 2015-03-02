@@ -16,7 +16,7 @@ description: Menny Even-Danan is the proud father of Hagar and Netta, husband to
 	<ul class="raised">
 		<li><strong>&hellip;does:</strong></li>
 		<li><a href="http://anysoftkeyboard.github.io" itemprop="affiliation">AnySoftKeyboard</a> - highly customizable, <a href="https://market.android.com/search?q=anysoftkeyboard&c=apps">plugins</a> based virtual keyboard for the Android OS.</li>
-		<li><a href="https://www.spotify.com/us/" itemprop="affiliation">Spotify</a> - making your music <i>Discovery</i> experience awesome.</li>
+		<li><a href="https://www.spotify.com/us/" itemprop="affiliation">Spotify</a> - making your online <i>Radio</i> experience awesome.</li>
 		<li><a href="/blog.html" itemprop="url">Blog</a> - a pretty static system and software blog.</li>
 	</ul>
 	<!-- not ready
