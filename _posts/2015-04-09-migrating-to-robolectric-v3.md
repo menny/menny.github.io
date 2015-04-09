@@ -62,17 +62,21 @@ set the `constants` value to the app's BuildConfig class.
 ## Activity life-cycle management ##
 Robolectric lets you manage the life cycle of the activity using it's `ActivityController`. This is still there, but there are two
 additions:
+
  * `ActivityController.postCreate()` was added.
- * `ActivityController` now has a new `setup` method which is a shorthand for `create().start().postCreate(null).resume().visible().get()`
- * and another shorthand was added `Robolectric.setupActivity(Class<T extends Activity>)`
+ * `ActivityController` now has a new `setup` method which is a shorthand for `create().start().postCreate(null).resume().visible().get()`.
+ * and another shorthand was added `Robolectric.setupActivity(Class<T extends Activity>)`.
+
 Quite useful.
 <br>
 
 ## Missing stuff ##
-This is what I've found so far:<br>
+This is what I've found so far:
+
  * `IntentFilter` will not do `equals` correctly anymore. I guess that this is due to some cleanup, which resulted in _Shadows_ to be removed. I used a new static method to calculate `match`:
 {% gist c45781b8d980f4a60ae3 IntentFilterIsSimilar.java %}
 I use [Mockito](http://mockito.org/) a lot and needed a  [Matcher](https://gist.github.com/menny/c45781b8d980f4a60ae3#file-intentfilterequalmatcher-java) too.
+<br>
 
 ## Replaced stuff ##
 This is what I've found so far:<br>
