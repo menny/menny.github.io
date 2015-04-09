@@ -7,6 +7,7 @@ tags: [walkthrough]
 ---
 [Robolectric](https://robolectric.org) has reach a big milestone recently: [V3-rc2](https://groups.google.com/forum/#!topic/robolectric/1XWVJvKiFjA), so it was time
 to upgrade all my personal projects.<br>
+
 With the new release, they have introduced new concepts and new APIs (and removed and renamed others).
 In most cases, I find the new API and structure much more readable, and generally like it.<br>
 But since I'm a user of _Robolectric_ since way-back, it also means that the unit-tests will have to be re-adjust to the new API.
