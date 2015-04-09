@@ -5,27 +5,28 @@ date:   2015-04-08 22:07:00
 categories: [android, robolectric, unit-test]
 tags: [walkthrough]
 ---
-_Robolectric has reach a big milestone recently: [V3-rc2](https://groups.google.com/forum/#!topic/robolectric/1XWVJvKiFjA), so it was time
-to upgrade all my personal projects. I was up to a very large upgrade due to API and concepts breakage.
-API breakage is a painful thing for developers, and [Robolectric](https://robolectric.org) sure did that with v3!
-In most cases, I find the new API and structure much more readable, and moduled correctly. 
-But since I'm a user of _Robolectric_ since wayback, it also means that the unit-tests will have to be re-adjust to the new API.
+[Robolectric](https://robolectric.org) has reach a big milestone recently: [V3-rc2](https://groups.google.com/forum/#!topic/robolectric/1XWVJvKiFjA), so it was time
+to upgrade all my personal projects.
+With the new release, they have introduced new concepts and new APIs (and removed and renamed others).
+In most cases, I find the new API and structure much more readable, and generally like it.
+But since I'm a user of _Robolectric_ since way-back, it also means that the unit-tests will have to be re-adjust to the new API.
 
-To make it clear, if it wasn't worth the hussle, I would not upgrade to v3, but this new version comes with a lot of nice improvements
-and Robolectric, in general, is [awesome](http://stackoverflow.com/a/18271651/1324235) beyond words.
+First, to make things clear, if it wasn't worth the hussle, I would not upgrade to v3, but this new version comes with a lot of nice improvements
+and _Robolectric_, in general, is [awesome](http://stackoverflow.com/a/18271651/1324235) beyond words.
 
 Let's start with the basic stuff, like:
 # Gradle stuff #
-You no longer need the Robolectric plugin. So just remove `classpath 'org.robolectric:robolectric-gradle-plugin:0.13.2` from `build.gradle`.
-Some developers had used a hack to get Robolectric tests navigatible in Android Studio:
+You no longer need the _Robolectric_ Gradle plugin. So just remove
+`classpath 'org.robolectric:robolectric-gradle-plugin` from _build.gradle_.
+Some developers had used a hack to get _Robolectric_ tests navigable in Android Studio:
 ```
-sourceSets {
-  androidTest {
-    setRoot('src/test')
+  sourceSets {
+    androidTest {
+      setRoot('src/test')
+    }
   }
-}
 ```
-or 
+<br> or <br>
 ```
 apply plugin: 'idea'
 
@@ -55,7 +56,7 @@ it and _Robolectric_ which causes all Fragment/Activity related unit-tests to [f
 # Entry Points #
  * `Robolectric.application` does not exist anymore. From now own use `RuntimeEnvironment.application`.
  * `Robolectric.shadowOf()` does not exist anymore. From now own use `Shadows.shadowOf()`.
- 
+
 # TestRunner #
 You have probably used `@RunWith(RobolectricTestRunner.class)` in your classes. Switch to `RobolectricGradleTestRunner`, but you'll also need to add a `@Config`
 annotation too, which points to your app's `BuildConfig` class:
@@ -69,5 +70,5 @@ This test-runner will set the app's SDK level to 21 (since Robolectric does not 
 set the `constants` value to the app's BuildConfig class.
 
 
- 
+
 Please share your tips and tricks for migrating in the comments! I'll update this post as things coming in
