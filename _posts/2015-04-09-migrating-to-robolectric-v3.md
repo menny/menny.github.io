@@ -17,36 +17,16 @@ and _Robolectric_, in general, is [awesome](http://stackoverflow.com/a/18271651/
 Let's start with the basic stuff, like:
 # Gradle stuff #
 You no longer need the _Robolectric_ Gradle plugin. So just remove
-`classpath 'org.robolectric:robolectric-gradle-plugin` from _build.gradle_.
-Some developers had used a hack to get _Robolectric_ tests navigable in Android Studio:<br>
-```
-sourceSets {
-    androidTest {
-        setRoot('src/test')
-    }
-}
-```
-<br> or <br>
-```
-apply plugin: 'idea'
-
-idea {
-    module {
-        testOutputDir = file('build/test-classes/debug')
-    }
-}
-```<br>
+`classpath 'org.robolectric:robolectric-gradle-plugin'` from _build.gradle_.<br>
+Some developers had used a hack to get _Robolectric_ tests navigable in Android Studio:
+{% gist c45781b8d980f4a60ae3 remove-androidTest %}
+or
+{% gist c45781b8d980f4a60ae3 remove_idea_plugin %}
 You don't need those anymore.
 <br>
-Any specific _Robolectric_ settings should also be removed, since we are not using the _Robolectric Gradle Plugin_ anymore. Remove this:<br>
-`
-robolectric {
-  include '**/*Test.class'
-  exclude '**/espresso/**/*.class'
-
-  maxHeapSize = "2048m"
-}
-`
+Any specific _Robolectric_ settings should also be removed, since we are not using the _Robolectric Gradle Plugin_ anymore. Remove this:
+{% gist c45781b8d980f4a60ae3 remove_robolectric_config %}
+<br>
 With _Android Gradle Plugin v1.1.0_ there is a built-in support for unit-test (using _mutableAndroidJar_), so we no longer need to setup
 _Robolectric_ as androidTestCompile.<br>
 Change `androidTestCompile('org.robolectric:robolectric:2.4')` to `testCompile 'org.robolectric:robolectric:3.0-rc2'`
@@ -54,18 +34,19 @@ Change `androidTestCompile('org.robolectric:robolectric:2.4')` to `testCompile '
 it and _Robolectric_ which causes all Fragment/Activity related unit-tests to [fail](https://github.com/robolectric/robolectric/issues/1633) with `NoSuchMethodError`.
 
 # Entry Points #
- * `Robolectric.application` does not exist anymore. From now own use `RuntimeEnvironment.application`.
- * `Robolectric.shadowOf()` does not exist anymore. From now own use `Shadows.shadowOf()`.
+ * `Robolectric.application` does not exist anymore. From now on use `RuntimeEnvironment.application`.
+ * `Robolectric.shadowOf()` does not exist anymore. From now on use `Shadows.shadowOf()`.
 
 # TestRunner #
 You have probably used `@RunWith(RobolectricTestRunner.class)` in your classes. Switch to `RobolectricGradleTestRunner`, but you'll also need to add a `@Config` annotation too, which points to your app's `BuildConfig` class:
-`
-@RunWith(RobolectricGradleTestRunner.class)
+```
+<br>
+@RunWith(RobolectricGradleTestRunner.class)<br>
 @Config(constants = BuildConfig.class)
-`
-I opted to a different approace: a custom test-runner that sets the Robolectric configuration:
+```
+I opted to a different approace: a custom test-runner that sets the _Robolectric_ configuration:
 {% gist c45781b8d980f4a60ae3 CustomGradleTestRunner.java %}
-This test-runner will set the app's SDK level to 21 (since Robolectric does not support anything higher than that, right now), and will
+This test-runner will set the app's SDK level to 21 (since _Robolectric_ does not support anything higher than that, right now), and will
 set the `constants` value to the app's BuildConfig class.
 
 
