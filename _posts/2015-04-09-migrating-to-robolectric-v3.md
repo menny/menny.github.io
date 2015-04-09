@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Migrating to Robolectric v3 a.k.a Just Work, Dear God, Just Work!
-date:   2015-04-08 22:07:00
+date:   2015-04-09 13:52:00
 categories: [android, robolectric, unit-test]
 tags: [walkthrough]
 ---
@@ -34,11 +34,11 @@ _Robolectric_ as _androidTestCompile_.<br>
 Change `androidTestCompile('org.robolectric:robolectric:2.4')` to `testCompile 'org.robolectric:robolectric:3.0-rc2'`<br>
 **DO NOT USE** `com.squareup:fest-android:1.0.8`. If you have it in your `testCompile` be sure to remove it. There is a conflict between
 it and _Robolectric_ which causes all Fragment/Activity related unit-tests to [fail](https://github.com/robolectric/robolectric/issues/1633) with `NoSuchMethodError`.
-
+<br>
 # Entry Points #
  * `Robolectric.application` does not exist anymore. From now on use `RuntimeEnvironment.application`.
  * `Robolectric.shadowOf()` does not exist anymore. From now on use `Shadows.shadowOf()`.
-
+ <br>
 # TestRunner #
 You have probably used `@RunWith(RobolectricTestRunner.class)` in your classes. Switch to `RobolectricGradleTestRunner`, but you'll also need to add a `@Config` annotation too, which points to your app's `BuildConfig` class:
 {% gist c45781b8d980f4a60ae3 MainActivityTest.java %}
@@ -47,6 +47,6 @@ I opted to a different approach: a custom test-runner that sets the _Robolectric
 This test-runner will set the app's SDK level to 21 (since _Robolectric_ does not support anything higher than that, right now), and will
 set the `constants` value to the app's BuildConfig class.
 
-
+<br>
 <br>
 Please share your tips and tricks for migrating in the comments! I'll update this post as things coming in
