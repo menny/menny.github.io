@@ -13,8 +13,7 @@ In most cases, I find the new API and structure much more readable, and generall
 But since I'm a user of _Robolectric_ since way-back, it also means that the unit-tests will have to be re-adjust to the new API.
 <br>
 
-* **Note:** all code in this post is licensed under [Apache2](https://gist.github.com/menny/c45781b8d980f4a60ae3#file-license).
-<br>
+   **Note:** all code in this post is licensed under [Apache2](https://gist.github.com/menny/c45781b8d980f4a60ae3#file-license).
 <br>
 
 First, to make things clear, if it wasn't worth the hassle, I would not upgrade to v3, but this new version comes with a lot of nice improvements
@@ -36,7 +35,7 @@ Any specific _Robolectric_ settings should also be removed, since we are not usi
 {% gist c45781b8d980f4a60ae3 remove_robolectric_config %}
 <br>
 
-With _Android Gradle Plugin v1.1.0_ there is a built-in support for unit-test (using _mutableAndroidJar_), so we no longer need to setup
+With _Android Gradle Plugin v1.1.0_ there is a [built-in support for unit-test](http://tools.android.com/tech-docs/unit-testing-support) (using _mutableAndroidJar_), so we no longer need to setup
 _Robolectric_ as _androidTestCompile_.<br>
 Change `androidTestCompile('org.robolectric:robolectric:2.4')` to `testCompile 'org.robolectric:robolectric:3.0-rc2'`<br>
 **DO NOT USE** `com.squareup:fest-android:1.0.8`. If you have it in your `testCompile` be sure to remove it. There is a conflict between

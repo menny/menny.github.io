@@ -10,17 +10,17 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'Quattrocento', serif;
 }
 
-h1, .subtitle{ 
+h1, .subtitle{
   text-align: center;
-  margin-bottom: 0.5em; 
+  margin-bottom: 0.5em;
 }
 
-h2, h3, h4, h5, h6 { 
-  margin-bottom: 0.2em; 
+h2, h3, h4, h5, h6 {
+  margin-bottom: 0.2em;
 }
 
-h3, h4, h5, h6 { 
-  margin-bottom: 0.1em; 
+h3, h4, h5, h6 {
+  margin-bottom: 0.1em;
 }
 
 p {
@@ -28,7 +28,7 @@ p {
 }
 
 code {
-  font-size: 90%;
+  font-size: 80%;
 }
 
 /* Custom container */
@@ -37,7 +37,7 @@ code {
 }
 
 .container-narrow > hr {
-  margin: 10pt 0; 
+  margin: 10pt 0;
 }
 
 .navbar ul {
@@ -71,20 +71,20 @@ code {
 /* post-full*/
 .post-full .date {
   margin-bottom: 10pt;
-  font-weight: bold; 
+  font-weight: bold;
 }
 
 /* tag_box */
 .tag_box {
   list-style: none;
-  overflow: hidden; 
-  float: left; 
+  overflow: hidden;
+  float: left;
   width: 50%;
   margin-top: -1em;
 }
 
 .tag_box.inline li {
-  float: left; 
+  float: left;
 }
 
 .tag_box a {
@@ -95,14 +95,14 @@ code {
 
 .tag_box a span {
   vertical-align: super;
-  font-size: 0.4em; 
+  font-size: 0.4em;
 }
 
 .tag_box a.active {
   background: #57A957;
   border: 1px solid #4c964d;
   color: #FFF; }
-  
+
 .bio ul{
   list-style: none;
 }
