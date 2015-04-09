@@ -23,16 +23,16 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'Quattrocento', serif;
 }
 
-h1 { 
-  margin-bottom: 1em; 
+h1 {
+  margin-bottom: 1em;
 }
 
-h2, h3, h4, h5, h6 { 
-  margin-bottom: 0.5em; 
+h2, h3, h4, h5, h6 {
+  margin-bottom: 0.5em;
 }
 
-h3, h4, h5, h6 { 
-  margin-bottom: 0.3em; 
+h3, h4, h5, h6 {
+  margin-bottom: 0.3em;
 }
 
 h1 {
@@ -169,7 +169,8 @@ a:visited { color: #a0a; }
 .post code {
   border: 1px solid #ddd;
   background-color: #eef;
-  padding: 0 .2em;
+  padding: 0 .1em;
+  font-size: 80%;
 }
 
 .post pre code {
