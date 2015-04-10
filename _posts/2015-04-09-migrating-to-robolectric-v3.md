@@ -80,8 +80,16 @@ This is what I've found so far:
 ## Replaced stuff ##
 This is what I've found so far:
 
-* `TestCursor` was replaced with `RoboCursor`, which is an improved version of it. This is a great addition.
-* _UI Thread_ is now called _ForegroundScheduler_, which means that `Robolectric.runUiThreadTasksIncludingDelayedTasks()` is now called `Robolectric.flushForegroundScheduler();`
+ * `TestCursor` was replaced with `RoboCursor`, which is an improved version of it. This is a great addition.
+ * _UI Thread_ is now called _ForegroundScheduler_, which means that `Robolectric.runUiThreadTasksIncludingDelayedTasks()` is now called `Robolectric.flushForegroundScheduler();`
+
+## Other ##
+This is what I've found so far:
+
+ * [`Time`](http://developer.android.com/reference/android/text/format/Time.html) now **respects** the default time-zone! So make sure you set it correctly in your unit-tests (maybe in the `@Before` method):
+ {% gist c45781b8d980f4a60ae3 TimeTest.java %}
+ Also, note that `Time` is _Deprecated_ with API-22, so you might want to refactor to use `GregorianCalendar`. But, no pressure.
+<br>
 
 <br>
 Please share your tips and tricks for migrating in the comments! I'll update this post as things coming in
