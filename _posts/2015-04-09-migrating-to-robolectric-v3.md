@@ -92,6 +92,8 @@ This is what I've found so far:
  * [`Time`](http://developer.android.com/reference/android/text/format/Time.html) now **respects** the default time-zone! So make sure you set it correctly in your unit-tests (most probably in the `@Before` method):
  {% gist c45781b8d980f4a60ae3 TimeTest.java %}
  Also, note that `Time` is _Deprecated_ with API-22, so you might want to refactor to use `GregorianCalendar`. But, no pressure.
+ * _Robolectric_ now supports API level 21! This means that if you _assumed_ in your tests that you are running on an API level 18 (which was the highest/default API level for _Robolectric_ v2.4), this is **no** longer the case! The default API level is 21!<br>
+ `@Config(emulateSdk = 18)` is your best friend there. And don't forget to add the missing unit-test for API levels higher than that.
 <br>
 
 <br>
