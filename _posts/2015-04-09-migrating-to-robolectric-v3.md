@@ -8,12 +8,11 @@ tags: [walkthrough]
 [Robolectric](https://robolectric.org) has reach a big milestone recently: [V3-rc2](https://groups.google.com/forum/#!topic/robolectric/1XWVJvKiFjA), so it was time
 to upgrade all my personal projects.<br>
 
-With the new release, they have introduced new concepts and new APIs (and removed and renamed others).
-In most cases, I find the new API and structure much more readable, and generally like it.<br>
-But since I'm a user of _Robolectric_ since way-back, it also means that the unit-tests will have to be re-adjust to the new API.
+With the new release, [the team](https://github.com/orgs/robolectric/people) has introduced new concepts and new APIs (and removed and renamed others). In most cases, I find the new API and structure much more readable, and generally like it.<br>
+But as a long time user of _Robolectric_, it also means that I have a lot of code to refactor.
 <br>
 
-   **Note:** all code in this post is licensed under [Apache2](https://gist.github.com/menny/c45781b8d980f4a60ae3#file-license).
+   **Note:** all code in this post is _Public Domain_ as described in [CC0](https://wiki.creativecommons.org/CC0).
 <br>
 
 First, to make things clear, if it wasn't worth the hassle, I would not upgrade to v3, but this new version comes with a lot of nice improvements
@@ -35,7 +34,7 @@ Any specific _Robolectric_ settings should also be removed, since we are not usi
 {% gist c45781b8d980f4a60ae3 remove_robolectric_config %}
 <br>
 
-With _Android Gradle Plugin v1.1.0_ there is a [built-in support for unit-test](http://tools.android.com/tech-docs/unit-testing-support) (using _mutableAndroidJar_), so we no longer need to setup
+With _Android Gradle Plugin v1.1.0_ there is a [built-in support for unit-test](http://tools.android.com/tech-docs/unit-testing-support) (using [_mockableAndroidJar_](https://android.googlesource.com/platform/tools/base/+/e8f845b47459973838c99656ae98563b268f21ff/build-system/gradle/src/main/groovy/com/android/build/gradle/internal/tasks/MockableAndroidJarTask.groovy)), so we no longer need to setup
 _Robolectric_ as _androidTestCompile_.<br>
 Change `androidTestCompile('org.robolectric:robolectric:2.4')` to `testCompile 'org.robolectric:robolectric:3.0-rc2'`<br>
 **DO NOT USE** `com.squareup:fest-android:1.0.8`. If you have it in your `testCompile` be sure to remove it. There is a conflict between
@@ -43,9 +42,9 @@ it and _Robolectric_ which causes all Fragment/Activity related unit-tests to [f
 <br>
 
 # TestRunner #
-You have probably used `@RunWith(RobolectricTestRunner.class)` in your classes. Switch to `RobolectricGradleTestRunner`, but you'll also need to add a `@Config` annotation too, which points to your app's `BuildConfig` class:
+You have probably used `@RunWith(RobolectricTestRunner.class)` in your classes. Switch to `RobolectricGradleTestRunner`, but also add a `@Config` annotation, and point to your app's `BuildConfig` class:
 {% gist c45781b8d980f4a60ae3 MainActivityTest.java %}
-I opted to a different approach: a custom test-runner that sets the _Robolectric_ configuration:
+This is enough, but I opted to a different approach: a custom test-runner that sets the _Robolectric_ configuration:
 {% gist c45781b8d980f4a60ae3 CustomGradleTestRunner.java %}
 This test-runner will set the app's SDK level to 21 (since _Robolectric_ does not support anything higher than that, right now), and will
 set the `constants` value to the app's BuildConfig class.
@@ -86,7 +85,7 @@ This is what I've found so far:
 ## Other ##
 This is what I've found so far:
 
- * [`Time`](http://developer.android.com/reference/android/text/format/Time.html) now **respects** the default time-zone! So make sure you set it correctly in your unit-tests (maybe in the `@Before` method):
+ * [`Time`](http://developer.android.com/reference/android/text/format/Time.html) now **respects** the default time-zone! So make sure you set it correctly in your unit-tests (most probably in the `@Before` method):
  {% gist c45781b8d980f4a60ae3 TimeTest.java %}
  Also, note that `Time` is _Deprecated_ with API-22, so you might want to refactor to use `GregorianCalendar`. But, no pressure.
 <br>
