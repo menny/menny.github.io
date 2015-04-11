@@ -68,6 +68,10 @@ additions:
 Quite useful.
 <br>
 
+## Add-On Modules ##
+_Robolectric_ is now broken up a bit; the main library will only include Shadows for the main Android framework classes, and anything else (support library, maps, etc) is served as an [Add-On Module](http://robolectric.org/using-add-on-modules/).<br>
+I don't have much to say about that, other than: if you want a Shadow of a class that is part of an external library (for example, _support-v4_'s `LocalBroadcastManager`), be sure to include the right _Add-On_ (for example `testCompile 'org.robolectric:shadows-support-v4'`). You can access the Shadow using the _Add-On_'s specific `Shadows` entry-point (for completeness: `org.robolectric.support.v4.Shadows`).
+
 ## Missing stuff ##
 This is what I've found so far:
 
