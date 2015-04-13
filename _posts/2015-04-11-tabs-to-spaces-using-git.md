@@ -43,5 +43,10 @@ Pushing to the remote repo (be it _origin_ or _upstream_).
 <br>
 
 # Possible Problems #
- * Applying the `filter-branch` may fail ("Cannot create a new backup.") because of an existing backup in your _refs_ folder. Delete those with `rm -rf .git/refs/original/refs/heads/master` from the root of your repo.
- * If you get `! [rejected]        master -> master (non-fast-forward)` when pushing the changes to your git repo, it means that you do not have _force push_ permissions in the git repo. Talk to the owner.
+* `filter-branch` creates a new, revised, branch in your git repo. This means a few things:
+ * the size of your repo may be doubled!
+ * hash of the commits in your history will be changed! This means that if you have a link to a specific commit, this link _might_ be dead after this process. The reason for that is that if _git_ sees that nothing is pointing to a specific commit, it will garbage collect it.<br>
+ A simple way to fix that, is to use `tag`, and annotate the commit prior to starting this process.
+* Applying the `filter-branch` may fail ("Cannot create a new backup.") because of an existing backup in your _refs_ folder. Delete those with `rm -rf .git/refs/original/refs/heads/master` from the root of your repo.
+* If you get `! [rejected]        master -> master (non-fast-forward)` when pushing the changes to your git repo, it means that you do not have _force push_ permissions in the git repo. Talk to the owner.
+* Previous tags are kept, and are pointing to the original commit, not the revised one. So we are not completely rewriting history.
