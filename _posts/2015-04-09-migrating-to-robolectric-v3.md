@@ -40,6 +40,9 @@ Change `androidTestCompile('org.robolectric:robolectric:2.4')` to `testCompile '
 **DO NOT USE** `com.squareup:fest-android:1.0.8`. If you have it in your `testCompile` be sure to remove it. There is a conflict between
 it and _Robolectric_ which causes all Fragment/Activity related unit-tests to [fail](https://github.com/robolectric/robolectric/issues/1633) with `NoSuchMethodError`.
 <br>
+If you have to use `com.squareup:fest-android:1.0.8`, then remove `support-v4` from it:
+{% gist c45781b8d980f4a60ae3 remove_fest.groovy %}
+<br>
 
 # TestRunner #
 You have probably used `@RunWith(RobolectricTestRunner.class)` in your classes. Switch to `RobolectricGradleTestRunner`, but also add a `@Config` annotation, and point to your app's `BuildConfig` class:
@@ -69,7 +72,7 @@ Quite useful.
 <br>
 
 ## Add-On Modules ##
-_Robolectric_ is now broken up a bit; the main library will only include Shadows for the main Android framework classes, and anything else (support library, maps, etc) is served as an [Add-On Module](http://robolectric.org/using-add-on-modules/).<br>
+_Robolectric_ was broken up to modules; the main library will only include Shadows for the main Android framework classes, and anything else (support library, maps, etc) is served as an [Add-On Module](http://robolectric.org/using-add-on-modules/).<br>
 I don't have much to say about that, other than: if you want a Shadow of a class that is part of an external library (for example, _support-v4_'s `LocalBroadcastManager`), be sure to include the right _Add-On_ (for example `testCompile 'org.robolectric:shadows-support-v4'`). You can access the Shadow using the _Add-On_'s specific `Shadows` entry-point (for completeness: `org.robolectric.support.v4.Shadows`).
 
 ## Missing stuff ##
