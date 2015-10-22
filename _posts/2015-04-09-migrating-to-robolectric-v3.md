@@ -97,6 +97,8 @@ This is what I've found so far:
  Also, note that `Time` is _Deprecated_ with API-22, so you might want to refactor to use [`GregorianCalendar`](http://developer.android.com/reference/java/util/GregorianCalendar.html). But, no pressure.
  * _Robolectric_ now supports API level 21! This means that if you _assumed_ in your tests that you are running on an API level 18 (which was the highest/default API level for _Robolectric_ v2.4), this is **no** longer the case! The default API level is 21!<br>
  `@Config(emulateSdk = 18)` or `@Config(qualifiers = "v19")` are your best friends there. And don't forget to add the missing unit-test for API levels higher than that.
+ * Since the `robolectric` gradle closure is removed, any special Java related configuration (e.g., `maxHeapSize`) should be moved to `android->testOptions->unitTests.all` closure. Something like this:
+   {% gist c45781b8d980f4a60ae3 file-gradle_java_unit_test_config-build %}
 <br>
 
 <br>
