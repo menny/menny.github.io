@@ -16,19 +16,19 @@ you'll create a `remote_file` rule like this:
 and depend on it in one of your targets:
 {% gist 832c6a3a5e10752fd357 android_library_with_remote_file %} 
 <br/>
-Replace `jar` with `aar` if you want to fetch `aar` libraries.
+ * Replace `jar` with `aar` if you want to fetch `aar` libraries.
 
 ## The `maven` rule ##
 This works, but wouldn't it be easier and more friendly if you could import artifacts as easily as _Gradle_ allows?<br/>
 Based on [zserge](https://github.com/zserge/buckbone/blob/master/buckbonejava) work, here's a simple way to achieve exactly that.
 First, create a `DEFS` file in your project's root folder, and add `mavensha1` and `maven` functions to it:
 {% gist 832c6a3a5e10752fd357 maven_rule %}
-Then, import the `DEFS` file to you project, but add the import code to the `.buckconfig` file:
+Second, import the `DEFS` file to you project, but add the import code to the `.buckconfig` file:
 {% gist 832c6a3a5e10752fd357 .buckconfig %}
-while will make `maven` rule available to every `BUCK` file. So, now you can simply do this:
+This will make `maven` rule available to every `BUCK` file. So, now you can simply depend on the rule in your target, like this:
 {% gist 832c6a3a5e10752fd357 library_with_maven_rule %}
 
-It doesn't matter if the artifact is an AAR or a JAR, this `maven` rule will fetch it!
+It doesn't matter if the artifact is an AAR or a JAR, this `maven` rule will fetch either!
 
 # The Support Library case #
 For some reason (legal? distribution?), the support library is not available in [Maven Central](http://search.maven.org/)
