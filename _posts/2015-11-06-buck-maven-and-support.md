@@ -5,8 +5,7 @@ date:   2015-11-06 11:32:00
 categories: [android, buck, gradle, maven]
 tags: [android]
 ---
-[Buck](https://buckbuild.com/) is _Facebook_'s super fast build system for many platforms, including Android. How fast? Up to [7.5 times](https://buckbuild.com/article/exopackage.html)
-in standard cases. That's intriging enough to get me to try it. And immediately realizing that the platform is not complete..
+[Buck](https://buckbuild.com/) is _Facebook_'s super fast build system. How fast? Up to [7.5 times](https://buckbuild.com/article/exopackage.html). That was intriging enough to get me to try it out, and immediately realizing that the platform is not complete..
 One of the features missing is proper and complete support for _Maven_ remote artifacts (aar and jar) and locally hosted Support Library artifacts.
 
 # Remote Maven Artifacts #
@@ -45,3 +44,6 @@ in that folder and import the support libraries:
 {% gist 832c6a3a5e10752fd357 DEFS_support_libraries python %}
 Now you have targets you can depend on when creating Android app:
 {% gist 832c6a3a5e10752fd357 target_with_support_library python %}
+
+# Conclusion #
+This is an amazing build platform! So fast, and so explicit to define and makes complete sense. The problem is that if you are to use it, you kinda giving up on _Gradle_, or any other (_Bazel?_) build system. The reason is that Facebook has its own idea of how an Android project is built, and how the relations between libraries and modules are defined. For example, you will not longer have resource merging, resource overwriting, or `R` constant values. Aligning with _Buck's_ paradigm might turn out to be a very costly operation, and will definetly will not be compatible with _Gradle_, meaning you will not be able to run both build systems on the same codebase.
