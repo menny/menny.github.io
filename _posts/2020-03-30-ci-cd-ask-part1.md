@@ -3,7 +3,7 @@ layout: post
 title: CI/CD at AnySoftKeyboard a.k.a. Is it ready to ship? Part 1
 date:   2020-03-30 20:03:30
 categories: [anysoftkeyboard, ci]
-tags: [android, ci, static-analysis, tests, bots, github, github-actions]
+tags: [android, ci, static-analysis, tests, bots, github]
 ---
 
 Recently, I've [merged](https://github.com/AnySoftKeyboard/AnySoftKeyboard/pull/1991) several AnySoftKeyboard repositories into a monorepo/monolithic-repository - I'm a believer in the [monorepo](https://en.wikipedia.org/wiki/Monorepo) process. During that process, I also refined the [CI](https://en.wikipedia.org/wiki/Continuous_integration)/[CD](https://en.wikipedia.org/wiki/Continuous_deployment) process and wanted to give an overview of the process and the logic behind that.
