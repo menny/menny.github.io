@@ -9,7 +9,7 @@ exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
 #
 name: Let Me Explain Myself&hellip;
 title : Let Me Explain Myself&hellip;
-highlighter: pygments
+highlighter: rouge
 tagline: Programming tricks, software design, and system architecture blog
 author:
   name: Menny Even Danan
