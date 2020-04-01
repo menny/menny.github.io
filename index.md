@@ -28,6 +28,7 @@ description: Menny Even-Danan is the proud father of Hagar and Netta, husband to
     </p>
     <p>
     <small><b>*</b>I'm pretty sure the <i>"powerful CPUs, lots of storage,...."</i> statement is already out-dated (see <a href="http://en.wikipedia.org/wiki/Moore's_law" target="_blank">Moore's law</a>).</small>
+    </p>
 </div>
 </td>
 </tr>
