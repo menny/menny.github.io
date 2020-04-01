@@ -20,7 +20,7 @@ description: Menny Even-Danan is the proud father of Hagar and Netta, husband to
         <li><a href="/blog.html" itemprop="url">Blog</a> - a pretty static system and software blog.</li>
     </ul>
 <div class="bio-extra">
-    <p>A <span itemprop="title">software engineer</span>, programing enthusiast, technology seeker. Not a <i>real blogger</i>. Father for <span itemprop="children">Hagar</span> and <span itemprop="children">Netta</span>. Husband to <span itemprop="spouse">Erela Portugaly.</span><br/>
+    <p>A <span itemprop="title">software engineer</span>, programing enthusiast, technology seeker. Not a <i>real blogger</i>. He, him, his. Father for <span itemprop="children">Hagar</span> and <span itemprop="children">Netta</span>. Husband to <span itemprop="spouse">Erela Portugaly.</span><br/>
     <span itemprop="address" itemscope
           itemtype="http://data-vocabulary.org/Address">I live in <span itemprop="locality">New York</span>, <span itemprop="region">NY</span>.</span>
     </p>
