@@ -27,12 +27,8 @@ description: Menny Even-Danan is the proud father of Hagar and Netta, husband to
     <p>I like the technology era in which we live: we have powerful CPUs<sup><b>*</b></sup> , lots of <a href="http://www.extremetech.com/computing/129183-how-big-is-the-cloud">storage</a>, fast internet <a href="http://www.bloomberg.com/slideshow/2013-07-23/top-20-where-to-find-the-world-s-fastest-internet.html">connection</a>, our mobile devices are wonderful, there are frameworks for everything from <a href="http://hadoop.apache.org/">distributed computing</a> to exceptional <a href="https://www.virag.si/2012/06/must-have-libraries-in-modern-android-developer-toolbox/">UI</a>, and everyone is <a href="https://github.com/menny">sharing</a>.
     </p>
     <p>
-    <small><b>*</b>I'm pretty sure I'll regret the <i>"powerful CPUs, lots of storage,...."</i> statement in a few years (see <a href="http://en.wikipedia.org/wiki/Moore's_law" target="_blank">Moore's law</a>).</small>
+    <small><b>*</b>I'm pretty sure the <i>"powerful CPUs, lots of storage,...."</i> statement is already out-dated (see <a href="http://en.wikipedia.org/wiki/Moore's_law" target="_blank">Moore's law</a>).</small>
 </div>
 </td>
 </tr>
 </table>
-
-
-
-
