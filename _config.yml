@@ -9,7 +9,6 @@ exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
 #
 name: Let Me Explain Myself&hellip;
 title : Let Me Explain Myself&hellip;
-markdown: redcarpet
 highlighter: pygments
 tagline: Programming tricks, software design, and system architecture blog
 author:
