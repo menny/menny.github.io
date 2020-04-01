@@ -10,8 +10,8 @@ Recently, I've [merged](https://github.com/AnySoftKeyboard/AnySoftKeyboard/pull/
 
 This is the first part out of three:
 
-1. CI - Continuous Integration.
-1. CD - Continuous Deployment.
+1. Continuous Integration, a.k.a _CI_.
+1. Continuous Deployment, a.k.a _CD_.
 1. Complimenting workflows.
 
 # Process
