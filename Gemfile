@@ -1,4 +1,4 @@
 source 'https://rubygems.org'
-gem 'commonmarker', '~> 0.14.2'
+gem "jekyll", ">= 3.6.3"
+gem 'commonmarker'
 gem 'github-pages', group: :jekyll_plugins
-gem 'bundler', '2.1.4'
