@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Menny Even-Danan
-description: Menny Even-Danan is the proud father of Hagar and Netta, husband to Erela Portugaly. This is my software related page.
+description: Menny Even-Danan is the proud father of Hagar, Netta and Ofir, husband to Erela Portugaly. This is my software related page.
 ---
 {% include JB/setup %}
 <table itemscope itemtype="http://data-vocabulary.org/Person" border="0" class="bio">
@@ -20,7 +20,7 @@ description: Menny Even-Danan is the proud father of Hagar and Netta, husband to
         <li><a href="/blog.html" itemprop="url">Blog</a> - a pretty static system and software blog.</li>
     </ul>
 <div class="bio-extra">
-    <p>A <span itemprop="title">software engineer</span>, programing enthusiast, technology seeker. Not a <i>real blogger</i>. He, him, his. Father for <span itemprop="children">Hagar</span> and <span itemprop="children">Netta</span>. Husband to <span itemprop="spouse">Erela Portugaly.</span><br/>
+    <p>A <span itemprop="title">software engineer</span>, programing enthusiast, technology seeker. Not a <i>real blogger</i>. He, him, his. Father for <span itemprop="children">Hagar</span>, <span itemprop="children">Netta</span> and  <span itemprop="children">Ofir</span>. Husband to <span itemprop="spouse">Erela Portugaly.</span><br/>
     <span itemprop="address" itemscope
           itemtype="http://data-vocabulary.org/Address">I live in <span itemprop="locality">New York</span>, <span itemprop="region">NY</span>.</span>
     </p>
