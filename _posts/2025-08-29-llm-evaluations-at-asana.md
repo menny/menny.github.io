@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "LLM Evaluations or How We Avoid Wat-Did-You-Say Moments"
+title: "LLM Evaluations a.k.a. How We Avoid Wat-Did-You-Say Moments"
 date:   2025-08-29 12:00:00
 categories: [ai, llm, asana]
 tags: [evaluations, testing, quality, aicamp]
