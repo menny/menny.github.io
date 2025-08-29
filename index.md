@@ -15,6 +15,7 @@ description: Menny Even-Danan is the proud father of Hagar, Netta and Ofir, husb
       <ul class="raised">
           <li><strong>...does:</strong></li>
           <li><a href="http://anysoftkeyboard.github.io" itemprop="affiliation">AnySoftKeyboard</a> - a highly customizable, plugins-based virtual keyboard for Android.</li>
+          <li><a href="http://www.asana.com" itemprop="affiliation">Asana</a> - making developers super charged.</li>
           <li><a href="/blog.html" itemprop="url">Blog</a> - a pretty static system and software blog.</li>
       </ul>
     </div>
