@@ -1,7 +1,7 @@
 <article itemscope itemtype="http://schema.org/BlogPosting">
 	<div class="page-header raised">
 	  <div class="date">
-		<span><span itemprop="datePublished">{{ page.date | date_to_long_string }}</span>,&nbsp;<span itemprop="author" itemscope itemtype="http://data-vocabulary.org/Person"><i>By&nbsp;<span itemprop="name">{{site.author.name}}</span></i></span></span>
+		<span><span itemprop="datePublished">{{ page.date | date_to_long_string }}</span>,&nbsp;<span itemprop="author" itemscope itemtype="http://schema.org/Person"><i>By&nbsp;<span itemprop="name">{{site.author.name}}</span></i></span></span>
 	  </div>
 	  <h1 itemprop="headline">{{ page.title }} {% if page.tagline %}<small>{{page.tagline}}</small>{% endif %}</h1>
 	  <div class="post-properties" itemprop="keywords">
@@ -32,19 +32,6 @@
 		<!-- sharing is fun, it is good for you, you should try it out -->
 		<div class="sharing-buttons">
 			<ul>
-				<li>
-			<!-- Google Plus sharing -->
-			<div class="g-plus" data-action="share" data-annotation="vertical-bubble" data-height="62"></div>
-
-			<script type="text/javascript">
-			  (function() {
-				var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-				po.src = 'https://apis.google.com/js/platform.js';
-				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-			  })();
-			</script>
-				</li>
-			
 			<!-- twitter sharing -->
 				<li>
 					<!-- Twitter Tweet Button: http://twitter.com/goodies/tweetbutton -->
@@ -61,6 +48,25 @@
 						g.src = '//hnbutton.appspot.com/static/hn.min.js';
 						s.parentNode.insertBefore(g, s);
 					}(document, 'script'));
+					</script>
+				</li>
+			<!-- Threads -->
+				<li>
+					<a href="https://www.threads.net/share?url={{ site.production_url }}{{ page.url }}&text={{ page.title | url_encode }}" target="_blank"><i class="icon-comment"></i> Share on Threads</a>
+				</li>
+			<!-- Copy Link -->
+				<li>
+					<button onclick="copyToClipboard()"><i class="icon-share"></i> Copy Link</button>
+					<script>
+						function copyToClipboard() {
+							var dummy = document.createElement('input'),
+							text = window.location.href;
+							document.body.appendChild(dummy);
+							dummy.value = text;
+							dummy.select();
+							document.execCommand('copy');
+							document.body.removeChild(dummy);
+						}
 					</script>
 				</li>
 			</ul>

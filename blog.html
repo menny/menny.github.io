@@ -12,7 +12,7 @@ title: Let Me Explain Myself&hellip;
     {% for post in site.posts %}
       <li class="raised">
         <article itemscope itemtype="http://schema.org/BlogPosting">
-            <span itemprop="dateCreated">{{ post.date | date_to_string }}</span></br>
+            <span itemprop="datePublished">{{ post.date | date_to_string }}</span></br>
             <h2><a href="{{ post.url }}" itemprop="url"><span itemprop="headline">{{ post.title }}</span></a></h2>
             <p><span itemprop="description">{{ post.excerpt }}</span></p>
         </article>

@@ -4,7 +4,7 @@ title: Menny Even-Danan
 description: Menny Even-Danan is the proud father of Hagar, Netta and Ofir, husband to Erela Portugaly. This is my software related page.
 ---
 {% include JB/setup %}
-<table itemscope itemtype="http://data-vocabulary.org/Person" border="0" class="bio">
+<table itemscope itemtype="http://schema.org/Person" border="0" class="bio">
 <tr>
 <td>
   <h1><span itemprop="name"><span itemprop="givenName">Menny</span> <span itemprop="familyName">Even-Danan</span></span>{% if page.tagline %} <small>{{ page.tagline }}</small>{% endif %}</h1>
@@ -20,9 +20,9 @@ description: Menny Even-Danan is the proud father of Hagar, Netta and Ofir, husb
         <li><a href="/blog.html" itemprop="url">Blog</a> - a pretty static system and software blog.</li>
     </ul>
 <div class="bio-extra">
-    <p>A <span itemprop="title">software engineer</span>, programing enthusiast, technology seeker. Not a <i>real blogger</i>. He, him, his. Father for <span itemprop="children">Hagar</span>, <span itemprop="children">Netta</span> and  <span itemprop="children">Ofir</span>. Husband to <span itemprop="spouse">Erela Portugaly.</span><br/>
+    <p>A <span itemprop="jobTitle">software engineer</span>, programing enthusiast, technology seeker. Not a <i>real blogger</i>. He, him, his. Father for <span itemprop="children">Hagar</span>, <span itemprop="children">Netta</span> and  <span itemprop="children">Ofir</span>. Husband to <span itemprop="spouse">Erela Portugaly.</span><br/>
     <span itemprop="address" itemscope
-          itemtype="http://data-vocabulary.org/Address">I live in <span itemprop="locality">New York</span>, <span itemprop="region">NY</span>.</span>
+          itemtype="http://schema.org/PostalAddress">I live in <span itemprop="addressLocality">New York</span>, <span itemprop="addressRegion">NY</span>.</span>
     </p>
     <p>I like the technology era in which we live: we have powerful CPUs<sup><b>*</b></sup> , lots of <a href="http://www.extremetech.com/computing/129183-how-big-is-the-cloud">storage</a>, fast internet <a href="http://www.bloomberg.com/slideshow/2013-07-23/top-20-where-to-find-the-world-s-fastest-internet.html">connection</a>, our mobile devices are wonderful, there are frameworks for everything from <a href="http://hadoop.apache.org/">distributed computing</a> to exceptional <a href="https://www.virag.si/2012/06/must-have-libraries-in-modern-android-developer-toolbox/">UI</a>, and everyone is <a href="https://github.com/menny">sharing</a>.
     </p>
