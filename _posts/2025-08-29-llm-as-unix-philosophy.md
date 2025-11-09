@@ -1,14 +1,14 @@
 ---
 layout: post
-title: "The Unix Philosophy for LLMs a.k.a. Your AI Tools Should Do One Thing Well"
+title: "My LLM Tooling Doctrine: The Unix Philosophy for Local AI"
 date:   2025-11-08 12:00:00
-categories: [ai, llm, asana]
+categories: [ai, llm]
 tags: [ai, developer-experience]
 ---
 
-Here at Asana, we've been building a lot of small LLM-powered CLI tools for about a year now. These are tiny utilities, each with a very specific job: one reviews my git diff, one generates a commit message, and another answers quick shell command questions.
+I've been building a lot of small LLM-powered CLI tools for about a year now. These are tiny utilities, each with a very specific job: one reviews my git diff, one generates a commit message, and another answers quick shell command questions.
 
-Our teams are full of these "micro-tools."
+My terminal is full of these "micro-tools."
 
 This is a deliberate choice. It's a move away from the clunky, do-it-all monoliths and a full embrace of a philosophy that's been battle-tested for decades: the Unix philosophy.
 
@@ -62,24 +62,24 @@ When you build small, separate tools, magical things happen.
 
 2. Perfectly Tuned Prompts: You can't use the same system prompt to review code and to generate a commit message. One needs to be a critical engineer, the other a concise technical writer. By splitting them, each tool has a small, highly-optimized prompt that does its one job perfectly. No prompt-routing, no "you are a helpful assistant" fluff.
 
-3. Reliable, Focused Evaluation: This is a huge engineering win. When a tool has one job, it's so much easier to evaluate. We can build a specific, high-quality test set for cm (commit messages) and another for cr (code review). We're not trying to test a massive, do-it-all prompt; we're testing a small, focused one, which makes it easier to measure quality and prevent regressions.
+3. Reliable, Focused Evaluation: This is a huge engineering win. When a tool has one job, it's so much easier to evaluate. I can build a specific, high-quality test set for cm (commit messages) and another for cr (code review). I'm not trying to test a massive, do-it-all prompt; I'm testing a small, focused one, which makes it easier to measure quality and prevent regressions.
 
 4. Simplicity (UX): The user experience is just... clean. You want a commit message? Type cm. You want a review? Type cr. No flags, no sub-commands, no cognitive overhead.
 
 ## My Family of Tools
-Here's a peek at the ~/bin directory we're building:
+Here's a peek at my local ~/bin directory:
 
 * `qq`: Quick question. qq "how to find files modified in the last 2 days"
 * `git ai-review`: Code review for the current git diff.
 * `gcai`: Git commit message for staged files.
 * `git pr`: Generate a PR title and description from the current branch's diff.
 * `git conflict-fix`: Takes a file with git conflict markers (<<<<<) and attempts a clean merge.
-* and others
+* ... and many more
 
 Each one is simple, fast, and does one thing.
 
 ## A Pro-Tip on Integration a.k.a. Live Where Your Context Is
-Here’s an extra detail on how we build these. We don't just dump them all into ~/bin. We put them where they make the most sense.
+Here’s an extra detail on how I build these. I don't just dump them all into ~/bin. I put them where they make the most sense.
 
 1. For Git-centric tasks, we build Git sub-commands. Our code review tool is `git ai-review`. Our PR generator is `git pr`. This is a huge win for discoverability and ergonomics. The commands feel like a native part of Git because they operate on the Git repository. Anyone who knows Git (and types git --help) can find them, and they automatically operate within the context of the current repo.
 
@@ -92,7 +92,7 @@ This all sounds great, but what about the maintenance nightmare? Do all 15 tools
 
 This is the most important part: you must build a base implementation.
 
-We have a single, internal company-llm-cli-utils library. Every micro-tool is just a 20-line script that imports this base. The base library handles all the boring, critical stuff:
+I have a single, local llm-cli-utils library. Every micro-tool is just a 20-line script that imports this base. The base library handles all the boring, critical stuff:
 
 * Consistent CLI: All tools get the same --model or --verbose flags for free, using something like argparse or click.
 
