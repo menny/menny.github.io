@@ -66,15 +66,6 @@ When you build small, separate tools, magical things happen.
 
 4. Simplicity (UX): The user experience is just... clean. You want a commit message? Type `ai-gc`. You want a review? Type `ai-review`. No flags, no sub-commands, no cognitive overhead.
 
-## A Pro-Tip on Integration a.k.a. Live Where Your Context Is
-Here’s an extra detail on how I build these. I don't just dump them all into `~/bin`. I put them where they make the most sense.
-
-1. For Git-centric tasks, I create simple binaries like `ai-review` and `ai-pr`. To make them feel like native Git commands, I name them `git-ai-review` and `git-ai-pr` and place them in my `PATH`. Git automatically discovers and executes them as sub-commands, so I can run `git ai-review` and it just works. This gives me the best of both worlds: a simple, independent binary that can also be used as a native Git command, which is a huge win for discoverability and ergonomics.
-
-2. For general tasks, I build standalone commands. My "quick question" tool is just `qq`. Since `qq` has no concept of a repository, it wouldn't make sense as a `git` sub-command. Instead, it lives in the standard shell, right next to `grep` and `ls`.
-
-This division is part of the same philosophy: design your tool for its specific job, and that includes its "home" on the command line.
-
 ## The Critical Base a.k.a. Don't Repeat Yourself
 This all sounds great, but what about the maintenance nightmare of having 15 different tools? How do you manage API keys, model selection, and updates?
 
@@ -88,7 +79,15 @@ I have a single, local llm-cli-utils library. Every micro-tool is just a 20-line
 
 *   **Interaction Helpers**: This is where the magic happens. The base library has helpers for common tasks like parsing model output, handling streaming responses, and even managing conversation history for more complex interactions. This keeps the individual tool scripts clean and focused on their specific logic.
 
-## My Family of Tools
+## My Family of Tools: What I've Built and How I Integrate Them
+Here’s an extra detail on how I build these. I don't just dump them all into `~/bin`. I put them where they make the most sense.
+
+1. For Git-centric tasks, I create simple binaries like `ai-review` and `ai-pr`. To make them feel like native Git commands, I name them `git-ai-review` and `git-ai-pr` and place them in my `PATH`. Git automatically discovers and executes them as sub-commands, so I can run `git ai-review` and it just works. This gives me the best of both worlds: a simple, independent binary that can also be used as a native Git command, which is a huge win for discoverability and ergonomics.
+
+2. For general tasks, I build standalone commands. My "quick question" tool is just `qq`. Since `qq` has no concept of a repository, it wouldn't make sense as a `git` sub-command. Instead, it lives in the standard shell, right next to `grep` and `ls`.
+
+This division is part of the same philosophy: design your tool for its specific job, and that includes its "home" on the command line.
+
 Here's a peek at my local `~/bin` directory:
 
 *   `qq`: Quick question. `qq "how to find files modified in the last 2 days"`
