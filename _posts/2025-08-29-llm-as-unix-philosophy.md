@@ -84,7 +84,7 @@ I have a single, local llm-cli-utils library. Every micro-tool is just a 20-line
 
 *   **API Key Retrieval**: It knows exactly where to find the `OPENAI_API_KEY` (or any other key) from the environment or a config file. No need to hardcode keys in every script.
 
-*   **LLM Framework Abstraction**: The base library handles the actual API call (using `langchain`, `litellm`, or just raw `openai-python`). If I want to add a new model provider, I change it in one place, and all tools get the upgrade instantly. This also means I can easily switch between models like `gpt-4o` and `claude-3.5-sonnet` - matching the right model to the job.
+*   **LLM Framework Abstraction**: The base library handles the actual API call (using `langchain`, `litellm`, or just raw `openai-python`). If I want to add a new model provider, I change it in one place, and all tools get the upgrade instantly. This also means I can easily choose different models—like `gpt-4o` for power and `haiku-4.5` for speed—matching the right model to the job.
 
 *   **Interaction Helpers**: This is where the magic happens. The base library has helpers for common tasks like parsing model output, handling streaming responses, and even managing conversation history for more complex interactions. This keeps the individual tool scripts clean and focused on their specific logic.
 
