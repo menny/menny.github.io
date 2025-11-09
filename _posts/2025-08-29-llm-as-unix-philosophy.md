@@ -6,7 +6,7 @@ categories: [ai, llm]
 tags: [ai, developer-experience]
 ---
 
-I've been building a lot of small LLM-powered CLI tools for about a year now. These are tiny utilities, each with a very specific job: one reviews my `git diff`, one generates a commit message, and another answers quick shell command questions.
+I've been building a lot of small LLM-powered CLI tools for about a year now. These are tiny utilities, each with a very specific job: reviewing my `git diff`, generating a commit message, or answering quick shell command questions.
 
 My terminal is full of these "micro-tools."
 
@@ -76,7 +76,7 @@ Here’s an extra detail on how I build these. I don't just dump them all into `
 This division is part of the same philosophy: design your tool for its specific job, and that includes its "home" on the command line.
 
 ## The Critical Base a.k.a. Don't Repeat Yourself
-This all sounds great, but what about the maintenance nightmare? Do all 15 tools have their own API key logic? How to manage LLM models? Etc
+This all sounds great, but what about the maintenance nightmare of having 15 different tools? How do you manage API keys, model selection, and updates?
 
 This is the most important part: you must build a base implementation.
 
@@ -109,4 +109,4 @@ The possibilities are endless. The key is to identify a repetitive task and buil
 
 This is the way. You get the beautiful UX of small, specialized tools and the maintenance sanity of a single, shared core.
 
-Stop building all-in-one AI behemoths. Start building small, sharp, Unix-style tools.
+By embracing the Unix philosophy, you can build a suite of AI-powered tools that are simple, powerful, and a joy to use. Stop building all-in-one AI behemoths. Start building small, sharp, Unix-style tools.
