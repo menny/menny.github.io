@@ -71,7 +71,7 @@ Here’s an extra detail on how I build these. I don't just dump them all into `
 
 1. For Git-centric tasks, I create simple binaries like `ai-review` and `ai-pr`. To make them feel like native Git commands, I name them `git-ai-review` and `git-ai-pr` and place them in my `PATH`. Git automatically discovers and executes them as sub-commands, so I can run `git ai-review` and it just works. This gives me the best of both worlds: a simple, independent binary that can also be used as a native Git command, which is a huge win for discoverability and ergonomics.
 
-2. For general tasks, we build standalone commands. My "quick question" tool is just `qq`. It would feel weird and clunky to type `git qq "how do I unzip a file?"`. This tool has no concept of a repository, so it lives in the standard shell, right next to `grep` and `ls`.
+2. For general tasks, I build standalone commands. My "quick question" tool is just `qq`. Since `qq` has no concept of a repository, it wouldn't make sense as a `git` sub-command. Instead, it lives in the standard shell, right next to `grep` and `ls`.
 
 This division is part of the same philosophy: design your tool for its specific job, and that includes its "home" on the command line.
 
