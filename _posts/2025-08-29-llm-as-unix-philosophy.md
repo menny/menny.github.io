@@ -101,8 +101,9 @@ Each one is simple, fast, and does one thing. And the list is growing! Here are 
 
 *   `ai-doc-gen`: Scopes to a function or class and writes its docstring.
 *   `ai-test-gen`: Scopes to a file or function and stubs out unit tests.
+*   `ai-fix-types`: Fix/add types to Python and TypeScript code.
+*   `ai-fix-text`: Typo/grammar/syntax fixer given a file (fixes variables names and comments, warn on classes and functions since those might be APIs).
 *   `ai-log-analyzer`: Takes a log file and summarizes the errors.
-*   `ai-image-compress`: Compresses an image using a series of commands, and explains the trade-offs.
 
 The possibilities are endless. The key is to identify a repetitive task and build a small, focused tool to automate it.
 
