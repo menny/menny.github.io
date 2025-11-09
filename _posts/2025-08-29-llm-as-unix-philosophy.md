@@ -94,9 +94,11 @@ This is the most important part: you must build a base implementation.
 
 I have a single, local llm-cli-utils library. Every micro-tool is just a 20-line script that imports this base. The base library handles all the boring, critical stuff:
 
-* API key retrieval
-* LLM framework abstraction
-* various helpers to handle interactions with models
+*   **API Key Retrieval**: It knows exactly where to find the `OPENAI_API_KEY` (or any other key) from the environment or a config file. No need to hardcode keys in every script.
+
+*   **LLM Framework Abstraction**: The base library handles the actual API call (using `langchain`, `litellm`, or just raw `openai-python`). If I want to add a new model provider, I change it in one place, and all tools get the upgrade instantly. This also means I can easily switch between models like `gpt-4o` and `claude-3.5-sonnet` with a simple flag.
+
+*   **Interaction Helpers**: This is where the magic happens. The base library has helpers for common tasks like parsing model output, handling streaming responses, and even managing conversation history for more complex interactions. This keeps the individual tool scripts clean and focused on their specific logic.
 
 This is the way. You get the beautiful UX of small, specialized tools and the maintenance sanity of a single, shared core.
 
