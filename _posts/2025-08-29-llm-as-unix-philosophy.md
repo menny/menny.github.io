@@ -44,7 +44,7 @@ Run `git ai-review`.
 This is the entire philosophy. The specialized tool isn't trying to be a general-purpose brain. It's an ergonomic, zero-friction extension of your existing CLI workflow.
 
 ## Why Monolithic AI CLI Tools Feel Wrong
-Once we've established why a CLI tool is the right fit for these tasks, the next question is how to build it.
+Once we've established why a CLI tool is the right fit for these tasks, there's a fundamental design choice to make: should it be a single, monolithic tool, or a collection of small, specialized ones?
 
 The "one big tool" approach has serious flaws. The tool is either a jack-of-all-trades with a million confusing flags (ai-tool --task=review --target=file.js), or it has a "smart" prompt-router that tries (and often fails) to guess what you want.
 
