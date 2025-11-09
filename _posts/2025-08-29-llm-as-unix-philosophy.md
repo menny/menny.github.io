@@ -57,22 +57,22 @@ When you build small, separate tools, magical things happen.
 
 1. Implicit, "Smart" Context: This is the killer feature. A specialized tool knows its job, so it can fetch its own context.
   * `git ai-review` (my code-review tool) doesn't need me to pipe a diff. It just runs git diff itself.
-  * `gcai` (commit-message) runs git diff --staged automatically.
-  * `git pr` (PR title/desc) knows to run git diff main... to see the whole branch. The tool feels smart, not because the LLM is a genius, but because the tool itself is a good assistant.
+  * `git c-ai` (commit-message) runs git diff --staged automatically.
+  * `git pr` (PR title/desc) knows to run git diff main... to see the whole branch, then pushes to GitHub and creates a PR. The tool feels smart, not because the LLM is a genius, but because the tool itself is a good assistant.
 
 2. Perfectly Tuned Prompts: You can't use the same system prompt to review code and to generate a commit message. One needs to be a critical engineer, the other a concise technical writer. By splitting them, each tool has a small, highly-optimized prompt that does its one job perfectly. No prompt-routing, no "you are a helpful assistant" fluff.
 
-3. Reliable, Focused Evaluation: This is a huge engineering win. When a tool has one job, it's so much easier to evaluate. I can build a specific, high-quality test set for `cm` (commit messages) and another for `cr` (code review). I'm not trying to test a massive, do-it-all prompt; I'm testing a small, focused one, which makes it easier to measure quality and prevent regressions.
+3. Reliable, Focused Evaluation: This is a huge engineering win. When a tool has one job, it's so much easier to evaluate. I can build a specific, high-quality test set for `git c-ai` (commit messages) and another for `git ai-review` (code review). I'm not trying to test a massive, do-it-all prompt; I'm testing a small, focused one, which makes it easier to measure quality and prevent regressions.
 
-4. Simplicity (UX): The user experience is just... clean. You want a commit message? Type `cm`. You want a review? Type `cr`. No flags, no sub-commands, no cognitive overhead.
+4. Simplicity (UX): The user experience is just... clean. You want a commit message? Type `git c-ai`. You want a review? Type `git ai-review`. No flags, no sub-commands, no cognitive overhead.
 
 ## My Family of Tools
 Here's a peek at my local ~/bin directory:
 
 * `qq`: Quick question. `qq "how to find files modified in the last 2 days"`
 * `git ai-review`: Code review for the current git diff.
-* `gcai`: Git commit message for staged files.
-* `git pr`: Generate a PR title and description from the current branch's diff.
+* `git c-ai`: Git commit message for staged files.
+* `git pr`: Generate a PR title and description from the current branch's diff, then pushes to GitHub and creates a PR.
 * `git conflict-fix`: Takes a file with git conflict markers (<<<<<) and attempts a clean merge.
 * ... and many more
 
