@@ -69,7 +69,7 @@ When you build small, separate tools, magical things happen.
 ## A Pro-Tip on Integration a.k.a. Live Where Your Context Is
 Here’s an extra detail on how I build these. I don't just dump them all into `~/bin`. I put them where they make the most sense.
 
-1. For Git-centric tasks, I create simple binaries like `ai-review` and `ai-pr`. Then, I create `git sub-command` aliases for them (e.g., `git config --global alias.ai-review '!ai-review'`). This gives me the best of both worlds: a simple, independent binary that can also be used as a native Git command, which is a huge win for discoverability and ergonomics.
+1. For Git-centric tasks, I create simple binaries like `ai-review` and `ai-pr`. To make them feel like native Git commands, I name them `git-ai-review` and `git-ai-pr` and place them in my `PATH`. Git automatically discovers and executes them as sub-commands, so I can run `git ai-review` and it just works. This gives me the best of both worlds: a simple, independent binary that can also be used as a native Git command, which is a huge win for discoverability and ergonomics.
 
 2. For general tasks, we build standalone commands. My "quick question" tool is just `qq`. It would feel weird and clunky to type `git qq "how do I unzip a file?"`. This tool has no concept of a repository, so it lives in the standard shell, right next to `grep` and `ls`.
 
@@ -84,7 +84,7 @@ I have a single, local llm-cli-utils library. Every micro-tool is just a 20-line
 
 *   **API Key Retrieval**: It knows exactly where to find the `OPENAI_API_KEY` (or any other key) from the environment or a config file. No need to hardcode keys in every script.
 
-*   **LLM Framework Abstraction**: The base library handles the actual API call (using `langchain`, `litellm`, or just raw `openai-python`). If I want to add a new model provider, I change it in one place, and all tools get the upgrade instantly. This also means I can easily switch between models like `gpt-4o` and `claude-3.5-sonnet` with a simple flag.
+*   **LLM Framework Abstraction**: The base library handles the actual API call (using `langchain`, `litellm`, or just raw `openai-python`). If I want to add a new model provider, I change it in one place, and all tools get the upgrade instantly. This also means I can easily switch between models like `gpt-4o` and `claude-3.5-sonnet` - matching the right model to the job.
 
 *   **Interaction Helpers**: This is where the magic happens. The base library has helpers for common tasks like parsing model output, handling streaming responses, and even managing conversation history for more complex interactions. This keeps the individual tool scripts clean and focused on their specific logic.
 
