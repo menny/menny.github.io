@@ -88,19 +88,15 @@ Here’s an extra detail on how I build these. I don't just dump them all into `
 This division is part of the same philosophy: design your tool for its specific job, and that includes its "home" on the command line.
 
 ## The Critical Base a.k.a. Don't Repeat Yourself
-This all sounds great, but what about the maintenance nightmare? Do all 15 tools have their own API key logic? What if I want to swap `gpt-4o` for `claude-3.5-sonnet`?
+This all sounds great, but what about the maintenance nightmare? Do all 15 tools have their own API key logic? How to manage LLM models? Etc
 
 This is the most important part: you must build a base implementation.
 
 I have a single, local llm-cli-utils library. Every micro-tool is just a 20-line script that imports this base. The base library handles all the boring, critical stuff:
 
-* Consistent CLI: All tools get the same `--model` or `--verbose` flags for free, using something like `argparse` or `click`.
-
-* API Key Retrieval: It knows exactly where to find the `OPENAI_API_KEY` (or any other key) from the environment or a config file.
-
-* Model Selection: The `--model` flag just works, everywhere.
-
-* LLM Framework Abstraction: The base library handles the actual API call (using `langchain`, `litellm`, or just raw `openai-python`). If we want to add a new model provider, we change it in one place, and all tools get the upgrade instantly.
+* API key retrieval
+* LLM framework abstraction
+* various helpers to handle interactions with models
 
 This is the way. You get the beautiful UX of small, specialized tools and the maintenance sanity of a single, shared core.
 
