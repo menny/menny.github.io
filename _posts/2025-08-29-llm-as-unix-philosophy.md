@@ -12,8 +12,8 @@ My terminal is full of these "micro-tools."
 
 This is a deliberate choice. It's a move away from the clunky, do-it-all monoliths and a full embrace of a philosophy that's been battle-tested for decades: the Unix philosophy.
 
-## But Why Not Just Use Gemini or ChatGPT?
-I know what you're thinking. "Why build a CLI tool at all? I'll just ask Gemini, ChatGPT, or my Claude Code agent."
+## But Why Not Just Use an LLM Agent/Bot?
+I know what you're thinking. "Why build a CLI tool at all? I'll just ask Gemini, ChatGPT, or my Claude Code Agent."
 
 And you're right. For exploratory, conversational, or complex one-off tasks, those tools are fantastic. I use them every day.
 
