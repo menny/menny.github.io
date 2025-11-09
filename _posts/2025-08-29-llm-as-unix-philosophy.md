@@ -6,7 +6,7 @@ categories: [ai, llm]
 tags: [ai, developer-experience]
 ---
 
-I've been building a lot of small LLM-powered CLI tools for about a year now. These are tiny utilities, each with a very specific job: one reviews my git diff, one generates a commit message, and another answers quick shell command questions.
+I've been building a lot of small LLM-powered CLI tools for about a year now. These are tiny utilities, each with a very specific job: one reviews my `git diff`, one generates a commit message, and another answers quick shell command questions.
 
 My terminal is full of these "micro-tools."
 
@@ -26,7 +26,7 @@ Let's look at the "code review" task:
 ### The AI Chat Bot Flow:
 
 1. Realize I want a review.
-1. Run git diff.
+1. Run `git diff`.
 1. Copy the output.
 1. Alt-Tab to my browser.
 1. Find the right Gemini/ChatGPT tab.
@@ -62,14 +62,14 @@ When you build small, separate tools, magical things happen.
 
 2. Perfectly Tuned Prompts: You can't use the same system prompt to review code and to generate a commit message. One needs to be a critical engineer, the other a concise technical writer. By splitting them, each tool has a small, highly-optimized prompt that does its one job perfectly. No prompt-routing, no "you are a helpful assistant" fluff.
 
-3. Reliable, Focused Evaluation: This is a huge engineering win. When a tool has one job, it's so much easier to evaluate. I can build a specific, high-quality test set for cm (commit messages) and another for cr (code review). I'm not trying to test a massive, do-it-all prompt; I'm testing a small, focused one, which makes it easier to measure quality and prevent regressions.
+3. Reliable, Focused Evaluation: This is a huge engineering win. When a tool has one job, it's so much easier to evaluate. I can build a specific, high-quality test set for `cm` (commit messages) and another for `cr` (code review). I'm not trying to test a massive, do-it-all prompt; I'm testing a small, focused one, which makes it easier to measure quality and prevent regressions.
 
-4. Simplicity (UX): The user experience is just... clean. You want a commit message? Type cm. You want a review? Type cr. No flags, no sub-commands, no cognitive overhead.
+4. Simplicity (UX): The user experience is just... clean. You want a commit message? Type `cm`. You want a review? Type `cr`. No flags, no sub-commands, no cognitive overhead.
 
 ## My Family of Tools
 Here's a peek at my local ~/bin directory:
 
-* `qq`: Quick question. qq "how to find files modified in the last 2 days"
+* `qq`: Quick question. `qq "how to find files modified in the last 2 days"`
 * `git ai-review`: Code review for the current git diff.
 * `gcai`: Git commit message for staged files.
 * `git pr`: Generate a PR title and description from the current branch's diff.
@@ -79,28 +79,28 @@ Here's a peek at my local ~/bin directory:
 Each one is simple, fast, and does one thing.
 
 ## A Pro-Tip on Integration a.k.a. Live Where Your Context Is
-Here’s an extra detail on how I build these. I don't just dump them all into ~/bin. I put them where they make the most sense.
+Here’s an extra detail on how I build these. I don't just dump them all into `~/bin`. I put them where they make the most sense.
 
-1. For Git-centric tasks, we build Git sub-commands. Our code review tool is `git ai-review`. Our PR generator is `git pr`. This is a huge win for discoverability and ergonomics. The commands feel like a native part of Git because they operate on the Git repository. Anyone who knows Git (and types git --help) can find them, and they automatically operate within the context of the current repo.
+1. For Git-centric tasks, we build Git sub-commands. Our code review tool is `git ai-review`. Our PR generator is `git pr`. This is a huge win for discoverability and ergonomics. The commands feel like a native part of Git because they operate on the Git repository. Anyone who knows Git (and types `git --help`) can find them, and they automatically operate within the context of the current repo.
 
-2. For general tasks, we build standalone commands. My "quick question" tool is just qq. It would feel weird and clunky to type git qq "how do I unzip a file?". This tool has no concept of a repository, so it lives in the standard shell, right next to grep and ls.
+2. For general tasks, we build standalone commands. My "quick question" tool is just `qq`. It would feel weird and clunky to type `git qq "how do I unzip a file?"`. This tool has no concept of a repository, so it lives in the standard shell, right next to `grep` and `ls`.
 
 This division is part of the same philosophy: design your tool for its specific job, and that includes its "home" on the command line.
 
 ## The Critical Base a.k.a. Don't Repeat Yourself
-This all sounds great, but what about the maintenance nightmare? Do all 15 tools have their own API key logic? What if I want to swap gpt-4o for claude-3.5-sonnet?
+This all sounds great, but what about the maintenance nightmare? Do all 15 tools have their own API key logic? What if I want to swap `gpt-4o` for `claude-3.5-sonnet`?
 
 This is the most important part: you must build a base implementation.
 
 I have a single, local llm-cli-utils library. Every micro-tool is just a 20-line script that imports this base. The base library handles all the boring, critical stuff:
 
-* Consistent CLI: All tools get the same --model or --verbose flags for free, using something like argparse or click.
+* Consistent CLI: All tools get the same `--model` or `--verbose` flags for free, using something like `argparse` or `click`.
 
-* API Key Retrieval: It knows exactly where to find the OPENAI_API_KEY (or any other key) from the environment or a config file.
+* API Key Retrieval: It knows exactly where to find the `OPENAI_API_KEY` (or any other key) from the environment or a config file.
 
-* Model Selection: The --model flag just works, everywhere.
+* Model Selection: The `--model` flag just works, everywhere.
 
-* LLM Framework Abstraction: The base library handles the actual API call (using langchain, litellm, or just raw openai-python). If we want to add a new model provider, we change it in one place, and all tools get the upgrade instantly.
+* LLM Framework Abstraction: The base library handles the actual API call (using `langchain`, `litellm`, or just raw `openai-python`). If we want to add a new model provider, we change it in one place, and all tools get the upgrade instantly.
 
 This is the way. You get the beautiful UX of small, specialized tools and the maintenance sanity of a single, shared core.
 
