@@ -7,7 +7,7 @@
 	  <div class="post-properties" itemprop="keywords">
 	  {% unless page.categories == empty %}
 		<ul class="tag_box inline">
-		  <li><i class="icon-folder-open"></i></li>
+		  <li><i class="icon-menny categories-icon"></i></li>
 		  {% assign categories_list = page.categories %}
 		  {% include JB/categories_list %}
 		</ul>
@@ -15,7 +15,7 @@
 
 	  {% unless page.tags == empty %}
 		<ul class="tag_box inline">
-		  <li><i class="icon-tags"></i></li>
+		  <li><i class="icon-menny tags-icon"></i></li>
 		  {% assign tags_list = page.tags %}
 		  {% include JB/tags_list %}
 		</ul>
@@ -35,12 +35,12 @@
 			<!-- twitter sharing -->
 				<li>
 					<!-- Twitter Tweet Button: http://twitter.com/goodies/tweetbutton -->
-					<a href="https://twitter.com/share" class="twitter-share-button" data-count="vertical" data-via="mennyed">Tweet</a>
+					<a href="https://twitter.com/share" class="icon-menny twitter-icon" data-count="vertical" data-via="mennyed">Tweet</a>
 	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
 				</li>
 			<!-- Hacker News -->
 				<li>
-					<a href="https://news.ycombinator.com/submit" class="hn-share-button">Vote on HN</a>
+					<a href="https://news.ycombinator.com/submit" class="icon-menny hacker-news-icon">Vote on HN</a>
 					<script>
 					(function(d, t) {
 						var g = d.createElement(t),
@@ -52,20 +52,14 @@
 				</li>
 			<!-- Threads -->
 				<li>
-					<a href="https://www.threads.net/share?url={{ site.production_url }}{{ page.url }}&text={{ page.title | url_encode }}" target="_blank"><i class="icon-comment"></i> Share on Threads</a>
+					<a href="https://www.threads.net/share?url={{ site.production_url }}{{ page.url }}&text={{ page.title | url_encode }}" target="_blank" class="icon-menny threads-icon">Share on Threads</a>
 				</li>
 			<!-- Copy Link -->
 				<li>
-					<button onclick="copyToClipboard()"><i class="icon-share"></i> Copy Link</button>
+					<a href="#" onclick="copyToClipboard(); return false;" class="icon-menny copy-clipboard-icon">Copy Link</a>
 					<script>
 						function copyToClipboard() {
-							var dummy = document.createElement('input'),
-							text = window.location.href;
-							document.body.appendChild(dummy);
-							dummy.value = text;
-							dummy.select();
-							document.execCommand('copy');
-							document.body.removeChild(dummy);
+							navigator.clipboard.writeText(window.location.href);
 						}
 					</script>
 				</li>

@@ -152,3 +152,64 @@ code {
 .strikethrough {
   text-decoration: line-through;
 }
+
+
+a.dark-light-mode-toggle {
+  background-image:url("/assets/themes/twitter/img/dark_mode_24px.png");
+  display: inline-block;
+  text-decoration: none;
+  width: 24px;
+  height: 24px;
+}
+
+.icon-menny {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.icon-menny::before {
+  content: "";
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.dark-mode-toggle-icon::before {
+  background-image: url("/assets/themes/twitter/img/dark_mode_24px.png");
+}
+
+.share-icon::before {
+  background-image: url("/assets/themes/twitter/img/share_24px_light.png");
+}
+
+.rss-icon::before {
+  background-image: url("/assets/themes/twitter/img/rss_feed_24px_light.svg");
+}
+
+.categories-icon::before {
+  background-image: url("/assets/themes/twitter/img/categories_24px_light.svg");
+}
+
+.tags-icon::before {
+  background-image: url("/assets/themes/twitter/img/tag_24px_light.svg");
+}
+
+.hacker-news-icon::before {
+  background-image: url("/assets/themes/twitter/img/hacker_news_24px_light.svg");
+}
+
+.twitter-icon::before {
+  background-image: url("/assets/themes/twitter/img/twitter-3-logo-svgrepo-com.svg");
+}
+
+.threads-icon::before {
+  background-image: url("/assets/themes/twitter/img/threads-logo-black-01.png");
+}
+
+.copy-clipboard-icon::before {
+  background-image: url("/assets/themes/twitter/img/content_copy_24px_light.svg");
+}

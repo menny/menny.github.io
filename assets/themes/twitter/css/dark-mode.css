@@ -1,0 +1,136 @@
+:root {
+  --dark-background: #222222;
+  --dark-surface: #3a3a3a;
+  --dark-primary: #bb86fc;
+  --dark-secondary: #03dac6;
+  --dark-on-primary: #000000;
+  --dark-on-surface: #ffffff;
+  --dark-on-background: #ffffff;
+}
+
+body.dark-mode {
+  background-color: var(--dark-background);
+  color: var(--dark-on-background);
+}
+
+.dark-mode .site {
+  color: var(--dark-on-background);
+}
+
+.dark-mode a {
+  color: var(--dark-primary);
+}
+
+.dark-mode a:hover {
+  color: var(--dark-secondary);
+}
+
+.dark-mode a:visited {
+  color: #9d74e2;
+}
+
+.dark-mode .title a {
+  color: #f00;
+}
+
+.dark-mode .title a:hover {
+  color: #fff;
+}
+
+.dark-mode .header a.extra {
+  color: #777;
+}
+
+.dark-mode .header a.extra:hover {
+  color: #fff;
+}
+
+.dark-mode .meta {
+  color: #777;
+}
+
+.dark-mode .footer {
+  color: #999;
+  border-top-color: #333;
+}
+
+.dark-mode .footer .contact a {
+  color: #a0a5e1;
+}
+
+.dark-mode .posts pre,
+.dark-mode .post-full pre {
+  border-color: #444;
+  background-color: #3a3a3a;
+}
+
+.dark-mode .posts code,
+.dark-mode .post-full code {
+  border-color: #eeeeee;
+  color: #a0a5e1;
+  background-color: #2a2a2a;
+}
+
+.dark-mode .posts pre.terminal,
+.dark-mode .post-full pre.terminal {
+  border-color: #fff;
+  background-color: #111;
+  color: #eee;
+}
+
+.dark-mode .posts pre.terminal code,
+.dark-mode .post-full pre.terminal code {
+  background-color: #111;
+}
+
+/* Custom styles for dark-mode */
+.dark-mode .raised {
+    background: #3a3a3a;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+.dark-mode .navbar-inner {
+    background-color: #222;
+    background-image: none;
+    border-color: #333;
+}
+
+.dark-mode .navbar .brand {
+    color: #fff;
+}
+
+.dark-mode .navbar .nav > li > a {
+    color: #ccc;
+}
+
+.dark-mode .dark-mode-toggle-icon::before {
+  background-image: url("/assets/themes/twitter/img/light_mode_24px.png");
+}
+
+.dark-mode .share-icon::before {
+  background-image: url("/assets/themes/twitter/img/share_24px_dark.png");
+}
+
+.dark-mode .rss-icon::before {
+  background-image: url("/assets/themes/twitter/img/rss_feed_24px_dark.svg");
+}
+
+.dark-mode .categories-icon::before {
+  background-image: url("/assets/themes/twitter/img/categories_24px_dark.svg");
+}
+
+.dark-mode .tags-icon::before {
+  background-image: url("/assets/themes/twitter/img/tag_24px_dark.svg");
+}
+
+.dark-mode .hacker-news-icon::before {
+  background-image: url("/assets/themes/twitter/img/hacker_news_24px_dark.svg");
+}
+
+.dark-mode .threads-icon::before {
+  background-image: url("/assets/themes/twitter/img/threads-logo-white-01.png");
+}
+
+.dark-mode .copy-clipboard-icon::before {
+  background-image: url("/assets/themes/twitter/img/content_copy_24px_dark.svg");
+}
