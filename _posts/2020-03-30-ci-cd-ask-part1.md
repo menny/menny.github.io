@@ -1,6 +1,6 @@
 ---
 layout: post
-title: CI/CD at AnySoftKeyboard aka Is it ready to ship? Part 1
+title: CI/CD at AnySoftKeyboard Part 1 aka Is it ready to ship?
 date:   2020-03-30 20:03:30
 categories: [anysoftkeyboard, ci]
 tags: [android, ci, static-analysis, tests, github]
@@ -10,8 +10,8 @@ Recently, I've [merged](https://github.com/AnySoftKeyboard/AnySoftKeyboard/pull/
 
 This is the first of three parts:
 
-1. Continuous Integration, aka _CI_.
-1. Continuous Deployment, aka _CD_.
+1. [Continuous Integration](/2020/03/30/ci-cd-ask-part1.html), aka _CI_.
+1. [Continuous Deployment](/2025/11/09/ci-cd-ask-part2.html), aka _CD_.
 1. Complimenting workflows.
 
 # Process
