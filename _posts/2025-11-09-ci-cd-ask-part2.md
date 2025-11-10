@@ -33,13 +33,15 @@ AnySoftKeyboard employs a multi-channel deployment strategy, each with its own t
 ### Beta Channel (The Weekly Digest)
 
 *   **Pointer**: The Beta promotion is handled by a scheduled workflow that runs daily, but the promotion itself is gated to only happen on Wednesdays.
-*   **Snippet**: The schedule is defined in [`.github/workflows/deployment_promote.yml`](https://github.com/AnySoftKeyboard/AnySoftKeyboard/blob/604834d25345cccb033e815f93234625bce64d2e/.github/workflows/deployment_promote.yml):
+*   **Snippet**: The schedule is defined in [`.github/workflows/deployment_promote.yml`](https://github.com/AnySoftKeyboard/AnySoftKeyboard/blob/604834d25345cccb033e815f93234625bce64d2e/.github/workflows/deployment_promote.yml):   
+
 ```yaml
 # In .github/workflows/deployment_promote.yml
 on:
     schedule:
     - cron: '04 04 * * *' # Runs daily at 04:04 UTC
 ```
+
 This workflow triggers our custom deployment tool, which contains the gating logic in [`js/github_deployments/deployment_config.ts`](https://github.com/AnySoftKeyboard/AnySoftKeyboard/blob/604834d25345cccb033e815f93234625bce64d2e/js/github_deployments/deployment_config.ts). The `promoteOnWednesday` function ensures the promotion to the Beta channel only proceeds when the job runs on a Wednesday.
 
 ### Stable Channel (The Official Release)
@@ -47,6 +49,7 @@ This workflow triggers our custom deployment tool, which contains the gating log
 *   **Metric**: Our stable rollout completes over **5 days**: 10% → 20% → 50% → 100%.
 *   **Pointer**: The Stable release process is triggered not by a Git tag, but by a push to a specifically named *branch*, like `release-branch-ime-v1.12-r1`. This kicks off a time-based, gradual rollout.
 *   **Snippet**: The `checks.yml` workflow is also configured to run on pushes to release branches, as seen in [the same file](https://github.com/AnySoftKeyboard/AnySoftKeyboard/blob/604834d25345cccb033e815f93234625bce64d2e/.github/workflows/checks.yml):
+
 ```yaml
 # In .github/workflows/checks.yml
 on:
@@ -54,6 +57,7 @@ on:
     branches:
         - 'release-branch-*-v*.*-r*'
 ```
+
 Our deployment script then uses a regular expression (`/^release-branch-ime-.*$/`) in [`js/github_deployments/deployment_config.ts`](https://github.com/AnySoftKeyboard/AnySoftKeyboard/blob/604834d25345cccb033e815f93234625bce64d2e/js/github_deployments/deployment_config.ts) to identify this as a Production release, which begins the automated, multi-day staged rollout.
 
 # The Brains of the Operation: Our `github_deployments` Tool
@@ -95,15 +99,18 @@ The key here is that no human intervention is required for these steps. The auto
 An automated deployment process is only effective if it provides clear visibility into its status. For AnySoftKeyboard, various tools and mechanisms are in place to provide this feedback directly within our development workflow.
 
 *   **Deployment Status Updates**: We use our `github_deployments` tool to communicate with the GitHub Deployments API. The same tool that initiates a deployment is also called at various stages within the main `deploy.yml` workflow to report back the status. For example, as soon as a deployment begins, we run the following command to set the status to "in progress":
+
 ```bash
 # In .github/workflows/deploy.yml
 bazel run //js/github_deployments -- status \
     --deployment-id="${{ github.event.deployment.id }}" \
     --state=in_progress
 ```
+
 This immediately updates the deployment status in the GitHub UI, providing real-time feedback.
 
 *   **Automated GitHub Releases**: After a successful deployment to the Google Play Store, a dedicated `post_deployment` job in our [`deploy.yml` workflow](https://github.com/AnySoftKeyboard/AnySoftKeyboard/blob/604834d25345cccb033e815f93234625bce64d2e/.github/workflows/deploy.yml) handles the creation of a public-facing GitHub Release. Interestingly, this is a two-step process. When the stable rollout first begins (at 10%), we use the popular [`softprops/action-gh-release`](https://github.com/softprops/action-gh-release) action to create a **Pre-release**.
+
 ```yaml
 # In .github/workflows/deploy.yml
 - name: Create GitHub Pre-Release
@@ -113,7 +120,9 @@ This immediately updates the deployment status in the GitHub UI, providing real-
     prerelease: true
     # ... other parameters
 ```
+
 Once the rollout successfully completes and reaches 100% of users, a later step in the same job updates the release, removing the "pre-release" flag. This ensures the official release notes are only marked as "Latest" when the deployment is fully complete.
+
 ```yaml
 # In .github/workflows/deploy.yml
 - name: Update GitHub Release to Stable
