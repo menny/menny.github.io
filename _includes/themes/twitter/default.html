@@ -56,7 +56,7 @@
               <li><a rel="me" href="https://mastodon.social/@menny">Mastodon</a></li>
               <li><a rel="me" href="https://www.threads.net/@mennyed">Threads</a></li>
               <li><a rel="me" href="https://www.linkedin.com/in/menny">linkedin</a></li>
-              <li><a href="#" class="icon-menny dark-mode-toggle-icon" id="dark-mode-toggle"></a></li>
+              <li><a href="#" role="button" aria-label="Toggle dark mode" class="icon-menny dark-mode-toggle-icon" id="dark-mode-toggle"></a></li>
           	</ul> 
           </div>
       </div>
@@ -95,7 +95,8 @@
       }
 
       // Toggle theme on click
-      toggle.addEventListener('click', () => {
+      toggle.addEventListener('click', (e) => {
+        e.preventDefault();
         const currentTheme = body.classList.contains('dark-mode') ? 'dark' : 'light';
         const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
         applyTheme(newTheme);
