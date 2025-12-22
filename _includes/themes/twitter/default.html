@@ -7,7 +7,7 @@
     <meta name="author" content="{{ site.author.name }}">
 
     <!-- Enable responsive viewport -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
     <!--[if lt IE 9]>
@@ -40,6 +40,7 @@
   </head>
 
   <body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
     <div class="navbar">
       <div class="navbar-inner">
           <a class="brand" href="/blog.html">{{ site.title }}</a>
@@ -64,7 +65,7 @@
 
     <div class="container-narrow">
 
-      <div class="content">
+      <div class="content" id="main-content">
         {{ content }}
       </div>
 
