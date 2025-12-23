@@ -56,11 +56,36 @@
 				</li>
 			<!-- Copy Link -->
 				<li>
-					<a href="#" onclick="copyToClipboard(); return false;" class="icon-menny copy-clipboard-icon">Copy Link</a>
+					<a href="#" class="icon-menny copy-clipboard-icon" id="copy-link-btn" role="button" tabindex="0" aria-live="polite">Copy Link</a>
 					<script>
-						function copyToClipboard() {
-							navigator.clipboard.writeText(window.location.href);
-						}
+						(function() {
+							const btn = document.getElementById('copy-link-btn');
+							const originalText = btn.textContent;
+							let timeoutId = null;
+
+							function copyToClipboard(e) {
+								e.preventDefault();
+								navigator.clipboard.writeText(window.location.href).then(() => {
+									btn.textContent = 'Copied!';
+									if (timeoutId) {
+										clearTimeout(timeoutId);
+									}
+									timeoutId = setTimeout(() => {
+										btn.textContent = originalText;
+										timeoutId = null;
+									}, 2000);
+								}).catch(err => {
+									console.error('Failed to copy: ', err);
+								});
+							}
+
+							btn.addEventListener('click', copyToClipboard);
+							btn.addEventListener('keydown', (e) => {
+								if (e.key === 'Enter' || e.key === ' ') {
+									copyToClipboard(e);
+								}
+							});
+						})();
 					</script>
 				</li>
 			</ul>
