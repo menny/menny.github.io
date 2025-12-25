@@ -45,20 +45,24 @@
       <div class="navbar-inner">
           <a class="brand" href="/blog.html">{{ site.title }}</a>
           <div class="container-narrow">
-          <ul class="nav_left">
-          	<li><a href="/archive.html">Archive</a></li>
-          	<li><a href="/categories.html">Categories</a></li>       	
-          </ul>
+          <nav aria-label="Main">
+            <ul class="nav_left">
+              <li><a href="/archive.html">Archive</a></li>
+              <li><a href="/categories.html">Categories</a></li>
+            </ul>
+          </nav>
           </div>
           <div class="nav_right">
-            <ul>
-              <li><a href="/">Me</a>&nbsp;@&nbsp;</li>
-              <li><a rel="me" href="https://github.com/menny">github</a></li>
+            <nav aria-label="Social">
+              <ul>
+                <li><a href="/">Me</a>&nbsp;@&nbsp;</li>
+                <li><a rel="me" href="https://github.com/menny">github</a></li>
               <li><a rel="me" href="https://mastodon.social/@menny">Mastodon</a></li>
               <li><a rel="me" href="https://www.threads.net/@mennyed">Threads</a></li>
               <li><a rel="me" href="https://www.linkedin.com/in/menny">linkedin</a></li>
               <li><a href="#" role="button" aria-label="Toggle dark mode" class="icon-menny dark-mode-toggle-icon" id="dark-mode-toggle"></a></li>
-          	</ul> 
+              </ul>
+            </nav>
           </div>
       </div>
     </div>
