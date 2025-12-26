@@ -6,3 +6,12 @@
 **Action:**
 - Always check for "Skip to content" links in `default.html` or main layout files.
 - Audit `meta[name="viewport"]` tags for zoom restrictions.
+
+## 2025-12-26 - [Interaction: Header Anchors]
+**Learning:**
+On content-heavy pages (like blog posts), users often want to share specific sections. Automatically generating anchor links for headers (h2-h6) is a high-impact, low-effort UX win. Crucially, ensuring these links are keyboard accessible (visible on focus) and have descriptive aria-labels makes them accessible to everyone, not just mouse users.
+
+**Action:**
+- When auditing content-heavy sites, check if headers have permalinks.
+- Implement anchor links with hover-reveal patterns, but ensure `focus` visibility for keyboard users.
+- Use `aria-label` to describe where the anchor link goes (e.g., "Permalink to [Header Text]").
