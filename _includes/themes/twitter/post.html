@@ -56,14 +56,10 @@
 				</li>
 			<!-- Copy Link -->
 				<li>
-					<a href="#" onclick="copyToClipboard(); return false;" class="icon-menny copy-clipboard-icon">Copy Link</a>
-					<script>
-						function copyToClipboard() {
-							navigator.clipboard.writeText(window.location.href);
-						}
-					</script>
+					<a href="#" role="button" aria-label="Copy link to clipboard" class="icon-menny copy-clipboard-icon js-copy-link">Copy Link</a>
 				</li>
 			</ul>
+			<script src="{{ ASSET_PATH }}/js/share-interactions.js"></script>
 		</div>
 		<!-- I dont want pagination at the moment
 		<hr>
