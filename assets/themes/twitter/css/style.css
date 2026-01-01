@@ -233,6 +233,28 @@ a.dark-light-mode-toggle {
   background-image: url("/assets/themes/twitter/img/content_copy_24px_light.svg");
 }
 
+/* Copy Link Button */
+button.js-copy-link {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: #0088cc; /* Match link color */
+  font-family: inherit;
+  font-size: inherit;
+  text-decoration: none;
+}
+
+button.js-copy-link:hover {
+  text-decoration: underline;
+  color: #005580;
+}
+
+button.js-copy-link.copied {
+  color: #46a546; /* Success green */
+  text-decoration: none;
+}
+
 /* Copy Code Button */
 .copy-code-button {
   position: absolute;
