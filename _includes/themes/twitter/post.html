@@ -35,8 +35,7 @@
 			<!-- twitter sharing -->
 				<li>
 					<!-- Twitter Tweet Button: http://twitter.com/goodies/tweetbutton -->
-					<a href="https://twitter.com/share" class="icon-menny twitter-icon" data-count="vertical" data-via="mennyed">Tweet</a>
-	<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+					<a href="https://twitter.com/intent/tweet?text={{ page.title | url_encode }}&url={{ site.production_url }}{{ page.url }}&via=mennyed" class="icon-menny twitter-icon" target="_blank">Tweet</a>
 				</li>
 			<!-- Hacker News -->
 				<li>
@@ -52,11 +51,11 @@
 				</li>
 			<!-- Threads -->
 				<li>
-					<a href="https://www.threads.net/share?url={{ site.production_url }}{{ page.url }}&text={{ page.title | url_encode }}" target="_blank" class="icon-menny threads-icon">Share on Threads</a>
+					<a href="https://www.threads.net/intent/post?url={{ site.production_url }}{{ page.url }}&text={{ page.title | url_encode }}" target="_blank" class="icon-menny threads-icon">Share on Threads</a>
 				</li>
 			<!-- Copy Link -->
 				<li>
-					<a href="#" role="button" aria-label="Copy link to clipboard" class="icon-menny copy-clipboard-icon js-copy-link">Copy Link</a>
+					<button type="button" aria-label="Copy link to clipboard" class="icon-menny copy-clipboard-icon js-copy-link">Copy Link</button>
 				</li>
 			</ul>
 			<script src="{{ ASSET_PATH }}/js/share-interactions.js"></script>
