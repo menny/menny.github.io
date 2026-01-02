@@ -291,3 +291,22 @@ a.dark-light-mode-toggle {
 .header-anchor:focus {
   opacity: 1;
 }
+
+/* Button that looks like a link for copy-clipboard */
+button.js-copy-link {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: #0088cc;
+  text-decoration: none;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+button.js-copy-link:hover,
+button.js-copy-link:focus {
+  text-decoration: underline;
+  color: #005580;
+  outline: none;
+}
