@@ -1,7 +1,7 @@
 <article itemscope itemtype="http://schema.org/BlogPosting">
 	<div class="page-header raised">
 	  <div class="date">
-		<span><span itemprop="datePublished">{{ page.date | date_to_long_string }}</span>,&nbsp;<span itemprop="author" itemscope itemtype="http://schema.org/Person"><i>By&nbsp;<span itemprop="name">{{site.author.name}}</span></i></span></span>
+		<span><span itemprop="datePublished">{{ page.date | date_to_long_string }}</span>&nbsp;&middot;&nbsp;{{ content | number_of_words | divided_by: 180 | plus: 1 }} min read,&nbsp;<span itemprop="author" itemscope itemtype="http://schema.org/Person"><i>By&nbsp;<span itemprop="name">{{site.author.name}}</span></i></span></span>
 	  </div>
 	  <h1 itemprop="headline">{{ page.title }} {% if page.tagline %}<small>{{page.tagline}}</small>{% endif %}</h1>
 	  <div class="post-properties" itemprop="keywords">
