@@ -310,3 +310,9 @@ button.js-copy-link:focus {
   color: #005580;
   outline: none;
 }
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
