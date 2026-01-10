@@ -134,3 +134,12 @@ body.dark-mode {
 .dark-mode .copy-clipboard-icon::before {
   background-image: url("/assets/themes/twitter/img/content_copy_24px_dark.svg");
 }
+
+.dark-mode button.js-copy-link {
+  color: var(--dark-primary);
+}
+
+.dark-mode button.js-copy-link:hover,
+.dark-mode button.js-copy-link:focus {
+  color: var(--dark-secondary);
+}

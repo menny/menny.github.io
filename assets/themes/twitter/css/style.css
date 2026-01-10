@@ -308,7 +308,12 @@ button.js-copy-link:hover,
 button.js-copy-link:focus {
   text-decoration: underline;
   color: #005580;
-  outline: none;
+}
+
+button.js-copy-link:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+  border-radius: 2px;
 }
 
 @media (prefers-reduced-motion: no-preference) {
