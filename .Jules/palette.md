@@ -29,3 +29,14 @@
 **Action:**
 - Use `:focus-visible` instead of removing outlines entirely.
 - Ensure custom interactive elements use CSS variables for colors to support theming automatically.
+
+## 2026-01-11 - [Icon-Only Lists & Accessibility]
+**Learning:**
+1. **Empty List Items confuse Screen Readers:** Using an empty `<li>` with an icon class as a visual label for a list creates a confusing experience for screen reader users (reading "empty" or nothing).
+2. **Lists need Labels:** When a list's purpose is visual (indicated by an icon), the `<ul>` element must have an `aria-label` to convey that meaning (e.g., "Categories", "Tags") to non-visual users.
+3. **Hide Decorations:** Purely decorative icons used as list markers or labels should be hidden with `aria-hidden="true"` to prevent noise.
+
+**Action:**
+- Audit lists that use icons as headers/labels.
+- Apply `aria-label` to the container `<ul>` or `<nav>`.
+- Hide the decorative icon elements from assistive technology.
