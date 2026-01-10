@@ -37,6 +37,9 @@
 	<link href='https://fonts.googleapis.com/css?family=Quattrocento:700' rel='stylesheet' type='text/css'>
 	<!-- for body -->
 	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:300' rel='stylesheet' type='text/css'>
+    <!-- Pagefind search -->
+    <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+    <link href="{{ ASSET_PATH }}/css/pagefind-custom.css" rel="stylesheet">
   </head>
 
   <body>
@@ -49,6 +52,7 @@
             <ul class="nav_left">
               <li><a href="/archive.html">Archive</a></li>
               <li><a href="/categories.html">Categories</a></li>
+              <li><div id="search"></div></li>
             </ul>
           </nav>
           </div>
@@ -110,5 +114,15 @@
     </script>
     <script src="{{ ASSET_PATH }}/js/copy-code.js"></script>
     <script src="{{ ASSET_PATH }}/js/header-anchors.js"></script>
+    <script src="/pagefind/pagefind-ui.js"></script>
+    <script>
+      window.addEventListener('DOMContentLoaded', (event) => {
+        new PagefindUI({
+          element: "#search",
+          showSubResults: true,
+          showImages: false
+        });
+      });
+    </script>
   </body>
 </html>

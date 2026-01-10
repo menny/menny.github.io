@@ -39,3 +39,33 @@ bundle exec jekyll serve
 ```
 
 Point your browser to http://127.0.0.1:4000
+
+### Search Functionality
+
+This site includes client-side search powered by [Pagefind](https://pagefind.app/).
+
+To build the site with search locally:
+
+1. Install Node.js dependencies:
+```
+npm install
+```
+
+2. Build Jekyll:
+```
+bundle exec jekyll build
+```
+
+3. Generate the search index:
+```
+npm run pagefind
+```
+
+4. Serve the built site:
+```
+cd _site && python3 -m http.server 4000
+```
+
+The search box will appear in the navigation bar on all pages.
+
+**Note:** GitHub Actions automatically builds the site with search enabled when pushing to the `main` branch.

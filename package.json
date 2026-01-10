@@ -1,0 +1,12 @@
+{
+  "name": "menny-blog",
+  "version": "1.0.0",
+  "description": "Menny Even-Danan's blog",
+  "scripts": {
+    "pagefind": "pagefind --site _site",
+    "build": "bundle exec jekyll build && npm run pagefind"
+  },
+  "devDependencies": {
+    "pagefind": "^1.1.1"
+  }
+}
