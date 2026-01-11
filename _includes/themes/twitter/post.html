@@ -6,16 +6,16 @@
 	  <h1 itemprop="headline">{{ page.title }} {% if page.tagline %}<small>{{page.tagline}}</small>{% endif %}</h1>
 	  <div class="post-properties" itemprop="keywords">
 	  {% unless page.categories == empty %}
-		<ul class="tag_box inline">
-		  <li><i class="icon-menny categories-icon"></i></li>
+		<ul class="tag_box inline" aria-label="Categories">
+		  <li aria-hidden="true"><i class="icon-menny categories-icon"></i></li>
 		  {% assign categories_list = page.categories %}
 		  {% include JB/categories_list %}
 		</ul>
 	  {% endunless %}  
 
 	  {% unless page.tags == empty %}
-		<ul class="tag_box inline">
-		  <li><i class="icon-menny tags-icon"></i></li>
+		<ul class="tag_box inline" aria-label="Tags">
+		  <li aria-hidden="true"><i class="icon-menny tags-icon"></i></li>
 		  {% assign tags_list = page.tags %}
 		  {% include JB/tags_list %}
 		</ul>
