@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "10x Faster Builds Without Owning Code a.k.a. I Don't Know Rust, But AI Does"
+title: "Faster Builds Without Owning Code a.k.a. I Don't Know Rust, But AI Does"
 date: 2026-01-18 12:00:00
 categories: [ai, build-system, rust]
 tags: [bazel, ai-agent, developer-experience, performance]
@@ -16,17 +16,17 @@ But comfort comes with a tax.
 
 Let's look at a specific example: generating `.d.ts` Declaration files for our TypeScript packages. 
 
-We have a custom tool for this. It's written in TypeScript, runs on Node.js, and uses `swc` under the hood. It's a great tool. It's readable, easy to modify, and by human standards, it's fast. It takes about **1 second** to process a large package.
+We have a custom tool for this. It's written in TypeScript, runs on Node.js, and uses `swc` under the hood. It's a great tool. It's readable, easy to modify, and by human standards, it's fast. It takes about **120ms** to process a large package.
 
-1 second. That sounds fine, right?
+120ms. That sounds fine, right?
 
-But we have thousands of packages. And in a build system like Bazel, those seconds add up. Every time we spin up a Node.js process, we pay a startup penalty. We pay for the single-threaded nature of the event loop - even if we use IO async operations.
+But we have tens of thousands of packages. And in a build system like Bazel, those milliseconds add up. Every time we spin up a Node.js process, we pay a startup penalty. We pay for the single-threaded nature of the event loop - even if we use IO async operations.
 
 To make this *truly* fast—we're talking sub-100ms fast—we would need to move to a native language. Something like Rust. We could use the specific crates (like [`oxc`](https://github.com/oxc-project/oxc), the Oxidation Compiler) directly as libraries, bypassing the process-spawning overhead and utilizing true multi-threading.
 
 But here is the friction: **I don't know Rust.** And none of my teammates know Rust. 
 
-At least, not well enough to write a production-grade, highly optimized build tool from scratch. And honestly? I don't want to learn it just for this one 100-line script. So, we stuck with the slow, comfortable Node.js tool.
+At least, not well enough to write a production-grade, highly optimized build tool from scratch. And honestly? I don't want to learn it just for this one 50-line script. So, we stuck with the slow, comfortable Node.js tool.
 
 Well... until now.
 
@@ -55,17 +55,19 @@ The result? [**rust_oxc_dts_emit**](https://github.com/menny/rust_oxc_dts_emit).
 *   **Development Time to POC**: ~30 minutes*.
     *   *Caveat: I already had a full, battle-tested TypeScript implementation to reference, some Rust examples in the codebase, and lots of real-world test cases.*
 *   **My Rust Knowledge Required**: Zero.
-*   **Performance**: The new tool runs in **less than 0.1 seconds**.
+*   **Performance**: The new tool runs in **around 50ms**.
 *   **Additional time to productize and document**: a couple of hours.
 
-That is a **10x speedup**.
+That is a **~2.4x speedup**.
 
 ```bash
-# Before (Node.js)
-time node dts-emit src/   # 1.2s
+# Before (Node.js + swc) - 200 typescript files
+time node dts-emit src/
+# 120ms
 
-# After (Rust)
-time rust_oxc_dts_emit src/   # 0.08s
+# After (Rust-based + oxc) - same 200 typescript files
+time rust_oxc_dts_emit src/
+# 50ms
 ```
 
 By moving from a "spawning a Node process" model to a "native binary using a library" model, we obliterated the overhead. And because the AI handled the implementation, the "cost" of using a language I don't know was effectively zero.
@@ -77,7 +79,7 @@ While Rust was the right choice for this specific task due to the `oxc` library,
 How do you spot a candidate for an AI-rewrite?
 
 1.  **The "Glue" Script**: Look for scripts that primarily move data between other tools. If it's just `subprocess.call` wrappers, it can be rewritten in a faster, safer language.
-2.  **The "Slow but Simple"**: Tools that take noticeable time (1s+) but do something logically simple (like generating files, parsing JSON, or checking file existence).
+2.  **The "Slow but Simple"**: Tools that take noticeable time (100ms+) but do something logically simple (like generating files, parsing JSON, or checking file existence).
 3.  **The "Black Box"**: Legacy scripts that everyone is afraid to touch. Since you don't understand it anyway, having an AI rewrite it in a modern, strictly-typed language often *increases* maintainability because the AI will add types and structure that the original lacked.
 4.  **No Secret Sauce**: Code that relies purely on public logic or open-source libraries. If it contains complex, proprietary business logic, you might want to keep it in a language you can debug manually.
 
@@ -100,13 +102,13 @@ This documentation ensures that when the next Agent picks up the task 6 months f
 
 ## Why This Matters: The Scale of Trust
 
-The implications go beyond just saving a few seconds on a build script.
+The implications go beyond just saving a few milliseconds on a build script.
 
 Right now, we are comfortable delegating these small, isolated scripts. They are easy to verify: input `in.json`, output `out.rs`. We can treat them as black boxes because the scope of failure is limited to a single build step.
 
 But this is just the training ground.
 
-As our confidence in AI Agents grows and their capabilities improve, the definition of "manageable code" will expand. Today it's a 100-line build tool. Tomorrow it might be a non-critical microservice, or a complex validation library. 
+As our confidence in AI Agents grows and their capabilities improve, the definition of "manageable code" will expand. Today it's a 50-line build tool. Tomorrow it might be a non-critical microservice, or a complex validation library. 
 
 We are training ourselves to be Managers on the small stuff so we are ready for the big stuff. We are learning how to specify behavior rather than implementation, how to verify outcomes rather than syntax, and how to maintain systems we didn't build.
 
