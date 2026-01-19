@@ -52,7 +52,8 @@ I didn't write a single line of Rust. I didn't worry about the borrow checker. I
 
 The result? [**rust_oxc_dts_emit**](https://github.com/menny/rust_oxc_dts_emit).
 
-*   **Development Time to POC**: ~30 minutes.
+*   **Development Time to POC**: ~30 minutes*.
+    *   *Caveat: I already had a full, battle-tested TypeScript implementation to reference, some Rust examples in the codebase, and lots of real-world test cases.*
 *   **My Rust Knowledge Required**: Zero.
 *   **Performance**: The new tool runs in **less than 0.1 seconds**.
 *   **Additional time to productize and document**: a couple of hours.
