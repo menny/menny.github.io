@@ -502,7 +502,7 @@ ul.raised {
 
 
 a.dark-light-mode-toggle {
-  background-image:url("/assets/themes/twitter/img/dark_mode_24px.png");
+  background-image:url("/assets/themes/surface/img/dark_mode_24px.png");
   display: inline-block;
   text-decoration: none;
   width: 24px;
@@ -526,39 +526,39 @@ a.dark-light-mode-toggle {
 }
 
 .dark-mode-toggle-icon::before {
-  background-image: url("/assets/themes/twitter/img/dark_mode_24px.png");
+  background-image: url("/assets/themes/surface/img/dark_mode_24px.png");
 }
 
 .share-icon::before {
-  background-image: url("/assets/themes/twitter/img/share_24px_light.png");
+  background-image: url("/assets/themes/surface/img/share_24px_light.svg");
 }
 
 .rss-icon::before {
-  background-image: url("/assets/themes/twitter/img/rss_feed_24px_light.svg");
+  background-image: url("/assets/themes/surface/img/rss_feed_24px_light.svg");
 }
 
 .categories-icon::before {
-  background-image: url("/assets/themes/twitter/img/categories_24px_light.svg");
+  background-image: url("/assets/themes/surface/img/categories_24px_light.svg");
 }
 
 .tags-icon::before {
-  background-image: url("/assets/themes/twitter/img/tag_24px_light.svg");
+  background-image: url("/assets/themes/surface/img/tag_24px_light.svg");
 }
 
 .hacker-news-icon::before {
-  background-image: url("/assets/themes/twitter/img/hacker_news_24px_light.svg");
+  background-image: url("/assets/themes/surface/img/hacker_news_24px_light.svg");
 }
 
 .twitter-icon::before {
-  background-image: url("/assets/themes/twitter/img/twitter-3-logo-svgrepo-com.svg");
+  background-image: url("/assets/themes/surface/img/twitter-3-logo-svgrepo-com.svg");
 }
 
 .threads-icon::before {
-  background-image: url("/assets/themes/twitter/img/threads-logo-black-01.png");
+  background-image: url("/assets/themes/surface/img/threads-logo-black-01.png");
 }
 
 .copy-clipboard-icon::before {
-  background-image: url("/assets/themes/twitter/img/content_copy_24px_light.svg");
+  background-image: url("/assets/themes/surface/img/content_copy_24px_light.svg");
 }
 
 /* Copy Code Button */

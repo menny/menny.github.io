@@ -131,35 +131,35 @@ body.dark-mode {
 }
 
 .dark-mode .dark-mode-toggle-icon::before {
-  background-image: url("/assets/themes/twitter/img/light_mode_24px.png");
+  background-image: url("/assets/themes/surface/img/light_mode_24px.png");
 }
 
 .dark-mode .share-icon::before {
-  background-image: url("/assets/themes/twitter/img/share_24px_dark.png");
+  background-image: url("/assets/themes/surface/img/share_24px_dark.png");
 }
 
 .dark-mode .rss-icon::before {
-  background-image: url("/assets/themes/twitter/img/rss_feed_24px_dark.svg");
+  background-image: url("/assets/themes/surface/img/rss_feed_24px_dark.svg");
 }
 
 .dark-mode .categories-icon::before {
-  background-image: url("/assets/themes/twitter/img/categories_24px_dark.svg");
+  background-image: url("/assets/themes/surface/img/categories_24px_dark.svg");
 }
 
 .dark-mode .tags-icon::before {
-  background-image: url("/assets/themes/twitter/img/tag_24px_dark.svg");
+  background-image: url("/assets/themes/surface/img/tag_24px_dark.svg");
 }
 
 .dark-mode .hacker-news-icon::before {
-  background-image: url("/assets/themes/twitter/img/hacker_news_24px_dark.svg");
+  background-image: url("/assets/themes/surface/img/hacker_news_24px_dark.svg");
 }
 
 .dark-mode .threads-icon::before {
-  background-image: url("/assets/themes/twitter/img/threads-logo-white-01.png");
+  background-image: url("/assets/themes/surface/img/threads-logo-white-01.png");
 }
 
 .dark-mode .copy-clipboard-icon::before {
-  background-image: url("/assets/themes/twitter/img/content_copy_24px_dark.svg");
+  background-image: url("/assets/themes/surface/img/content_copy_24px_dark.svg");
 }
 
 .dark-mode button.js-copy-link {
