@@ -43,19 +43,19 @@
     <a href="#main-content" class="skip-link">Skip to main content</a>
     <div class="navbar">
       <div class="navbar-inner">
-          <a class="brand" href="/blog.html">{{ site.title }}</a>
-          <div class="container-narrow">
-          <nav aria-label="Main">
-            <ul class="nav_left">
-              <li><a href="/archive.html">Archive</a></li>
-              <li><a href="/categories.html">Categories</a></li>
-            </ul>
-          </nav>
+          <div class="nav_left">
+            <a class="brand{% if page.url == '/blog.html' %} active{% endif %}" href="/blog.html"{% if page.url == '/blog.html' %} aria-current="page"{% endif %}>{{ site.title }}</a>
+            <nav aria-label="Main">
+              <ul class="nav_links">
+                <li><a href="/archive.html"{% if page.url == '/archive.html' %} class="active" aria-current="page"{% endif %}>Archive</a></li>
+                <li><a href="/categories.html"{% if page.url == '/categories.html' %} class="active" aria-current="page"{% endif %}>Categories</a></li>
+              </ul>
+            </nav>
           </div>
           <div class="nav_right">
             <nav aria-label="Social">
               <ul>
-                <li><a href="/">Me</a>&nbsp;@&nbsp;</li>
+                <li><a href="/"{% if page.url == '/' or page.url == '/index.html' %} class="active" aria-current="page"{% endif %}>Me</a>&nbsp;@&nbsp;</li>
                 <li><a rel="me" href="https://github.com/menny">github</a></li>
               <li><a rel="me" href="https://mastodon.social/@menny">Mastodon</a></li>
               <li><a rel="me" href="https://www.threads.net/@mennyed">Threads</a></li>

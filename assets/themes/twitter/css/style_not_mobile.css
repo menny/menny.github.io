@@ -30,15 +30,68 @@ p {
 
 .navbar li {
 	display:inline;
-	margin: 5pt;
+	margin: 0;
 }
 
 .navbar .nav_right {
-  float: right;
+  float: none;
 }
 
 .navbar .nav_left {
-  float: left;
+  float: none;
+}
+
+.navbar-inner {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.navbar ul {
+  padding-top: 0;
+}
+
+.navbar .nav_left {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-start;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar .nav_links {
+  display: flex;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+}
+
+.navbar .nav_right ul {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+}
+
+.navbar .nav_right a {
+  font-size: 0.95em;
+  color: var(--color-muted);
+}
+
+.navbar .nav_right a:hover,
+.navbar .nav_right a:focus {
+  color: var(--color-accent);
+}
+
+.navbar a.active,
+.navbar a[aria-current="page"] {
+  color: var(--color-accent);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
 .rotated {
