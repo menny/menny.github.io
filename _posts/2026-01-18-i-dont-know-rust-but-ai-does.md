@@ -22,7 +22,7 @@ We have a custom tool for this. It's written in TypeScript, runs on Node.js, and
 
 But we have tens of thousands of packages. And in a build system like Bazel, those milliseconds add up. Every time we spin up a Node.js process, we pay a startup penalty. We pay for the single-threaded nature of the event loop - even if we use IO async operations.
 
-To make this *truly* fast—we're talking sub-100ms fast—we would need to move to a native language. Something like Rust. We could use the specific crates (like [`oxc`](https://github.com/oxc-project/oxc), the Oxidation Compiler) directly as libraries, bypassing the process-spawning overhead and utilizing true multi-threading.
+To make this *truly* fast—we're talking single-digit milliseconds in most cases and ~50ms on the big ones—we would need to move to a native language. Something like Rust. We could use the specific crates (like [`oxc`](https://github.com/oxc-project/oxc), the Oxidation Compiler) directly as libraries, bypassing the process-spawning overhead and utilizing true multi-threading.
 
 But here is the friction: **I don't know Rust.** And none of my teammates know Rust. 
 
