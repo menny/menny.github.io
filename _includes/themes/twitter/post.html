@@ -1,7 +1,9 @@
 <article itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="page-header raised">
-	  <div class="date">
-		<span><span itemprop="datePublished">{{ page.date | date_to_long_string }}</span>&nbsp;&middot;&nbsp;{{ content | number_of_words | divided_by: 180 | plus: 1 }} min read,&nbsp;<span itemprop="author" itemscope itemtype="http://schema.org/Person"><i>By&nbsp;<span itemprop="name">{{site.author.name}}</span></i></span></span>
+	<div class="page-header raised post-hero">
+	  <div class="post-meta">
+		<span class="post-date" itemprop="datePublished">{{ page.date | date_to_long_string }}</span>
+		<span class="post-read-time">{{ content | number_of_words | divided_by: 180 | plus: 1 }} min read</span>
+		<span class="post-author" itemprop="author" itemscope itemtype="http://schema.org/Person">By <span itemprop="name">{{site.author.name}}</span></span>
 	  </div>
 	  <h1 itemprop="headline">{{ page.title }} {% if page.tagline %}<small>{{page.tagline}}</small>{% endif %}</h1>
 	  <div class="post-properties" itemprop="keywords">
@@ -80,11 +82,12 @@
 		</div>
 		-->
 	
-		<hr>
-		{% include JB/comments %}
+		<div class="comments-area raised">
+		  <h2 class="comments-title">Discussion</h2>
+		  {% include JB/comments %}
+		</div>
 	
-		<hr>
-		<footer>
+		<footer class="post-footer">
 		  <p>&copy; <span itemprop="copyrightYear">{{ site.time | date: '%Y' }}</span> <span itemprop="copyrightHolder">{{ site.author.name }}</span>
 			  with help from <a href="http://jekyllbootstrap.com" target="_blank" title="The Definitive Jekyll Blogging Framework">Jekyll Bootstrap</a>
 			  and <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>

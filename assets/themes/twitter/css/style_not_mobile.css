@@ -1,5 +1,5 @@
 body {
-  font-size: large;
+  font-size: 18px;
 }
 .subtitle{
   font-size: 120%;
@@ -19,13 +19,13 @@ h4, h5, h6 {
 }
 
 p {
-  line-height: 1.5em;
-  letter-spacing: 0.02em;
+  line-height: 1.7em;
+  letter-spacing: 0.01em;
 }
 
 /* Custom container */
 .container-narrow {
-  max-width: 600pt;
+  max-width: var(--content-width);
 }
 
 .navbar li {
@@ -53,11 +53,10 @@ p {
 
 /*card*/
 .raised {
-	margin: 0pt 0pt 24pt 0pt;
-	padding: 8pt 8pt 8pt 8pt;
-	-webkit-box-shadow: 0 15px 10px -10px rgba(0,0,0,0.5),0 1px 4px rgba(0,0,0,0.3),0 0 60px rgba(0,0,0,0.1) inset;
-	-moz-box-shadow: 0 15px 10px -10px rgba(0,0,0,0.5),0 1px 4px rgba(0,0,0,0.3),0 0 40px rgba(0,0,0,0.1) inset;
-	box-shadow: 0 15px 10px -10px rgba(0,0,0,0.5),0 1px 4px rgba(0,0,0,0.3),0 0 40px rgba(0,0,0,0.1) inset;
+	border-radius: var(--card-radius);
+	border: 1px solid var(--color-border);
+	background: var(--color-surface);
+	box-shadow: var(--shadow-soft);
 }
 
 .bio-photo {
@@ -70,7 +69,7 @@ p {
 
 .sharing-buttons {
 	text-align: right;
-	margin: 8pt 16pt 8pt 16pt;
+	margin: var(--space-2) var(--space-3);
 }
 
 .bio-extra {

@@ -10,12 +10,19 @@ title: Let Me Explain Myself&hellip;
   <h1><span itemprop="name">{{ site.title }}</span><small> - <span itemprop="description">{{site.tagline}}</span></small></h1>
   <ul class="posts" itemprop="blogPosts">
     {% for post in site.posts %}
-      <li class="raised">
-        <article itemscope itemtype="http://schema.org/BlogPosting">
-            <span itemprop="datePublished">{{ post.date | date_to_string }}</span></br>
-            <h2><a href="{{ post.url }}" itemprop="url"><span itemprop="headline">{{ post.title }}</span></a></h2>
-            <p><span itemprop="description">{{ post.excerpt }}</span></p>
-        </article>
+      <li class="raised post-card">
+        <a class="post-card-link" href="{{ post.url }}">
+          <article itemscope itemtype="http://schema.org/BlogPosting">
+            <meta itemprop="url" content="{{ post.url }}">
+            <div class="post-card-meta">
+              <span class="post-date" itemprop="datePublished">{{ post.date | date_to_string }}</span>
+              <span class="post-read-time">{{ post.content | number_of_words | divided_by: 180 | plus: 1 }} min read</span>
+            </div>
+            <h2 class="post-card-title" itemprop="headline">{{ post.title }}</h2>
+            <p class="post-card-excerpt"><span itemprop="description">{{ post.excerpt | strip_html }}</span></p>
+            <span class="post-card-cta">Read more -></span>
+          </article>
+        </a>
       </li>
     {% endfor %}
   </ul>

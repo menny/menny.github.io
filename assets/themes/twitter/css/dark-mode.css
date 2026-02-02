@@ -9,66 +9,84 @@
 }
 
 body.dark-mode {
-  background-color: var(--dark-background);
-  color: var(--dark-on-background);
+  --color-background: #1f1f1f;
+  --color-surface: #2b2b2b;
+  --color-surface-muted: #242424;
+  --color-border: #3a3a3a;
+  --color-text: #f4f4f4;
+  --color-muted: #a9a9a9;
+  --color-accent: var(--dark-primary);
+  --color-accent-hover: #d4b0ff;
+  --color-accent-visited: #9d74e2;
+  --color-code-bg: #1e1e1e;
+  --color-code-border: #343434;
+  color-scheme: dark;
+  background-color: var(--color-background);
+  color: var(--color-text);
 }
 
 .dark-mode .site {
-  color: var(--dark-on-background);
+  color: var(--color-text);
 }
 
 .dark-mode a {
-  color: var(--dark-primary);
+  color: var(--color-accent);
 }
 
 .dark-mode a:hover {
-  color: var(--dark-secondary);
+  color: var(--color-accent-hover);
 }
 
 .dark-mode a:visited {
-  color: #9d74e2;
+  color: var(--color-accent-visited);
 }
 
 .dark-mode .title a {
-  color: #f00;
+  color: var(--color-text);
 }
 
 .dark-mode .title a:hover {
-  color: #fff;
+  color: var(--color-accent);
 }
 
 .dark-mode .header a.extra {
-  color: #777;
+  color: var(--color-muted);
 }
 
 .dark-mode .header a.extra:hover {
-  color: #fff;
+  color: var(--color-text);
 }
 
 .dark-mode .meta {
-  color: #777;
+  color: var(--color-muted);
 }
 
 .dark-mode .footer {
-  color: #999;
-  border-top-color: #333;
+  color: var(--color-muted);
+  border-top-color: var(--color-border);
 }
 
 .dark-mode .footer .contact a {
-  color: #a0a5e1;
+  color: var(--color-accent);
 }
 
 .dark-mode .posts pre,
 .dark-mode .post-full pre {
-  border-color: #444;
-  background-color: #3a3a3a;
+  border-color: var(--color-code-border);
+  background-color: var(--color-code-bg);
 }
 
 .dark-mode .posts code,
 .dark-mode .post-full code {
-  border-color: #eeeeee;
-  color: #a0a5e1;
-  background-color: #2a2a2a;
+  border-color: var(--color-code-border);
+  color: #d7c8ff;
+  background-color: var(--color-code-bg);
+}
+
+.dark-mode .posts pre code,
+.dark-mode .post-full pre code {
+  background-color: transparent;
+  border: none;
 }
 
 .dark-mode .posts pre.terminal,
@@ -85,22 +103,31 @@ body.dark-mode {
 
 /* Custom styles for dark-mode */
 .dark-mode .raised {
-    background: #3a3a3a;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.5);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.25);
 }
 
 .dark-mode .navbar-inner {
-    background-color: #222;
+    background-color: var(--color-surface);
     background-image: none;
-    border-color: #333;
+    border-color: var(--color-border);
+}
+
+.dark-mode .comments-area {
+  color-scheme: dark;
+}
+
+.dark-mode #disqus_thread {
+  color-scheme: dark;
 }
 
 .dark-mode .navbar .brand {
-    color: #fff;
+    color: var(--color-text);
 }
 
 .dark-mode .navbar .nav > li > a {
-    color: #ccc;
+    color: var(--color-text);
 }
 
 .dark-mode .dark-mode-toggle-icon::before {
@@ -136,10 +163,10 @@ body.dark-mode {
 }
 
 .dark-mode button.js-copy-link {
-  color: var(--dark-primary);
+  color: var(--color-accent);
 }
 
 .dark-mode button.js-copy-link:hover,
 .dark-mode button.js-copy-link:focus {
-  color: var(--dark-secondary);
+  color: var(--color-accent-hover);
 }
