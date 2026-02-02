@@ -150,6 +150,10 @@ body.dark-mode {
   background-image: url("/assets/themes/surface/img/tag_24px_dark.svg");
 }
 
+.dark-mode .archive-icon::before {
+  background-image: url("/assets/themes/surface/img/content_copy_24px_dark.svg");
+}
+
 .dark-mode .hacker-news-icon::before {
   background-image: url("/assets/themes/surface/img/hacker_news_24px_dark.svg");
 }
