@@ -76,6 +76,11 @@ p {
   padding: 0;
 }
 
+.navbar .nav_right li {
+  display: flex;
+  align-items: center;
+}
+
 .navbar .nav_right a {
   font-size: 0.95em;
   color: var(--color-muted);
@@ -128,3 +133,4 @@ p {
 .bio-extra {
   margin-top: 60pt;
 }
+

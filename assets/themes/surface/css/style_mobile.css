@@ -62,6 +62,22 @@ h4, h5, h6 {
   justify-content: flex-end;
   margin: 0;
   padding: 0;
+  align-items: center;
+}
+
+.navbar .nav_right li {
+  display: flex;
+  align-items: center;
+  font-size: 1.1em;
+}
+
+.navbar .nav_right a {
+  font-size: inherit;
+}
+
+.navbar .icon-menny::before {
+  width: 20px;
+  height: 20px;
 }
 
 .navbar li {
@@ -135,4 +151,9 @@ h4, h5, h6 {
 
 .bio-extra {
   margin-top: 8pt;
+}
+
+.navbar .brand {
+  font-size: 1.2em;
+  text-shadow: none;
 }

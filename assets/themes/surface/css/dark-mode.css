@@ -159,7 +159,23 @@ body.dark-mode {
 }
 
 .dark-mode .threads-icon::before {
-  background-image: url("/assets/themes/surface/img/threads-logo-white-01.png");
+  background-image: url("/assets/themes/surface/img/threads_24px_dark.svg");
+}
+
+.dark-mode .person-icon::before {
+  background-image: url("/assets/themes/surface/img/person_24px_dark.svg");
+}
+
+.dark-mode .github-icon::before {
+  background-image: url("/assets/themes/surface/img/github_24px_dark.svg");
+}
+
+.dark-mode .mastodon-icon::before {
+  background-image: url("/assets/themes/surface/img/mastodon_24px_dark.svg");
+}
+
+.dark-mode .linkedin-icon::before {
+  background-image: url("/assets/themes/surface/img/linkedin_24px_dark.svg");
 }
 
 .dark-mode .copy-clipboard-icon::before {

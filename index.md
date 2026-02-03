@@ -28,6 +28,14 @@ description: Menny Even-Danan is the proud father of Hagar, Netta and Ofir, husb
         <div class="bio-extra">
             <p>I'm fascinated by the current technology landscape. We're seeing incredible advancements in Large Language Models (LLMs), and the open-source community is more vibrant than ever. The ability to collaborate and share knowledge on platforms like GitHub is truly transformative.</p>
         </div>
+        <div class="sharing-buttons">
+          <ul>
+            <li><a rel="me" href="https://github.com/menny" class="icon-menny github-icon" aria-label="Github"></a></li>
+            <li><a rel="me" href="https://mastodon.social/@menny" class="icon-menny mastodon-icon" aria-label="Mastodon"></a></li>
+            <li><a rel="me" href="https://www.threads.net/@mennyed" class="icon-menny threads-icon" aria-label="Threads"></a></li>
+            <li><a rel="me" href="https://www.linkedin.com/in/menny" class="icon-menny linkedin-icon" aria-label="LinkedIn"></a></li>
+          </ul>
+        </div>
     </div>
   </div>
 </div>
