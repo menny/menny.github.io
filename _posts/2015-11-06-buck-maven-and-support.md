@@ -4,6 +4,7 @@ title: Maven and Support Library Artifacts in Buck a.k.a. Wait, It Doesn't Have 
 date:   2015-11-06 11:32:00
 categories: [android, buck, gradle, maven]
 tags: [android]
+updates: []
 ---
 [Buck](https://buckbuild.com/) is _Facebook_'s super fast build system. How fast? Up to [7.5 times](https://buckbuild.com/article/exopackage.html). That was intriging enough to get me to try it out, and immediately realizing that the platform is not complete..
 One of the features missing is proper and complete support for _Maven_ remote artifacts (aar and jar) and locally hosted Support Library artifacts.

@@ -4,6 +4,13 @@ title: "No! We don't use that here! a.k.a. Making AI Coding NP-Complete"
 date: 2026-01-31 12:00:00
 categories: [ai, llm, software-engineering]
 tags: [agents, fine-tuning, developer-experience]
+updates:
+  - date: 2026-02-05 10:00:00
+    reason: "Standardized heading format and minor grammar fixes"
+  - date: 2026-02-05 11:00:00
+    reason: "Fixed citation to correct arXiv paper (2405.05904)"
+  - date: 2026-02-05 12:00:00
+    reason: "Added 'Knowledge Trap' section addressing fine-tuning critique"
 ---
 
 We've all been there. You ask your shiny new AI Agent to "add a user profile endpoint," and it generates 50 lines of pristine, bug-free, idiomatic Python. 

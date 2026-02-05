@@ -4,6 +4,7 @@ title: "CI/CD at AnySoftKeyboard Part 2 aka Ship It!"
 date:   2025-11-09 12:00:00
 categories: [anysoftkeyboard, cd]
 tags: [android, cd, deployment, github, play-store, alpha, beta, stable]
+updates: []
 ---
 
 In [Part 1 of this series](/2020/03/30/ci-cd-ask-part1.html), we discussed how Continuous Integration (CI) at AnySoftKeyboard ensures that our `main` branch is always in a healthy, shippable state. Through rigorous testing, static analysis, and code style checks, we gain the confidence that our code is robust and ready for prime time.

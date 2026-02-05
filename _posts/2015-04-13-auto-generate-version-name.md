@@ -4,6 +4,7 @@ title: Auto-Generate Version Name a.k.a. It Is So Boring Incrementing Build, Let
 date:   2015-04-13 20:52:00
 categories: [android, git, gradle]
 tags: [android]
+updates: []
 ---
 _0.0.1_, _0.0.2_, _0.1.0_, _0.1.1_, _0.1.3_,.... I'm super lazy, and I get bored really quickly with repeating tasks. So, whenever
 I can offload something to a script, I just do it.<br>

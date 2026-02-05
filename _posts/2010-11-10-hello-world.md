@@ -5,6 +5,7 @@ date:   2010-11-10 12:00:00
 permalink: /p/1
 categories: [introduction]
 tags: [im-alive]
+updates: []
 ---
 ` Welcome to WordPress. This is your first post. Edit or delete it, then start blogging! `
 

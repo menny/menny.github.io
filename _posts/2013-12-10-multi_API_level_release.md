@@ -4,6 +4,7 @@ title: Multiple API Level APK Release a.k.a I'm Done With Legacy
 date:   2013-12-10 10:29:00
 categories: [android]
 tags: [tips, anysoftkeyboard]
+updates: []
 ---
 Up until recently, [AnySoftKeyboard](http://anysoftkeyboard.github.io) was supporting Android devices all the way back to 1.5 in a single APK.
 Mostly, it worked fine, and I was able to use [FrankenRobot](http://evendanan.net/2011/04/Backward-compatibility-in-Android-OR-How-I-made-a-2-2-Android-APK-run-under-1-5/)

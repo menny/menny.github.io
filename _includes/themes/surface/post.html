@@ -30,7 +30,46 @@
 		<div class="content" itemprop="articleBody">
 		  {{ content }}
 		</div>
-	
+
+		{% if page.updates and page.updates.size > 0 %}
+		<div class="update-history">
+		  {% assign latest_update = page.updates | last %}
+		  <div class="update-summary">
+			<span class="update-latest">
+			  Updated {{ latest_update.date | date: "%d %b %Y" }}: {{ latest_update.reason }}
+			</span>
+			{% if page.updates.size > 1 %}
+			<button class="update-toggle" aria-expanded="false" aria-controls="update-list">
+			  ({{ page.updates.size }} updates since publication)
+			</button>
+			{% endif %}
+		  </div>
+		  {% if page.updates.size > 1 %}
+		  <ul class="update-list" id="update-list" hidden>
+			{% for update in page.updates reversed %}
+			<li>
+			  <span class="update-date">{{ update.date | date: "%d %b %Y" }}</span>
+			  <span class="update-reason">{{ update.reason }}</span>
+			</li>
+			{% endfor %}
+		  </ul>
+		  {% endif %}
+		</div>
+		<script>
+		(function() {
+		  var toggle = document.querySelector('.update-toggle');
+		  var list = document.getElementById('update-list');
+		  if (toggle && list) {
+		    toggle.addEventListener('click', function() {
+		      var isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+		      toggle.setAttribute('aria-expanded', String(!isExpanded));
+		      list.hidden = isExpanded;
+		    });
+		  }
+		})();
+		</script>
+		{% endif %}
+
 		<!-- sharing is fun, it is good for you, you should try it out -->
 		<div class="sharing-buttons">
 			<ul>

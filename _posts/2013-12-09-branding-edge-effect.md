@@ -4,6 +4,7 @@ title: Branding the EdgeEffect aka Hit the Wall with Your Own Color
 date:   2013-12-09 13:07:00
 categories: [android, branding]
 tags: [tips, hacx]
+updates: []
 ---
 Lately, I've become sort of branding obsessed; colors, font sizes and types, UI language, they all seem _so_ important to me, 
 I can hardly look at an App these days without pulling on my hairs and scream "God, oh God, why would they use inconsistent, non-brand colors!"

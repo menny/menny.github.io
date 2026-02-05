@@ -4,6 +4,7 @@ title: Migrating to Robolectric v3 a.k.a Just Work, Dear God, Just Work!
 date:   2015-04-09 13:52:00
 categories: [robolectric, unit-test]
 tags: [android]
+updates: []
 ---
 [Robolectric](https://robolectric.org) has reach a big milestone recently: [V3-rc2](https://groups.google.com/forum/#!topic/robolectric/1XWVJvKiFjA), so it was time
 to upgrade all my personal projects.<br>

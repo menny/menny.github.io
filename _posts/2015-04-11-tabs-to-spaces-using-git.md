@@ -4,6 +4,7 @@ title: Tabs to Spaces in a GIT repo a.k.a If everyone is Doing It, I'm Doing It 
 date:   2015-04-11 13:52:00
 categories: [android, git, code-style]
 tags: [git]
+updates: []
 ---
 I work on a few projects right now, some using the [Android code-style](https://source.android.com/source/code-style.html) and some their [own](http://robolectric.org/contributing/). This is very confusing, and always causes problems when pushing a commit for merge.<br>
 

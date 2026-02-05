@@ -4,6 +4,7 @@ title: "LLM Evaluations a.k.a. How We Avoid Wat-Did-You-Say Moments"
 date:   2025-08-29 12:00:00
 categories: [ai, llm, asana]
 tags: [evaluations, testing, quality, aicamp]
+updates: []
 ---
 
 A few weeks ago, I had the pleasure of presenting at an [AI-Camp event](https://www.aicamp.ai/event/eventdetails/W2025062614) hosted at the Asana office in NYC. The topic was "LLM Evaluations: How we ensure AI tools produce consistent quality." I wanted to share some of the key takeaways from that presentation here.

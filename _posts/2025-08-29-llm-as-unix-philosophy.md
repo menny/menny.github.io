@@ -4,6 +4,11 @@ title: "My LLM Tooling Doctrine: The Unix Philosophy for Local AI"
 date:   2025-11-08 12:00:00
 categories: [ai, llm]
 tags: [ai, developer-experience]
+updates:
+  - date: 2025-11-08 18:00:00
+    reason: "Grammar and style fixes, updated tool names"
+  - date: 2025-11-09 12:00:00
+    reason: "Restructured sections and added more tool ideas"
 ---
 
 I've been building a lot of small LLM-powered CLI tools for about a year now. These are tiny utilities, each with a very specific job: reviewing my `git diff`, generating a commit message, or answering quick shell command questions.
