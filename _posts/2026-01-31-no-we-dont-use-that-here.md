@@ -18,7 +18,7 @@ It's not that the code is *wrong*. It compiles. It runs. It passes tests. But it
 
 So you write a comment. Then you edit the prompt. Then you update that massive `AGENTS.md` file that is rapidly becoming a novel. You are stuck in a loop of teaching the same lessons over and over again.
 
-LLMs are incredible coders. But they are terrible employees - they forget.
+LLMs are incredible coders. But they are terrible employees — they forget.
 
 They don't know "how things are done around here." And trying to teach them by shoving more and more context into the prompt is a losing battle. 
 
@@ -65,7 +65,7 @@ The Reviewer doesn't need to know the right answer. It just needs to know that t
 
 "But wait," you ask, "Don't I still have to train this Reviewer? Isn't that just `AGENTS.md` with extra steps?"
 
-No. Because you shouldn't be writing rules. You should be just doing your job.
+No. Because you shouldn't be writing rules. You should just be doing your job.
 
 We can harvest the training data for this Reviewer automatically from the "Exhaust" of your engineering org.
 
@@ -76,7 +76,6 @@ We can harvest the training data for this Reviewer automatically from the "Exhau
 *   IDE Shadowing: In a "Copilot" setting, if the AI suggests code and the user immediately backspaces and retypes it, that is a strong negative signal.
 *   **Direct Feedback:** When you explicitly correct the Agent in chat, that is high-quality data. We could even add simple reaction emojis (👍/👎) to every Agent reply to gather "Taste" signals with zero friction.
 
-
 We can feed this stream of stylistic preferences into a small model. This creates a Living Memory of the organization's taste. It evolves as you evolve. If you stop using `LegacyQueryFramework` and switch to `GraphQL`, the training data shifts, the Reviewer updates, and the Agents follow suit—without anyone updating a markdown file.
 
 # The Logistics: Can We Actually Do This?
@@ -85,46 +84,72 @@ We can feed this stream of stylistic preferences into a small model. This create
 
 Here is the napkin math for building your organization's reviewer:
 
-**1. The Data**
+## 1. The Data
 You don't need "Big Data." For a specialized classifier like this (Binary: "Good/Bad" or Classification: "Pass/Refactor"), you can see results with as few as **1,000 - 5,000 examples**.
 *   *Source:* Your existing PR history.
 *   *Labeling:* Automated scripts (e.g., "accepted without comments" vs "commented on").
 
-**2. The Model** (as of January 2026—this list will likely be outdated soon):
+## 2. The Model
+*(as of January 2026—this list will likely be outdated soon)*
 You don't need GPT-4. You need something small, fast, and verify-capable.
 *   [**Gemma 2B / 7B**](https://blog.google/technology/developers/gemma-open-models/): Google's open models are excellent for this. The 2B version is tiny enough to run on almost any modern laptop.
 *   [**Phi-3-mini**](https://azure.microsoft.com/en-us/blog/introducing-phi-3-redefining-what-s-possible-with-slms/): Microsoft's 3.8B model packs a punch way above its weight class.
 *   [**Llama 3 8B**](https://llama.meta.com/llama3/): A bit heavier, but widely supported and very capable as a generalized "Judge".
 
-**3. The Method** (Disclaimer: I am not an expert in fine-tuning, so take this as a high-level overview).
+## 3. The Method
+*(Disclaimer: I am not an expert in fine-tuning, so take this as a high-level overview)*
 You won't retrain the whole model. You will use **PEFT** (Parameter-Efficient Fine-Tuning) techniques:
 *   [**LoRA**](https://arxiv.org/abs/2106.09685) (Low-Rank Adaptation): Freezes the big model and trains tiny "adapter" layers.
 *   [**QLoRA**](https://arxiv.org/abs/2305.14314): Does the above but with 4-bit quantization, allowing you to train on a single consumer GPU (like an NVIDIA T4 or RTX 4090).
 
-**4. The Cost**
+## 4. The Cost
 *   **Training:** On a cloud GPU (e.g., [T4 on Google Colab](https://cloud.google.com/compute/gpus-pricing) or AWS), a fine-tuning run for a small dataset takes <1 hour. Estimated cost: **<$5**. That's cheap enough to do re-training every week.
 *   **Serving:** Serving a small model like Gemma or Llama 3B on a cloud provider costs roughly **$0.02–$0.10 per 1M tokens** (based on [Together AI pricing](https://www.together.ai/pricing)). Compared to GPT-4o input costs (~$2.50/1M tokens), it's negligible.
 
 It is cheaper to run a custom-trained 2B parameter verification model than to jam 50k tokens of "Rules" into every GPT-4 prompt.
 
+# The Knowledge Trap: Why Your Reviewer Doesn't Need a Library Card
+
+The primary critique of fine-tuning—that it is a "leaky" and [inefficient way to inject factual knowledge compared to RAG](https://arxiv.org/abs/2312.05934)—actually reinforces the **Reviewer/Writer** split. The theory remains robust because it shifts the objective of fine-tuning from **Data Storage** to **Behavioral Alignment.**
+
+## 1. Taste is a Pattern, Not a Fact
+
+Fine-tuning is [notoriously poor at "memorizing" specific, isolated facts](https://arxiv.org/abs/2405.05904) (like a new API endpoint name), but it is exceptionally good at **Domain Adaptation.** "Taste" (organizational style, architectural preferences, idiomatic patterns) is a statistical distribution, not a lookup table. The Reviewer doesn't need to be an encyclopedia; it needs to be a **Filter** that recognizes the "shape" of acceptable code.
+
+## 2. Training on the "Direction," Not the "State"
+
+While RAG pulls from the current state of a codebase (which is often messy or full of legacy "noise"), the Reviewer is fine-tuned on the **Diffs**—the "Exhaust" of the PR process.
+
+*   This allows the Reviewer to learn the **vector of improvement** (e.g., *“We are moving away from X and toward Y”*).
+*   Because it learns the *correction* rather than the *static fact*, the inherent "lossiness" of fine-tuning becomes an advantage: it ignores the noise of the codebase and focuses on the signal of the organization’s evolution.
+
+## 3. Decoupling "The Brain" from "The Conscience"
+
+The Fine-Tuning Knowledge Gap only breaks a model if that model is expected to be the sole source of truth. In the **Reviewer Architecture**:
+
+*   **The Writer (Frontier Model)** uses its massive scale and RAG to handle the **NP-Hard Generation** and factual knowledge.
+*   **The Reviewer (Small Fine-Tuned Model)** handles the **Verification.**
+
+By separating these concerns, the fact that a 2B parameter model isn't a great "database" doesn't matter—it only needs to be a great **judge.**
+
 # Prior Art: It’s Not Just Theory
 
 This isn't just a fun thought experiment. The biggest players in AI and Tech are already validating pieces of this puzzle.
 
-### 1. The "Reviewer" Architecture Works (Google & Microsoft)
+## 1. The "Reviewer" Architecture Works (Google & Microsoft)
 *   **Google** deployed a model trained purely on [resolving code review comments](https://research.google/blog/resolving-code-review-comments-with-ml/). It focuses on the "cleanup" phase—predicting the edit needed to satisfy a human reviewer—and achieved a 50%+ acceptance rate.
 *   **Microsoft** [released CodeReviewer](https://arxiv.org/abs/2203.09095), a model pre-trained on the *interaction* of code reviews (Code Change → Review Comment). It proved that a model trained on diffs and comments beats a generic large model at spotting errors.
 
-### 2. The Data Strategy Works (Meta)
+## 2. The Data Strategy Works (Meta)
 *   **Meta** fine-tuned Llama on 64,000 internal `<Review Comment, Patch>` pairs ([MetaMate for Code Review](https://www.researchgate.net/publication/381062746_Resolving_Code_Review_Comments_with_Machine_Learning)). They found that fine-tuning a smaller model on their own *high-quality internal history* significantly outperformed massive generic models.
 
-### 3. The Future is Reward Engineering (DeepSeek)
+## 3. The Future is Reward Engineering (DeepSeek)
 *   **DeepSeek-R1** (released Jan 2025) pioneered using large-scale Reinforcement Learning to force a model to "pause and verify" its own output ([Technical Report](https://github.com/deepseek-ai/DeepSeek-R1)). This is the logical endpoint of our Reviewer: training the "Taste" directly into the model's reward function.
 
 # A New Kind of Feedback Loop
 
 We are currently stuck in a local maximum of "Prompt Engineering"—trying to craft the perfect set of instructions to get the perfect result.
 
-We need to move to Reward Engineering. We need to accept that "Taste" is hard to describe but easy to recognize. By building specialized models that act as automated Code Reviewers, we can finally scale the most unscalable part of software engineering: our culture.
+We need to move to **Reward Engineering**. We need to accept that "Taste" is hard to describe but easy to recognize. By building specialized models that act as automated Code Reviewers, we can finally scale the most unscalable part of software engineering: our culture.
 
 We don't need generic speed; we need specific taste. It's time to clone our team's DNA.
