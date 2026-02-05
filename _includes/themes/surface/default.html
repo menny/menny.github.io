@@ -68,38 +68,7 @@
     </div>
 
     {% include JB/analytics %}
-    <script>
-      const toggle = document.getElementById('dark-mode-toggle');
-      const body = document.body;
-
-      // Function to apply the theme
-      function applyTheme(theme) {
-        if (theme === 'dark') {
-          body.classList.add('dark-mode');
-        } else {
-          body.classList.remove('dark-mode');
-        }
-      }
-
-      // Check for saved preference in local storage
-      const savedTheme = localStorage.getItem('theme');
-      if (savedTheme) {
-        applyTheme(savedTheme);
-      } else {
-        // Check for system preference
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        applyTheme(prefersDark ? 'dark' : 'light');
-      }
-
-      // Toggle theme on click
-      toggle.addEventListener('click', (e) => {
-        e.preventDefault();
-        const currentTheme = body.classList.contains('dark-mode') ? 'dark' : 'light';
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        applyTheme(newTheme);
-        localStorage.setItem('theme', newTheme);
-      });
-    </script>
+    <script src="{{ ASSET_PATH }}/js/dark-mode.js"></script>
     <script src="{{ ASSET_PATH }}/js/copy-code.js"></script>
     <script src="{{ ASSET_PATH }}/js/header-anchors.js"></script>
   </body>

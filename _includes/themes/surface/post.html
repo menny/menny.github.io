@@ -55,19 +55,7 @@
 		  </ul>
 		  {% endif %}
 		</div>
-		<script>
-		(function() {
-		  var toggle = document.querySelector('.update-toggle');
-		  var list = document.getElementById('update-list');
-		  if (toggle && list) {
-		    toggle.addEventListener('click', function() {
-		      var isExpanded = toggle.getAttribute('aria-expanded') === 'true';
-		      toggle.setAttribute('aria-expanded', String(!isExpanded));
-		      list.hidden = isExpanded;
-		    });
-		  }
-		})();
-		</script>
+		<script src="{{ ASSET_PATH }}/js/update-history.js"></script>
 		{% endif %}
 
 		<!-- sharing is fun, it is good for you, you should try it out -->
