@@ -11,6 +11,8 @@ updates:
     reason: "Fixed citation to correct arXiv paper (2405.05904)"
   - date: 2026-02-05 12:00:00
     reason: "Added 'Knowledge Trap' section addressing fine-tuning critique"
+  - date: 2026-02-06 09:00:00
+    reason: "Corrected NP-Hard/NP-Complete analogy and replaced unverifiable MetaMate citation with LIMA paper"
 ---
 
 We've all been there. You ask your shiny new AI Agent to "add a user profile endpoint," and it generates 50 lines of pristine, bug-free, idiomatic Python. 
@@ -43,9 +45,9 @@ Code Generation is NP-Hard.
 When you ask an Agent to "write code that fits our organization's standards," you are asking it to search an infinite space of possible syntaxes, libraries, and architectural patterns to find the *one* specific combination that matches your organization's unwritten rules. To do this successfully, the Agent needs perfect knowledge of your entire codebase, your history, and your personal preferences. That is a massive search problem.
 Not only that, but the Agent may find many different solutions that are all correct given the current context, but none of them are "good enough" - they all fail to meet the organization's actual, ever-evolving standards.
 
-Code Verification is NP-Complete.
+Code Verification is P (Polynomial Time).
 But if I show you a piece of code, you can instantly say: "No, don't use `GraphQL` here, use `LegacyQueryFramework`." 
-Verifying if a solution fits expectations is cheap. You don't need to know how to write the perfect code to know that the current code is wrong.
+Verifying if a solution fits expectations is cheap. You don't need to know how to write the perfect code to know that the current code is wrong. The essence of an NP-Complete problem is that finding a solution is hard, but verifying a solution is easy. Coding is NP-Complete.
 
 Right now, we are asking our Agents to be perfect Generators. We are overloading them with context hoping they can "solve" the Style Problem in one shot. 
 
@@ -147,8 +149,8 @@ This isn't just a fun thought experiment. The biggest players in AI and Tech are
 *   **Google** deployed a model trained purely on [resolving code review comments](https://research.google/blog/resolving-code-review-comments-with-ml/). It focuses on the "cleanup" phase—predicting the edit needed to satisfy a human reviewer—and achieved a 50%+ acceptance rate.
 *   **Microsoft** [released CodeReviewer](https://arxiv.org/abs/2203.09095), a model pre-trained on the *interaction* of code reviews (Code Change → Review Comment). It proved that a model trained on diffs and comments beats a generic large model at spotting errors.
 
-## 2. The Data Strategy Works (Meta)
-*   **Meta** fine-tuned Llama on 64,000 internal `<Review Comment, Patch>` pairs ([MetaMate for Code Review](https://www.researchgate.net/publication/381062746_Resolving_Code_Review_Comments_with_Machine_Learning)). They found that fine-tuning a smaller model on their own *high-quality internal history* significantly outperformed massive generic models.
+## 2. The Data Strategy Works (LIMA)
+*   **LIMA: Less Is More for Alignment** ([arXiv:2305.11206](https://arxiv.org/abs/2305.11206)) proved that fine-tuning on just 1,000 carefully curated examples can match the performance of models trained on 50,000+ examples. This validates our thesis: You don't need "Big Data", you need *your* data (high-quality diffs).
 
 ## 3. The Future is Reward Engineering (DeepSeek)
 *   **DeepSeek-R1** (released Jan 2025) pioneered using large-scale Reinforcement Learning to force a model to "pause and verify" its own output ([Technical Report](https://github.com/deepseek-ai/DeepSeek-R1)). This is the logical endpoint of our Reviewer: training the "Taste" directly into the model's reward function.
