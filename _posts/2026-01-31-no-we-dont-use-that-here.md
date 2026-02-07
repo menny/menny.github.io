@@ -47,7 +47,11 @@ Not only that, but the Agent may find many different solutions that are all corr
 
 Code Verification is P (Polynomial Time).
 But if I show you a piece of code, you can instantly say: "No, don't use `GraphQL` here, use `LegacyQueryFramework`." 
-Verifying if a solution fits expectations is cheap. You don't need to know how to write the perfect code to know that the current code is wrong. The essence of an NP-Complete problem is that finding a solution is hard, but verifying a solution is easy. Coding is NP-Complete.
+Verifying if a solution fits expectations is cheap. You don't need to know how to write the perfect code to know that the current code is wrong.
+
+*Author's Note: I'm simplifying here. Verifying deep logical correctness or security properties is still incredibly hard (often undecidable). But verifying "Style" and "Local Constraints"—which is what most code review nitpicks are about—is almost always computationally cheap. You scan, you spot the pattern, you flag it.*
+
+The essence of an NP-Complete problem is that finding a solution is hard, but verifying a solution is easy. Coding is NP-Complete.
 
 Right now, we are asking our Agents to be perfect Generators. We are overloading them with context hoping they can "solve" the Style Problem in one shot. 
 
@@ -86,6 +90,8 @@ We can harvest the training data for this Reviewer automatically from the "Exhau
 *   **Direct Feedback:** When you explicitly correct the Agent in chat, that is high-quality data. We could even add simple reaction emojis (👍/👎) to every Agent reply to gather "Taste" signals with zero friction.
 
 We can feed this stream of stylistic preferences into a small model. This creates a Living Memory of the organization's taste. It evolves as you evolve. If you stop using `LegacyQueryFramework` and switch to `GraphQL`, the training data shifts, the Reviewer updates, and the Agents follow suit—without anyone updating a markdown file.
+
+Of course, this isn't magic. "Garbage In, Garbage Out" still applies. You can't just feed raw git logs into a model; you need to filter for "clean" commits, successful merges, and ignore the chaotic "fix typo" churn. But automating *data curation* is still infinitely more scalable than manually writing rules.
 
 # The Logistics: Can We Actually Do This?
 
