@@ -11,6 +11,10 @@ updates:
     reason: "Fixed citation to correct arXiv paper (2405.05904)"
   - date: 2026-02-05 12:00:00
     reason: "Added 'Knowledge Trap' section addressing fine-tuning critique"
+  - date: 2026-02-06 09:00:00
+    reason: "Corrected NP-Hard/NP-Complete analogy"
+  - date: 2026-02-07 12:00:00
+    reason: "Fixed MetaMate citation URL and added LIMA paper as supporting evidence"
 ---
 
 We've all been there. You ask your shiny new AI Agent to "add a user profile endpoint," and it generates 50 lines of pristine, bug-free, idiomatic Python. 
@@ -43,9 +47,13 @@ Code Generation is NP-Hard.
 When you ask an Agent to "write code that fits our organization's standards," you are asking it to search an infinite space of possible syntaxes, libraries, and architectural patterns to find the *one* specific combination that matches your organization's unwritten rules. To do this successfully, the Agent needs perfect knowledge of your entire codebase, your history, and your personal preferences. That is a massive search problem.
 Not only that, but the Agent may find many different solutions that are all correct given the current context, but none of them are "good enough" - they all fail to meet the organization's actual, ever-evolving standards.
 
-Code Verification is NP-Complete.
+Code Verification is P (Polynomial Time).
 But if I show you a piece of code, you can instantly say: "No, don't use `GraphQL` here, use `LegacyQueryFramework`." 
 Verifying if a solution fits expectations is cheap. You don't need to know how to write the perfect code to know that the current code is wrong.
+
+*Author's Note: I'm simplifying here. Verifying deep logical correctness or security properties is still incredibly hard (often undecidable). But verifying "Style" and "Local Constraints"—which is what most code review nitpicks are about—is almost always computationally cheap. You scan, you spot the pattern, you flag it.*
+
+The essence of an NP-Complete problem is that finding a solution is hard, but verifying a solution is easy. Coding is NP-Complete.
 
 Right now, we are asking our Agents to be perfect Generators. We are overloading them with context hoping they can "solve" the Style Problem in one shot. 
 
@@ -84,6 +92,8 @@ We can harvest the training data for this Reviewer automatically from the "Exhau
 *   **Direct Feedback:** When you explicitly correct the Agent in chat, that is high-quality data. We could even add simple reaction emojis (👍/👎) to every Agent reply to gather "Taste" signals with zero friction.
 
 We can feed this stream of stylistic preferences into a small model. This creates a Living Memory of the organization's taste. It evolves as you evolve. If you stop using `LegacyQueryFramework` and switch to `GraphQL`, the training data shifts, the Reviewer updates, and the Agents follow suit—without anyone updating a markdown file.
+
+Of course, this isn't magic. "Garbage In, Garbage Out" still applies. You can't just feed raw git logs into a model; you need to filter for "clean" commits, successful merges, and ignore the chaotic "fix typo" churn. But automating *data curation* is still infinitely more scalable than manually writing rules.
 
 # The Logistics: Can We Actually Do This?
 
@@ -147,8 +157,9 @@ This isn't just a fun thought experiment. The biggest players in AI and Tech are
 *   **Google** deployed a model trained purely on [resolving code review comments](https://research.google/blog/resolving-code-review-comments-with-ml/). It focuses on the "cleanup" phase—predicting the edit needed to satisfy a human reviewer—and achieved a 50%+ acceptance rate.
 *   **Microsoft** [released CodeReviewer](https://arxiv.org/abs/2203.09095), a model pre-trained on the *interaction* of code reviews (Code Change → Review Comment). It proved that a model trained on diffs and comments beats a generic large model at spotting errors.
 
-## 2. The Data Strategy Works (Meta)
-*   **Meta** fine-tuned Llama on 64,000 internal `<Review Comment, Patch>` pairs ([MetaMate for Code Review](https://www.researchgate.net/publication/381062746_Resolving_Code_Review_Comments_with_Machine_Learning)). They found that fine-tuning a smaller model on their own *high-quality internal history* significantly outperformed massive generic models.
+## 2. The Data Strategy Works (Meta & LIMA)
+*   **Meta** fine-tuned Llama on 64,000 internal `<Review Comment, Patch>` pairs ([MetaMateCR](https://arxiv.org/abs/2507.13499)). Their fine-tuned model outperformed GPT-4o by 9 percentage points—proving that *your own data* beats a bigger generic model.
+*   **LIMA** ([arXiv:2305.11206](https://arxiv.org/abs/2305.11206)) showed that even 1,000 carefully curated examples can produce competitive results, reinforcing that you don't need "Big Data"—you need *clean* data.
 
 ## 3. The Future is Reward Engineering (DeepSeek)
 *   **DeepSeek-R1** (released Jan 2025) pioneered using large-scale Reinforcement Learning to force a model to "pause and verify" its own output ([Technical Report](https://github.com/deepseek-ai/DeepSeek-R1)). This is the logical endpoint of our Reviewer: training the "Taste" directly into the model's reward function.
