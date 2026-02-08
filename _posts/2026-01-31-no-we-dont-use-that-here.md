@@ -12,7 +12,9 @@ updates:
   - date: 2026-02-05 12:00:00
     reason: "Added 'Knowledge Trap' section addressing fine-tuning critique"
   - date: 2026-02-06 09:00:00
-    reason: "Corrected NP-Hard/NP-Complete analogy and replaced unverifiable MetaMate citation with LIMA paper"
+    reason: "Corrected NP-Hard/NP-Complete analogy"
+  - date: 2026-02-07 12:00:00
+    reason: "Fixed MetaMate citation URL and added LIMA paper as supporting evidence"
 ---
 
 We've all been there. You ask your shiny new AI Agent to "add a user profile endpoint," and it generates 50 lines of pristine, bug-free, idiomatic Python. 
@@ -155,8 +157,9 @@ This isn't just a fun thought experiment. The biggest players in AI and Tech are
 *   **Google** deployed a model trained purely on [resolving code review comments](https://research.google/blog/resolving-code-review-comments-with-ml/). It focuses on the "cleanup" phase—predicting the edit needed to satisfy a human reviewer—and achieved a 50%+ acceptance rate.
 *   **Microsoft** [released CodeReviewer](https://arxiv.org/abs/2203.09095), a model pre-trained on the *interaction* of code reviews (Code Change → Review Comment). It proved that a model trained on diffs and comments beats a generic large model at spotting errors.
 
-## 2. The Data Strategy Works (LIMA)
-*   **LIMA: Less Is More for Alignment** ([arXiv:2305.11206](https://arxiv.org/abs/2305.11206)) proved that fine-tuning on just 1,000 carefully curated examples can match the performance of models trained on 50,000+ examples. This validates our thesis: You don't need "Big Data", you need *your* data (high-quality diffs).
+## 2. The Data Strategy Works (Meta & LIMA)
+*   **Meta** fine-tuned Llama on 64,000 internal `<Review Comment, Patch>` pairs ([MetaMateCR](https://arxiv.org/abs/2507.13499)). Their fine-tuned model outperformed GPT-4o by 9 percentage points—proving that *your own data* beats a bigger generic model.
+*   **LIMA** ([arXiv:2305.11206](https://arxiv.org/abs/2305.11206)) showed that even 1,000 carefully curated examples can produce competitive results, reinforcing that you don't need "Big Data"—you need *clean* data.
 
 ## 3. The Future is Reward Engineering (DeepSeek)
 *   **DeepSeek-R1** (released Jan 2025) pioneered using large-scale Reinforcement Learning to force a model to "pause and verify" its own output ([Technical Report](https://github.com/deepseek-ai/DeepSeek-R1)). This is the logical endpoint of our Reviewer: training the "Taste" directly into the model's reward function.
