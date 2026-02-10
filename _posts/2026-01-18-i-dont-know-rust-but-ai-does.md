@@ -9,6 +9,8 @@ updates:
     reason: "Fixed benchmark numbers and added caveat about existing resources"
   - date: 2026-02-01 12:00:00
     reason: "Clarified performance target"
+  - date: 2026-02-10 09:00:00
+    reason: "Updated average benchmark numbers"
 ---
 
 We software engineers are creatures of habit. We have our comfortable pair of slippers: the languages we know by heart. For me, and for many of my colleagues, those languages are TypeScript, Python, Java, etc.
@@ -21,13 +23,13 @@ But comfort comes with a tax.
 
 Let's look at a specific example: generating `.d.ts` Declaration files for our TypeScript packages. 
 
-We have a custom tool for this. It's written in TypeScript, runs on Node.js, and uses `swc` under the hood. It's a great tool. It's readable, easy to modify, and by human standards, it's fast. It takes about **120ms** to process a large package.
+We have a custom tool for this. It's written in TypeScript, runs on Node.js, and uses `swc` under the hood. It's a great tool. It's readable, easy to modify, and by human standards, it's fast. It takes about **750ms** to process an average-sized package.
 
-120ms. That sounds fine, right?
+750ms. That sounds fine, right?
 
 But we have tens of thousands of packages. And in a build system like Bazel, those milliseconds add up. Every time we spin up a Node.js process, we pay a startup penalty. We pay for the single-threaded nature of the event loop - even if we use IO async operations.
 
-To make this *truly* fast—we're talking single-digit milliseconds in most cases and ~50ms on the big ones—we would need to move to a native language. Something like Rust. We could use the specific crates (like [`oxc`](https://github.com/oxc-project/oxc), the Oxidation Compiler) directly as libraries, bypassing the process-spawning overhead and utilizing true multi-threading.
+To make this *truly* fast—we're talking single-digit milliseconds in most cases and ~100ms on the big ones—we would need to move to a native language. Something like Rust. We could use the specific crates (like [`oxc`](https://github.com/oxc-project/oxc), the Oxidation Compiler) directly as libraries, bypassing the process-spawning overhead and utilizing true multi-threading.
 
 But here is the friction: **I don't know Rust.** And none of my teammates know Rust. 
 
@@ -60,19 +62,19 @@ The result? [**rust_oxc_dts_emit**](https://github.com/menny/rust_oxc_dts_emit).
 *   **Development Time to POC**: ~30 minutes*.
     *   *Caveat: I already had a full, battle-tested TypeScript implementation to reference, some Rust examples in the codebase, and lots of real-world test cases.*
 *   **My Rust Knowledge Required**: Zero.
-*   **Performance**: The new tool runs in **around 50ms**.
+*   **Performance**: The new tool runs on average in **around 200ms**. Moreover, it is **single** digit on single file packages!
 *   **Additional time to productize and document**: a couple of hours.
 
-That is a **~2.4x speedup**.
+That is a **~3.5x speedup** on average!
 
 ```bash
 # Before (Node.js + swc) - 200 typescript files
 time node dts-emit src/
-# 120ms
+# 780ms
 
 # After (Rust-based + oxc) - same 200 typescript files
 time rust_oxc_dts_emit src/
-# 50ms
+# 215ms
 ```
 
 By moving from a "spawning a Node process" model to a "native binary using a library" model, we obliterated the overhead. And because the AI handled the implementation, the "cost" of using a language I don't know was effectively zero.
