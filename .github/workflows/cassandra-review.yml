@@ -24,10 +24,8 @@ jobs:
       - name: Run Cassandra AI Review
         uses: menny/cassandra@v0.4.0
         with:
-          provider: 'google'
           provider_api_key: ${{ secrets.GEMINI_API_KEY }}
           reviewer_github_token: ${{ steps.app-token.outputs.token }}
           base: ${{ github.event.pull_request.base.sha }}
           head: ${{ github.event.pull_request.head.sha }}
-          main_guidelines: 'minimalist'
           submit_review_action: 'true'
