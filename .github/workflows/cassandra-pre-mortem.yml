@@ -2,6 +2,8 @@ name: Cassandra Pre-Mortem
 on:
   pull_request:
     types: [opened, synchronize, reopened]
+    paths:
+      - '_posts/**'
 jobs:
   pre-mortem:
     name: AI Pre-Mortem Review
