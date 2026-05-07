@@ -11,7 +11,7 @@
 *   Is the "Hook" too generic? Is there too much preamble before the first piece of "meat" (code, data, or novel insight)?
 
 ### 2. Credibility & Factual Collapse
-*   **Use Brave Search MCP** to find the weakest link or the most shaky technical claim.
+*   **Use `brave-search`** to verify quantitative claims, dates, library version support, and benchmark results. Do not search for subjective opinions.
 *   Check if any recommended libraries or versions are already considered "legacy" or if there's a widely known "gotcha" that we ignored.
 *   If the post makes a "hot take," find the most compelling counter-argument and explain why it wins over our argument.
 
@@ -21,7 +21,7 @@
 
 ### 4. Technical Fragility
 *   Does the code work? Is it missing imports, or does it rely on "happy path" assumptions that would break in production?
-*   Use the Brave MCP to verify API signatures if they look suspicious.
+*   Use the `brave-search` to verify API signatures if they look suspicious.
 
 ## Required Output Format
 
