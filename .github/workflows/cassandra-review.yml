@@ -30,4 +30,4 @@ jobs:
           head: ${{ github.event.pull_request.head.sha }}
           submit_review_action: 'true'
         env:
-          CASSANDRA_BRAVE_SEARCH_MCP: ${{ secrets.CASSANDRA_BRAVE_SEARCH_MCP }}
+          BRAVE_API_KEY: ${{ secrets.BRAVE_API_KEY }}

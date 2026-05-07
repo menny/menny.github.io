@@ -34,8 +34,6 @@ jobs:
           main_guidelines: ".cassandra/pre-mortem.md"
           # Reinforce the tone with a dedicated adversarial persona
           supplemental_guidelines: ".cassandra/adversarial-persona.md"
-          # Ensure Brave MCP is available for deep fact-checking
-          mcp_config: "mcp.json"
           submit_review_action: 'false'
         env:
-          CASSANDRA_BRAVE_SEARCH_MCP: ${{ secrets.CASSANDRA_BRAVE_SEARCH_MCP }}
+          BRAVE_API_KEY: ${{ secrets.BRAVE_API_KEY }}

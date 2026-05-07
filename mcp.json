@@ -7,7 +7,7 @@
         "@modelcontextprotocol/server-brave-search@0.6.2"
       ],
       "env": {
-        "BRAVE_API_KEY": "${CASSANDRA_BRAVE_SEARCH_MCP}"
+        "BRAVE_API_KEY": "${BRAVE_API_KEY}"
       }
     }
   }
