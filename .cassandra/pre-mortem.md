@@ -11,7 +11,8 @@
 *   Is the "Hook" too generic? Is there too much preamble before the first piece of "meat" (code, data, or novel insight)?
 
 ### 2. Credibility & Factual Collapse
-*   **Use `brave-search`** to verify quantitative claims, dates, library version support, and benchmark results. Do not search for subjective opinions.
+*   **Use `brave-search`** to verify quantitative claims, dates, library version support, and benchmark results. 
+*   **For Subjective Opinions:** Use `brave-search` to investigate the validity of bold opinions and to find prominent counter-claims that would lead to public disagreement or a "Hacker News pile-on."
 *   Check if any recommended libraries or versions are already considered "legacy" or if there's a widely known "gotcha" that we ignored.
 *   If the post makes a "hot take," find the most compelling counter-argument and explain why it wins over our argument.
 
