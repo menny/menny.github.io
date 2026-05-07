@@ -9,6 +9,15 @@
       "env": {
         "BRAVE_API_KEY": "${BRAVE_API_KEY}"
       }
+    },
+    "fetch": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "mcp-server-fetch==2025.4.7",
+        "mcp-server-fetch"
+      ]
     }
+
   }
 }

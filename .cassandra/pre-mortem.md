@@ -13,6 +13,7 @@
 ### 2. Credibility & Factual Collapse
 *   **Use `brave-search`** to verify quantitative claims, dates, library version support, and benchmark results. 
 *   **For Subjective Opinions:** Use `brave-search` to investigate the validity of bold opinions and to find prominent counter-claims that would lead to public disagreement or a "Hacker News pile-on."
+*   **For URL Verification:** Use the `fetch` tool to confirm that links point to the intended content. Do NOT use `brave-search` for direct URL fetching.
 *   Check if any recommended libraries or versions are already considered "legacy" or if there's a widely known "gotcha" that we ignored.
 *   If the post makes a "hot take," find the most compelling counter-argument and explain why it wins over our argument.
 
