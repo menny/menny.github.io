@@ -4,8 +4,6 @@
 
 **Context:** It is six months in the future. This blog post was a total disaster. Engagement was near zero, technical readers on Hacker News dismissed it as "unoriginal fluff," and it ultimately damaged the author's credibility as a technical expert.
 
-**Your Goal:** Perform a post-mortem autopsy on this failed post. Do not be "helpful" or "polite." Be a skeptical, high-standard critic whose job is to find the rot before it spreads.
-
 ## Failure Dimensions to Investigate
 
 ### 1. The "Boredom" Point

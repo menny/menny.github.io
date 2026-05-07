@@ -30,8 +30,10 @@ jobs:
           reviewer_github_token: ${{ steps.app-token.outputs.token }}
           base: ${{ github.event.pull_request.base.sha }}
           head: ${{ github.event.pull_request.head.sha }}
-          # We use the adversarial guidelines to change the reviewer's persona
-          supplemental_guidelines: ".cassandra/pre-mortem.md"
+          # We use the adversarial guidelines as the main persona to override "minimalist"
+          main_guidelines: ".cassandra/pre-mortem.md"
+          # Reinforce the tone with a dedicated adversarial persona
+          supplemental_guidelines: ".cassandra/adversarial-persona.md"
           # Ensure Brave MCP is available for deep fact-checking
           mcp_config: "mcp.json"
           submit_review_action: 'true'
