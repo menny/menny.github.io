@@ -36,6 +36,6 @@ jobs:
           supplemental_guidelines: ".cassandra/adversarial-persona.md"
           # Ensure Brave MCP is available for deep fact-checking
           mcp_config: "mcp.json"
-          submit_review_action: 'true'
+          submit_review_action: 'false'
         env:
           CASSANDRA_BRAVE_SEARCH_MCP: ${{ secrets.CASSANDRA_BRAVE_SEARCH_MCP }}
