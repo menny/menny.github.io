@@ -26,8 +26,10 @@ Follow these guidelines when reviewing pull requests that modify or add files in
 *   **Formatting:** Observe how code blocks, lists, and bold text are used for emphasis in previous posts and maintain that style.
 
 ## 4. Fact-Checking
+*   **Brave Search MCP:** Use the `brave-search` tool to verify quantitative claims, dates, library version support, and benchmark results. Do not use it for subjective opinions.
+*   **Link Verification:** For all citation links, use the `brave-search` or fetch tools to confirm that the link points to the intended content and that the cited information accurately reflects the linked source.
 *   **Technical Accuracy:** Flag any technical claims that seem inaccurate or outdated.
-*   **External References:** Verify that mentioned tools, libraries (e.g., `oxc`, `swc`, `FastAPI`), or papers (e.g., ArXiv citations) are correctly named and linked if possible.
+*   **External References:** Verify that mentioned tools, libraries (e.g., `oxc`, `swc`, `FastAPI`), or papers (e.g., ArXiv citations) are correctly named and linked.
 *   **Reasoning:** If a post makes a bold claim (e.g., about NP-Completeness or performance metrics), ensure the reasoning is internally consistent and logically sound.
 
 ## Feedback Format

@@ -5,6 +5,7 @@
 provider = "google"
 model = "gemini-3.1-pro-preview"
 main-guidelines = "minimalist"
+mcp-config = "mcp.json"
 
 # Additive guidelines to supplement the main prompt.
 supplemental-guidelines = [

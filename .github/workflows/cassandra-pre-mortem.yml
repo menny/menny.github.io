@@ -1,10 +1,12 @@
-name: Cassandra Review
+name: Cassandra Pre-Mortem
 on:
   pull_request:
     types: [opened, synchronize, reopened]
+    paths:
+      - '_posts/**'
 jobs:
-  review:
-    name: AI Code Review
+  pre-mortem:
+    name: AI Pre-Mortem Review
     runs-on: ubuntu-24.04
     # Skip the job if it is a cross-repository PR (secrets are not available for external PRs)
     if: github.event.pull_request.head.repo.full_name == github.repository
@@ -21,13 +23,19 @@ jobs:
         with:
           app-id: 3562238
           private-key: ${{ secrets.CASSANDRA_APP_PRIVATE_KEY }}
-      - name: Run Cassandra AI Review
+      - name: Run Cassandra AI Pre-Mortem
         uses: menny/cassandra@v0.4.0
         with:
           provider_api_key: ${{ secrets.GEMINI_API_KEY }}
           reviewer_github_token: ${{ steps.app-token.outputs.token }}
           base: ${{ github.event.pull_request.base.sha }}
           head: ${{ github.event.pull_request.head.sha }}
-          submit_review_action: 'true'
+          # We use the adversarial guidelines as the main persona to override "minimalist"
+          main_guidelines: ".cassandra/pre-mortem.md"
+          # Reinforce the tone with a dedicated adversarial persona
+          supplemental_guidelines: ".cassandra/adversarial-persona.md"
+          # Ensure Brave MCP is available for deep fact-checking
+          mcp_config: "mcp.json"
+          submit_review_action: 'false'
         env:
           CASSANDRA_BRAVE_SEARCH_MCP: ${{ secrets.CASSANDRA_BRAVE_SEARCH_MCP }}
