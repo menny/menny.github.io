@@ -14,6 +14,8 @@ updates:
     reason: "Updated average benchmark numbers"
   - date: 2026-06-20 09:00:00
     reason: "Added first letter image"
+  - date: 2026-06-20 11:00:00
+    reason: "Add examples for similar shifts in other areas"
 ---
 
 We software engineers are creatures of habit. We have our comfortable pair of slippers: the languages we know by heart. For me, and for many of my colleagues, those languages are TypeScript, Python, Java, etc.
@@ -126,25 +128,11 @@ We are training ourselves to be Managers on the small stuff so we are ready for 
 
 This transition might feel unnatural to us software developers. We like to *know* how our tools work. But giving up intimate knowledge of implementation details is exactly what happened in almost every other mature engineering discipline as complexity scaled. 
 
-Think about it.
-
-### Logic Synthesis in Electrical Engineering
-
-In the early days of chip design, engineers manually drafted schematics and routed logic gates. But then came Moore's Law. As chip complexity exploded from thousands to millions of transistors in the late 1980s, manual placement became physically and mathematically impossible. 
+For example, in the early days of chip design, engineers manually drafted schematics and routed logic gates. But then came Moore's Law. As chip complexity exploded from thousands to millions of transistors in the late 1980s, manual placement became physically and mathematically impossible. 
 
 Electrical engineers didn't stubbornly stick to manual routing. They moved up the abstraction stack. Today, they write behavioral code and let [logic synthesis](https://ieeexplore.ieee.org/document/8682229) software like Synopsys Design Compiler figure out the exact placement of billions of microscopic transistors. They own the *behavior*; the tool owns the *implementation*.
 
-### Generative Design in Mechanical Engineering
-
-We see the exact same pattern in structural design. If you look at modern, high-performance aerospace components, they often look highly organic—almost alien. 
-
-Why? Because mechanical engineers started using [Generative Design](https://en.wikipedia.org/wiki/Generative_design) and Topology Optimization. Powered by cloud computing, the software mathematically shaves off unnecessary material at a microscopic level. The engineer defines the structural load constraints (the "what"), but they cannot explain the exact reasoning behind every specific microscopic hollow or asymmetric curve (the "how"). They gave up intimate knowledge to achieve a vastly superior result.
-
-### Finite Element Analysis in Civil Engineering
-
-Even civil engineering went through this. When we transitioned to modern skyscrapers in the 70s and 80s, the structural math became too complex for manual calculation. 
-
-Enter [Finite Element Analysis (FEA)](https://www.simscale.com/blog/2018/10/finite-element-method-history/). Tools like SAP2000 break a massive skyscraper down into millions of discrete geometric elements. A structural engineer manages the global forces—like wind or earthquakes—but they have absolutely no intimate knowledge of the localized matrix mathematics occurring within element #3,405,112 inside a concrete pillar. They trust the solver to do the heavy lifting.
+We see the exact same pattern in other fields—whether it's [Generative Design](https://en.wikipedia.org/wiki/Generative_design) in mechanical engineering or [Finite Element Analysis (FEA)](https://www.simscale.com/blog/2018/10/finite-element-method-history/) in civil engineering. The engineer specifies the constraints (the "what") and trusts the solver to figure out the complex math (the "how").
 
 # Conclusion
 
