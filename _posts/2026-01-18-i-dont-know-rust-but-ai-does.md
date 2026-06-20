@@ -128,11 +128,11 @@ We are training ourselves to be Managers on the small stuff so we are ready for 
 
 This transition might feel unnatural to us software developers. We like to *know* how our tools work. But giving up intimate knowledge of implementation details is exactly what happened in almost every other mature engineering discipline as complexity scaled. 
 
-For example, in the early days of chip design, engineers manually drafted schematics and routed logic gates. But then came Moore's Law. As chip complexity exploded from thousands to millions of transistors in the late 1980s, manual placement became physically and mathematically impossible. 
+For example, in the early days of chip design, engineers manually drafted schematics and connected logic gates by hand. But then came Moore's Law. As chip complexity exploded from thousands to millions of transistors in the late 1980s, manual schematic drafting became impossible. 
 
-Electrical engineers didn't stubbornly stick to manual routing. They moved up the abstraction stack. Today, they write behavioral code and let [logic synthesis](https://ieeexplore.ieee.org/document/8682229) software like Synopsys Design Compiler figure out the exact placement of billions of microscopic transistors. They own the *behavior*; the tool owns the *implementation*.
+Electrical engineers didn't stubbornly stick to drawing gates. They moved up the abstraction stack. Today, they write high-level behavioral code (RTL) and let [logic synthesis](https://en.wikipedia.org/wiki/Logic_synthesis) software like Synopsys Design Compiler automatically translate that behavior into an optimized gate-level netlist. They own the *behavior*; the tool owns the *implementation*.
 
-We see the exact same pattern in other fields—whether it's [Generative Design](https://en.wikipedia.org/wiki/Generative_design) in mechanical engineering or [Finite Element Analysis (FEA)](https://www.simscale.com/blog/2018/10/finite-element-method-history/) in civil engineering. The engineer specifies the constraints (the "what") and trusts the solver to figure out the complex math (the "how").
+We see the exact same pattern in other fields—whether it's [Generative Design](https://en.wikipedia.org/wiki/Generative_design) in mechanical engineering or [Finite Element Analysis (FEA)](https://doi.org/10.1002/nme.962) in civil engineering. The engineer specifies the constraints (the "what") and trusts the solver to figure out the complex math (the "how").
 
 # Conclusion
 
