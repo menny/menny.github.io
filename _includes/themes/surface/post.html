@@ -28,12 +28,7 @@
 	<div class="row-fluid post-full">
 	  <div class="span12">
 		{% if page.first_letter_image %}
-		  {% assign first_char = page.first_letter_image | slice: 0 %}
-		  {% if first_char == "/" %}
-		    {% assign img_path = page.first_letter_image %}
-		  {% else %}
-		    {% assign img_path = "/" | append: page.first_letter_image %}
-		  {% endif %}
+		  {% assign img_path = page.first_letter_image | relative_url %}
 		{% endif %}
 		<div class="content{% if page.first_letter_image %} has-first-letter-image{% endif %}" itemprop="articleBody"{% if page.first_letter_image %} style="--first-letter-image-light: url('{{ img_path }}_light.png'); --first-letter-image-dark: url('{{ img_path }}_dark.png');"{% endif %}>
 		  {{ content }}
