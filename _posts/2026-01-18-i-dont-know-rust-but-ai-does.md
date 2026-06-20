@@ -4,6 +4,7 @@ title: "Faster Builds Without Owning Code a.k.a. I Don't Know Rust, But AI Does"
 date: 2026-01-18 12:00:00
 categories: [ai, build-system, rust]
 tags: [bazel, ai-agent, developer-experience, performance]
+first_letter_image: "assets/first-letter/2026-01-18-i-dont-know-rust-but-ai-does-2"
 updates:
   - date: 2026-01-19 12:00:00
     reason: "Fixed benchmark numbers and added caveat about existing resources"
@@ -11,6 +12,8 @@ updates:
     reason: "Clarified performance target"
   - date: 2026-02-10 09:00:00
     reason: "Updated average benchmark numbers"
+  - date: 2026-06-20 09:00:00
+    reason: "Added first letter image"
 ---
 
 We software engineers are creatures of habit. We have our comfortable pair of slippers: the languages we know by heart. For me, and for many of my colleagues, those languages are TypeScript, Python, Java, etc.
