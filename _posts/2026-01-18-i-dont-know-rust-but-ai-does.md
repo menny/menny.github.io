@@ -14,7 +14,7 @@ updates:
     reason: "Updated average benchmark numbers"
   - date: 2026-06-20 09:00:00
     reason: "Added first letter image"
-  - date: 2026-06-20 11:00:00
+  - date: 2026-06-22 09:00:00
     reason: "Add examples for similar shifts in other areas"
 ---
 
@@ -124,15 +124,16 @@ As our confidence in AI Agents grows and their capabilities improve, the definit
 
 We are training ourselves to be Managers on the small stuff so we are ready for the big stuff. We are learning how to specify behavior rather than implementation, how to verify outcomes rather than syntax, and how to maintain systems we didn't build.
 
-# The Engineering Precedent
+# This Has Happened Before
 
-This transition might feel unnatural to us software developers. We like to *know* how our tools work. But giving up intimate knowledge of implementation details is exactly what happened in almost every other mature engineering discipline as complexity scaled. 
+This transition might feel unnatural to us software developers. We pride ourselves on knowing exactly how our tools and systems work. But giving up intimate knowledge of implementation details is exactly what happens in every mature engineering discipline as complexity scales. A few examples:
 
-For example, in the early days of chip design, engineers manually drafted schematics and connected logic gates by hand. But then came Moore's Law. As chip complexity exploded from thousands to millions of transistors in the late 1980s, manual schematic drafting became impossible. 
+*   **Hardware Engineering ([High-Level Synthesis](https://en.wikipedia.org/wiki/High-level_synthesis)):** Engineers write behavioral C++ code, and the tool synthesizes the cycle-accurate Register-Transfer Level (RTL). The engineer abstracts away clock-cycle management and trusts the tool to generate the lower-level hardware description. They own the *behavior*; the tool owns the *implementation*.
+*   **Mechanical Engineering ([Generative Design](https://en.wikipedia.org/wiki/Generative_design)):** Engineers define the physical constraints (materials, load-bearing points, boundaries), and the software iterates thousands of shapes to find the optimal structure. The engineer accepts the final geometry without manually designing every curve. They specify the *what* and let the software figure out the *how*.
+*   **Software Engineering (The Move from Assembly):** Decades ago, programmers hand-wrote Assembly language, knowing exactly how data moved through CPU registers. With the rise of high-level languages like C, Python, and TypeScript, we lost that low-level knowledge. We stopped managing memory and started managing logic, trusting compilers to handle the "black box" of machine code.
 
-Electrical engineers didn't stubbornly stick to drawing gates. They moved up the abstraction stack. Today, they write high-level behavioral code (RTL) and let [logic synthesis](https://en.wikipedia.org/wiki/Logic_synthesis) software like Synopsys Design Compiler automatically translate that behavior into an optimized gate-level netlist. They own the *behavior*; the tool owns the *implementation*.
+While these historical tools are deterministic and AI is probabilistic, the underlying evolutionary shift is identical. We must let go of intimate implementation knowledge to move up the abstraction stack, focusing instead on the management of requirements and constraints.
 
-We see the exact same pattern in other fields—whether it's [Generative Design](https://en.wikipedia.org/wiki/Generative_design) in mechanical engineering or [Finite Element Analysis (FEA)](https://doi.org/10.1002/nme.962) in civil engineering. The engineer specifies the constraints (the "what") and trusts the solver to figure out the complex math (the "how").
 
 # Conclusion
 
