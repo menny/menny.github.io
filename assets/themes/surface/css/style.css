@@ -12,8 +12,8 @@
   --color-code-border: #e0e0ea;
   --content-width: 800px;
   --card-radius: 10px;
-  --shadow-soft: 0 8px 24px rgba(0,0,0,0.08);
-  --shadow-hover: 0 12px 30px rgba(0,0,0,0.14);
+  --shadow-soft: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --shadow-hover: 0 12px 30px rgba(0, 0, 0, 0.14);
   --space-1: 8px;
   --space-2: 16px;
   --space-3: 24px;
@@ -76,17 +76,23 @@ a:visited {
   color: var(--color-muted);
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: 'Quattrocento', serif;
 }
 
-h1, .headline{
+h1,
+.headline {
   text-align: center;
   margin-top: var(--space-3);
   margin-bottom: var(--space-2);
 }
 
-.subtitle{
+.subtitle {
   text-align: center;
   margin-bottom: var(--space-2);
   margin-top: var(--space-2);
@@ -97,12 +103,19 @@ h1, .headline{
   padding-left: 0em;
 }
 
-h2, h3, h4, h5, h6 {
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin-top: var(--space-3);
   margin-bottom: var(--space-1);
 }
 
-h3, h4, h5, h6 {
+h3,
+h4,
+h5,
+h6 {
   margin-bottom: var(--space-1);
 }
 
@@ -170,7 +183,7 @@ pre code {
   padding: 0 var(--space-2);
 }
 
-.container-narrow > hr {
+.container-narrow>hr {
   margin: var(--space-3) 0;
 }
 
@@ -218,15 +231,15 @@ pre code {
 }
 
 .navbar ul {
-	padding-top: 10px;
-	list-style-type: none;
+  padding-top: 10px;
+  list-style-type: none;
   margin: 0;
   padding-left: 0;
 }
 
 .posts {
-	list-style-type: none;
-	margin: 0;
+  list-style-type: none;
+  margin: 0;
   padding: 0;
   display: grid;
   gap: var(--space-3);
@@ -296,7 +309,7 @@ ul.raised {
   font-size: 0.9em;
 }
 
-.post-card-meta span + span::before {
+.post-card-meta span+span::before {
   content: "|";
   margin: 0 6px;
   color: var(--color-muted);
@@ -320,18 +333,21 @@ ul.raised {
 }
 
 /* posts index */
-.post > h3.title {
+.post>h3.title {
   position: relative;
-  padding-top: 10px; }
+  padding-top: 10px;
+}
 
-.post > h3.title span.date {
+.post>h3.title span.date {
   position: absolute;
   right: 0;
-  font-size: 0.9em; }
+  font-size: 0.9em;
+}
 
-.post > .more {
+.post>.more {
   margin: 5pt 0;
-  text-align: left; }
+  text-align: left;
+}
 
 /* post-full*/
 .post-full .date {
@@ -346,7 +362,7 @@ ul.raised {
   text-align: center;
 }
 
-.post-hero > * {
+.post-hero>* {
   max-width: var(--content-width);
   margin-left: auto;
   margin-right: auto;
@@ -370,7 +386,7 @@ ul.raised {
   font-size: 1em;
 }
 
-.post-meta span + span::before {
+.post-meta span+span::before {
   content: "|";
   margin: 0 6px;
   color: var(--color-muted);
@@ -431,7 +447,8 @@ ul.raised {
 .tag_box a.active {
   background: var(--color-accent);
   border: 1px solid var(--color-accent);
-  color: #FFF; }
+  color: #FFF;
+}
 
 .tag_box a:hover {
   border-color: var(--color-accent);
@@ -439,7 +456,7 @@ ul.raised {
   background: var(--color-surface);
 }
 
-.bio ul{
+.bio ul {
   list-style: none;
 }
 
@@ -448,7 +465,7 @@ ul.raised {
 }
 
 .sharing-buttons ul {
-	list-style-type: none;
+  list-style-type: none;
   margin: 0;
   padding: 0;
   display: flex;
@@ -458,8 +475,8 @@ ul.raised {
 }
 
 .sharing-buttons li {
-	display:inline;
-	margin-left: 0;
+  display: inline;
+  margin-left: 0;
 }
 
 .sharing-buttons a,
@@ -502,7 +519,7 @@ ul.raised {
 
 
 a.dark-light-mode-toggle {
-  background-image:url("/assets/themes/surface/img/dark_mode_24px.png");
+  background-image: url("/assets/themes/surface/img/dark_mode_24px.png");
   display: inline-block;
   text-decoration: none;
   width: 24px;
@@ -595,7 +612,8 @@ a.dark-light-mode-toggle {
   transition: opacity 0.2s, background-color 0.2s;
 }
 
-.copy-code-button:hover, .copy-code-button:focus {
+.copy-code-button:hover,
+.copy-code-button:focus {
   opacity: 1;
   background-color: rgba(0, 0, 0, 0.1);
 }
@@ -742,4 +760,21 @@ button.js-copy-link:focus-visible {
   html {
     scroll-behavior: smooth;
   }
+}
+
+.content.has-first-letter-image>p:first-of-type::first-letter {
+  font-size: 80pt;
+  color: transparent;
+  display: inline-block;
+  vertical-align: 18pt;
+  overflow: hidden;
+  margin-right: 2pt;
+  background-image: var(--first-letter-image-light);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: bottom center;
+}
+
+body.dark-mode .content.has-first-letter-image>p:first-of-type::first-letter {
+  background-image: var(--first-letter-image-dark);
 }
