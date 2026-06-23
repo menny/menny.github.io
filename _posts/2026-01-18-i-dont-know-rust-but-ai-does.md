@@ -32,9 +32,9 @@ We have a custom tool for this. It's written in TypeScript, runs on Node.js, and
 
 750ms. That sounds fine, right?
 
-But we have tens of thousands of packages. And in a build system like Bazel, those milliseconds add up. Every time we spin up a Node.js process, we pay a startup penalty. We pay for the single-threaded nature of the event loop - even if we use IO async operations.
+But we have tens of thousands of packages. And in a build system like Bazel, those milliseconds add up. Every time we spin up a Node.js process, we pay a startup penalty. We pay for the single-threaded nature of the event loop - even if we use async I/O operations.
 
-To make this *truly* fast—we're talking single-digit milliseconds in most cases and ~100ms on the big ones—we would need to move to a native language. Something like Rust. We could use the specific crates (like [`oxc`](https://github.com/oxc-project/oxc), the Oxidation Compiler) directly as libraries, bypassing the process-spawning overhead and utilizing true multi-threading.
+To make this *truly* fast—we're talking single-digit milliseconds in most cases and ~100ms on the big ones—we would need to move to a native language. Something like Rust. We could use specific crates (like [`oxc`](https://github.com/oxc-project/oxc), the Oxidation Compiler) directly as libraries, bypassing the process-spawning overhead and utilizing true multi-threading.
 
 But here is the friction: **I don't know Rust.** And none of my teammates know Rust. 
 
@@ -67,8 +67,8 @@ The result? [**rust_oxc_dts_emit**](https://github.com/menny/rust_oxc_dts_emit).
 *   **Development Time to POC**: ~30 minutes*.
     *   *Caveat: I already had a full, battle-tested TypeScript implementation to reference, some Rust examples in the codebase, and lots of real-world test cases.*
 *   **My Rust Knowledge Required**: Zero.
-*   **Performance**: The new tool runs on average in **around 200ms**. Moreover, it is **single** digit on single file packages!
-*   **Additional time to productize and document**: a couple of hours.
+*   **Performance**: The new tool runs on average in **around 200ms**. Moreover, it runs in single-digit milliseconds on single-file packages!
+*   **Additional time to productize and document**: A couple of hours.
 
 That is a **~3.5x speedup** on average!
 
@@ -90,9 +90,9 @@ While Rust was the right choice for this specific task due to the `oxc` library,
 
 How do you spot a candidate for an AI-rewrite?
 
-1.  **The "Glue" Script**: Look for scripts that primarily move data between other tools. If it's just `subprocess.call` wrappers, it can be rewritten in a faster, safer language.
+1.  **The "Glue" Script**: Look for scripts that primarily move data between other tools. If they are just `subprocess.call` wrappers, they can be rewritten in a faster, safer language.
 2.  **The "Slow but Simple"**: Tools that take noticeable time (100ms+) but do something logically simple (like generating files, parsing JSON, or checking file existence).
-3.  **The "Black Box"**: Legacy scripts that everyone is afraid to touch. Since you don't understand it anyway, having an AI rewrite it in a modern, strictly-typed language often *increases* maintainability because the AI will add types and structure that the original lacked.
+3.  **The "Black Box"**: Legacy scripts that everyone is afraid to touch. Since you don't understand them anyway, having an AI rewrite them in a modern, strictly-typed language often *increases* maintainability because the AI will add types and structure that the original lacked.
 4.  **No Secret Sauce**: Code that relies purely on public logic or open-source libraries. If it contains complex, proprietary business logic, you might want to keep it in a language you can debug manually.
 
 ## Maintenance: The "Context Window"
@@ -128,10 +128,10 @@ We are training ourselves to be Managers on the small stuff so we are ready for 
 
 This transition might feel unnatural to us software developers. We pride ourselves on knowing exactly how our tools and systems work. But giving up intimate knowledge of implementation details is exactly what happens in every mature engineering discipline as complexity scales. A few examples:
 
-*   **Hardware Engineering ([High-Level Synthesis](https://en.wikipedia.org/wiki/High-level_synthesis)):** Engineers write behavioral code, and the tool synthesizes the cycle-accurate Register-Transfer Level (RTL). The engineer own the *behavior*; the tool owns the *implementation*.
+*   **Hardware Engineering ([High-Level Synthesis](https://en.wikipedia.org/wiki/High-level_synthesis)):** Engineers write behavioral code, and the tool synthesizes the cycle-accurate Register-Transfer Level (RTL). The engineer owns the *behavior*; the tool owns the *implementation*.
 *   **Mechanical Engineering ([Generative Design](https://en.wikipedia.org/wiki/Generative_design)):** Engineers define the physical constraints (materials, load-bearing points, boundaries), and the software iterates to find the optimal structure. The engineer owns the *requirements*; the software *owns* the *how*.
 
-While these tools are deterministic and AI is probabilistic, the underlying shift is similar: intimate knowledge of the low-level code is not that important.
+While these tools strictly handle implementation mechanics (with no decision-making), the underlying shift is similar: intimate knowledge of the low-level code is not that important.
 
 
 # Conclusion
