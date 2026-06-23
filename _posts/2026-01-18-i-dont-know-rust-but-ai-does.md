@@ -14,7 +14,7 @@ updates:
     reason: "Updated average benchmark numbers"
   - date: 2026-06-20 09:00:00
     reason: "Added first letter image"
-  - date: 2026-06-22 09:00:00
+  - date: 2026-06-23 09:00:00
     reason: "Add examples for similar shifts in other areas"
 ---
 
@@ -124,15 +124,14 @@ As our confidence in AI Agents grows and their capabilities improve, the definit
 
 We are training ourselves to be Managers on the small stuff so we are ready for the big stuff. We are learning how to specify behavior rather than implementation, how to verify outcomes rather than syntax, and how to maintain systems we didn't build.
 
-# This Has Happened Before
+# Side Note: This Has Happened Before - kinda
 
 This transition might feel unnatural to us software developers. We pride ourselves on knowing exactly how our tools and systems work. But giving up intimate knowledge of implementation details is exactly what happens in every mature engineering discipline as complexity scales. A few examples:
 
-*   **Hardware Engineering ([High-Level Synthesis](https://en.wikipedia.org/wiki/High-level_synthesis)):** Engineers write behavioral C++ code, and the tool synthesizes the cycle-accurate Register-Transfer Level (RTL). The engineer abstracts away clock-cycle management and trusts the tool to generate the lower-level hardware description. They own the *behavior*; the tool owns the *implementation*.
-*   **Mechanical Engineering ([Generative Design](https://en.wikipedia.org/wiki/Generative_design)):** Engineers define the physical constraints (materials, load-bearing points, boundaries), and the software iterates thousands of shapes to find the optimal structure. The engineer accepts the final geometry without manually designing every curve. They specify the *what* and let the software figure out the *how*.
-*   **Software Engineering (The Move from Assembly):** Decades ago, programmers hand-wrote Assembly language, knowing exactly how data moved through CPU registers. With the rise of high-level languages like C, Python, and TypeScript, we lost that low-level knowledge. We stopped managing memory and started managing logic, trusting compilers to handle the "black box" of machine code.
+*   **Hardware Engineering ([High-Level Synthesis](https://en.wikipedia.org/wiki/High-level_synthesis)):** Engineers write behavioral code, and the tool synthesizes the cycle-accurate Register-Transfer Level (RTL). The engineer own the *behavior*; the tool owns the *implementation*.
+*   **Mechanical Engineering ([Generative Design](https://en.wikipedia.org/wiki/Generative_design)):** Engineers define the physical constraints (materials, load-bearing points, boundaries), and the software iterates to find the optimal structure. The engineer owns the *requirements*; the software *owns* the *how*.
 
-While these historical tools are deterministic and AI is probabilistic, the underlying evolutionary shift is identical. We must let go of intimate implementation knowledge to move up the abstraction stack, focusing instead on the management of requirements and constraints.
+While these tools are deterministic and AI is probabilistic, the underlying shift is similar: intimate knowledge of the low-level code is not that important.
 
 
 # Conclusion
