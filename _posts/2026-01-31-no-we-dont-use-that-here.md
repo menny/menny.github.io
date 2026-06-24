@@ -4,6 +4,7 @@ title: "No! We don't use that here! a.k.a. Making AI Coding NP-Complete"
 date: 2026-01-31 12:00:00
 categories: [ai, llm, software-engineering]
 tags: [agents, fine-tuning, developer-experience]
+first_letter_image: "assets/first-letter/2026-01-31-no-we-dont-use-that-here"
 updates:
   - date: 2026-02-05 10:00:00
     reason: "Standardized heading format and minor grammar fixes"
@@ -15,6 +16,8 @@ updates:
     reason: "Corrected NP-Hard/NP-Complete analogy"
   - date: 2026-02-07 12:00:00
     reason: "Fixed MetaMate citation URL and added LIMA paper as supporting evidence"
+  - date: 2026-06-23 22:00:00
+    reason: "Added first letter image"
 ---
 
 We've all been there. You ask your shiny new AI Agent to "add a user profile endpoint," and it generates 50 lines of pristine, bug-free, idiomatic Python. 
