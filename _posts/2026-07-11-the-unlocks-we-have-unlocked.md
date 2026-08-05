@@ -2,8 +2,12 @@
 layout: post
 title: "Like this. No, Wait... Maybe Like That? a.k.a. The Unlocks We Unlocked"
 date: 2026-07-11 12:00:00
+first_letter_image: "assets/first-letter/2026-08-04-unlocks"
 categories: [ai, art]
 tags: [tattoo, productivity]
+updates:
+  - date: 2026-08-04 10:00:00
+    reason: "Initial AI-assisted technical research paragraph"
 ---
 
 I have this idea for a tattoo I've been thinking about for quite some time—maybe 3 years. I know what the essence of it is:
