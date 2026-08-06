@@ -67,7 +67,7 @@ Frankly, I would postpone this even if I had a high-level plan in place.
 Not only does AI speed things up, or serve as the best [search tool](https://darren-broemmer.medium.com/the-search-for-intelligence-why-all-ai-is-really-just-search-e2a826ddef02) we've ever invented; the tools around AI are structured in a way to _keep_ context! I can give the Agent something to work on and come back later when I have time to focus. The details will be there: our conversation history, the details it found, the questions I asked, the breakdowns it produced, and the decisions I made. All there.
 
 ### Anecdotal benefit
-This is a side note, and this could be just me: with this pattern, I remove the long, difficult effort of researching, planning, and implementing. I am left with reading and deciding. This allows me to follow advice like Rule #9 of the [Ten Rules of Performance](https://www.panopticoncentral.net/2004/02/10/the-ten-rules-of-performance/)—to write it and rewrite it—more easily since I no longer [fall in love with my code](https://www.reddit.com/r/Entrepreneur/comments/1r7epfl/comment/o60ykah/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button). I feel free to delete, revise, replace, and iterate until I find something that actually feels right because it achieves its stated goal rather than a piece of _beautifully_ written code I engineered and coded.
+A quick side note: normally, manually building something in an unfamiliar domain ends in frustration, or me [falling in love with my code](https://www.reddit.com/r/Entrepreneur/comments/1r7epfl/comment/o60ykah/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button) just because I spent hours writing it. AI entirely removes that friction. Because generating and discarding ideas costs almost nothing, I can follow Rule #9 of the [Ten Rules of Performance](https://www.panopticoncentral.net/2004/02/10/the-ten-rules-of-performance/)—*to write it and rewrite it*. I can quickly cycle through iterations until I find the perfect visual to hand off to a professional, and simply throw the code away when I'm done.
 
 ## Did I do it?
 
@@ -75,14 +75,14 @@ So, I told you a story, but have I followed through? Was I unlocked?
 
 ### Technical research
 Okay, let's prompt Gemini to help us with that:
-```
+```markdown
 Explain how to extract audio frames (or raw audio buffers) from an MP3 file using standard modern web capabilities and tools.
 Also, give me a very short technical review of what is the data in the audio buffer.
 
 Complement this by finding a TypeScript library that can do the following audio functions:
 - extract frequency values or amplitudes from an audio frame
 - support various frame frequency representations
-- review the various audio visual representations available and what each show
+- review the various audio visual representations available and what each shows
 
 Give me a basic flow of using this TS library, and very short code examples (with a lot of comments).
 
