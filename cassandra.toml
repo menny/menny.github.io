@@ -3,7 +3,7 @@
 # Precedence: CLI Arguments > Configuration File > Defaults
 
 provider = "google"
-model = "gemini-3.6-flash"
+model = "gemini-3.8-flash"
 main-guidelines = "minimalist"
 mcp-config = "mcp.json"
 
