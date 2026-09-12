@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Like this. No, Wait... Maybe Like That? a.k.a. The Unlocks We Unlocked"
+title: "Like this. No, Wait... Maybe Like That? a.k.a. The Domain Translation Unlock"
 date: 2026-07-11 12:00:00
 first_letter_image: "assets/first-letter/2026-08-04-unlocks"
 categories: [ai, art]
@@ -8,6 +8,8 @@ tags: [tattoo, productivity]
 updates:
   - date: 2026-08-04 10:00:00
     reason: "Initial AI-assisted technical research paragraph"
+  - date: 2026-09-12 13:00:00
+    reason: "Switch to Domain Translation theme"
 ---
 
 I have this idea for a tattoo I've been thinking about for quite some time—maybe 3 years. I know what the essence of it is:
@@ -15,27 +17,29 @@ I have this idea for a tattoo I've been thinking about for quite some time—may
 - From the song [Telegraph Road](https://open.spotify.com/track/3k3rbIRXYS7g6RN3jeyjwc?si=dc254891c5d04126)
 - A specific guitar sequence
 - Likely black ink
-- It will be smallish, I'd say 1–2 cm
-- It will peek behind one of my ears
+- It will be smallish, I'd say 1.5–2.5 cm
+- It will peek out from behind one of my ears
 
-Yeah. If you're reading this description, I bet you're imagining something. You might think "this is cool" or maybe "meh". Regardless, I'd bet good money that it's _not_ what I imagine.
+Yeah. If you're reading this description, I bet you're imagining something. You might think "this is cool" or maybe "meh". Regardless, I'd bet good money that it's _not_ what I'm imagining.
 
 So, over the years I've tried to capture that frame using an [o-scope](https://en.wikipedia.org/wiki/Oscilloscope), a [spectrogram](https://en.wikipedia.org/wiki/Spectrogram), or [guitar tabs](https://en.wikipedia.org/wiki/Tablature). I described this to different people, and even tried to draw it.
 The outcome never looked the way I wanted or imagined. But why? I know what I want, I even have a vague mental image of it, and yet I cannot produce it.
 
 ## Why is that?
-Well, obviously, I am not an artist, so I can't draw this. I'm not an audio engineer, so I am unequipped to generate the right spectrogram—I even doubt that a spectrogram is the right visual for it. I'm not a guitar player, so my ability to find the right tab is limited.
-And on and on and on. Real blockers. My imagination is _locked_ behind my lack of capability.
+Well, obviously, I am not an artist, so I can't draw it. I'm not an audio engineer, so I don't know how to generate the right spectrogram—or if a spectrogram is even the right visual. I'm not a guitarist, so finding the exact tab is guesswork.
+Real blockers. My imagination is locked behind a vocabulary and skillset I don't have: **those are simply not my domains**.
 
-You know what capability I do _possess_? I am a software engineer.
+You know what domain I *do* inhabit? Software engineering.
 
 ## Disclaimer
 
-This post is not about a novel approach for how to use AI; it's not even an out-of-the-ordinary use case. Here I am merely pointing to what AI really solves for us—engineers—in our day-to-day work.
+This post is not about a novel approach for how to use AI; it's not even an out-of-the-ordinary use case. Here I am merely pointing to what AI allows us—people—to solve in our day-to-day issues.
 
 ## Let's unlock this
 
 If I can't produce a quality drawing, maybe I can PoC this—produce various versions of my idea and see what feels right to me. Once I have a couple of versions I like, I can show them to an actual artist and get their feedback. But at that point, the only person I need to excite is me—hey, I will have it permanently on my skin.
+
+Basically, I am going to use AI to map from my domain (software engineering) to other domains (audio engineering and sketching).
 
 ### Plan
 Here is my plan to generate some options:
@@ -43,9 +47,9 @@ Here is my plan to generate some options:
 1. Use AI to understand the technical parts:
   1. how to read an audio file into a buffer
   2. how to extract audio metadata
-  3. do I need [FFT](https://en.wikipedia.org/wiki/Fast_Fourier_transform), or maybe raw [PCM](https://en.wikipedia.org/wiki/Pulse-code_modulation)
-  4. what TypeScript (I arbitrarily pick TypeScript for my work here) library can help me with that
-  5. what are my options for audio visual presentations
+  3. do I need [FFT](https://en.wikipedia.org/wiki/Fast_Fourier_transform), or maybe raw [PCM](https://en.wikipedia.org/wiki/Pulse-code_modulation)?
+  4. what TypeScript (I arbitrarily pick TypeScript for my work here) library can help me with that?
+  5. what are my options for audio visualization?
 2. Use AI to design (plan) the technical execution of the POC tool:
    1. UX for pinpointing the data frame
    2. UX for switching between different visualizations
@@ -53,16 +57,14 @@ Here is my plan to generate some options:
    4. UX for freezing/exporting a frame
 3. Use AI to implement the tool
 
-Before the days of AI, searching and summarizing the different tools would take hours. This will now take ~20 minutes.
-Going over the technical aspects (pros/cons, different APIs, capabilities, etc.) would have taken about a day. This will now take ~30 minutes.
-Planning? ~A day before AI. It will take me a few minutes now.
-Implementation (coding, iterating, revising, etc.) would have taken me days (mind you, this is a completely new field for me, a new technology, and I am not that good with TypeScript). I bet AI will spit this out in 15 minutes.
-
 ## The Unlock
-Prior to AI, such an endeavor—yes, I use exactly that word—would have been intimidating: do I have the time? Can I really do this? Is my TypeScript proficiency enough? Do I have the focus to go over all the options and research them? Etc.
-Frankly, I would postpone this even if I had a high-level plan in place.
 
-**AI unlocked this.**
+Before the days of AI, searching, planning, and summarizing the different tools and options would take hours or days. Obviously, I also had low confidence that I would _know_ what to search for—how to translate what I need into a search query.
+
+And so such an endeavor—yes, I use exactly that word—would have been intimidating: do I have the time? Can I really do this? Is my TypeScript proficiency enough? Do I even know if I explored the right audio visualization options? Did I process the audio correctly? Do I have the focus to go over all the options and research them? Etc.
+Frankly, I would postpone this or give up. _I would just not do it_.
+
+AI **unlocks my imagination** by acting as a domain translator—mapping my words to the correct audio-engineering domain and performing a well-focused search.
 
 Not only does AI speed things up, or serve as the best [search tool](https://darren-broemmer.medium.com/the-search-for-intelligence-why-all-ai-is-really-just-search-e2a826ddef02) we've ever invented; the tools around AI are structured in a way to _keep_ context! I can give the Agent something to work on and come back later when I have time to focus. The details will be there: our conversation history, the details it found, the questions I asked, the breakdowns it produced, and the decisions I made. All there.
 
@@ -115,7 +117,7 @@ async function getRawAudioBuffer(mp3Url: string): Promise<AudioBuffer> {
 
 Pretty nice. It's a pure plumbing snippet, just to get me off the ground quickly.
 
-Gemini was also nice enough to give me a crash course on what `AudioBuffer` and PCM (Pulse Code Modulation) audio are. Look at that, now I feel less awkward with technical audio jargon. It continues to talk about `rms` (Root Mean Square), `amplitudeSpectrum`, `powerSpectrum`, `chroma`, etc.—giving me novice technical descriptions for audio concepts. These will give me names for the ideas I have in my head.
+Gemini was also nice enough to give me a crash course on what `AudioBuffer` and PCM (Pulse Code Modulation) audio are. Look at that, now I feel less awkward with technical audio jargon. It continues to talk about `rms` (Root Mean Square), `amplitudeSpectrum`, `powerSpectrum`, `chroma`, etc.—giving me novice technical descriptions for audio concepts. These gave names to the vague ideas floating around in my head—translating an aesthetic itch into concrete signal-processing vocabulary.
 
 It then introduces [meyda](https://www.npmjs.com/package/meyda) as the gold-standard for audio feature extraction in JS, and gives me a code example of how to use it.
 
@@ -123,6 +125,6 @@ This phase was so quick: one prompt, a couple of follow-ups, and my ability to e
 
 ## To be continued
 That was fun. I can pause now, knowing that all the context — summary, links, follow-ups — is still there in the chat session.
-Next will be brainstorming/PoC an audio visualizer and UX for tweaking the visual.
+Next up: brainstorming and prototyping an audio visualizer, along with a UI for tweaking the visuals.
 
 TTYL.
