@@ -7,9 +7,13 @@ tags: [productivity, design, system, funny]
 updates:
   - date: 2026-09-12 15:00:00
     reason: "Initial version"
+  - date: 2026-09-19 18:00:00
+    reason: "Timing corrections, including font detection web services"
+  - date: 2026-09-19 19:00:00
+    reason: "Adding detected fonts comparison image"
 ---
 
-My (very untechnical) friend asked me to edit a screenshot for him. Nothing too hard: it's a screenshot of a letter, and he wanted to change a few words and numbers in it.
+My (very non-technical) friend asked me to edit a screenshot for him. Nothing too hard: it's a screenshot of a letter, and he wanted to change a few words and numbers in it.
 I was like, "Sure, man. Come over, we'll do it on my laptop in a couple of minutes."
 
 Easy, right?
@@ -20,7 +24,7 @@ I launch [Gimp](https://www.gimp.org/), erase the parts that need amending and t
 
 ## Failing
 
-Ah, wait. The font doesn't look right. It _looks_ very much like Helvetica, but not really. Let's try [Arial](https://en.wikipedia.org/wiki/Arial). No.... man...
+Ah, wait. The font doesn't look right. It _looks_ very much like Helvetica, but not really. Let's try [Arial](https://en.wikipedia.org/wiki/Arial). No.... man... Also, there are some serifs in the screenshot.
 
 I'll ask [Google](https://www.google.com/search?q=what+other+fonts+look+like+Helvetica&rlz=1C5GCCM_en&oq=what+other+fonts+look+like+Helvetica&gs_lcrp=EgZjaHJvbWUyBggAEEUYOTIICAEQABgWGB4yCAgCEAAYFhgeMg0IAxAAGIYDGIAEGIoFMg0IBBAAGIYDGIAEGIoFMgcIBRAAGO8FMgcIBhAAGO8FMgcIBxAAGO8F0gEINDg3MGowajeoAgCwAgA&sourceid=chrome&source=chrome.ob&ie=UTF-8) for similar fonts. Okay... Maybe it's an [open-source](https://fonts.google.com/specimen/Roboto) one? Shit... no.
 
@@ -43,11 +47,26 @@ At this point my friend _and_ my wife are completely rolling their eyes at me: "
 
 NO!
 
-I need the right tool. And, evidently, LLMs are too big, so the right tool here is a [convolutional neural network](https://en.wikipedia.org/wiki/Convolutional_neural_network) — [CNNs are excellent with visual input](https://www.youtube.com/watch?v=n0QkWmOFnjs).
+I need the right tool. And, evidently, LLMs are too _large_, I bet there are services on the web that just do that.
+`*google search...*`
+Got a bunch of them. Let me try a few, this will work for sure.
+
+AHHH SO MANY ADS! <- is the reason I am not linking the sites, no need to bump up their [PageRank](https://en.wikipedia.org/wiki/PageRank).
+
+They say Avenir. Nope
+Another says Georgia. Nope.
+Even [Adobe Fonts](https://fonts.adobe.com/fonts/vs/upload) didn't detect the font.
+
+There is a problem here, my input (the screenshot) has low resolution, you can hardly see any kerning and serifs, it might also have some antialiasing.
+
+💡
+I know what is the right tool here: [convolutional neural network](https://en.wikipedia.org/wiki/Convolutional_neural_network) — [CNNs are excellent with visual input](https://www.youtube.com/watch?v=n0QkWmOFnjs).
 
 ## Building the tool
 
 Building a CNN is really easy today. After years of [optimizing framework](https://github.com/AlirezaShamsoshoara/PyTorchHistory) APIs and implementations, it is very easy to create and use a CNN even on my little MacBook.
+I also know what the (synthetic) dataset looks like: the resolution, the text, etc.
+Easy peasy.
 
 A couple of prompts, and we're done.
 First, a rough design:
@@ -119,9 +138,9 @@ After the first epoch (which took 7 minutes), we have:
 `Epoch 01/15 [445.9s] Train Loss: 3.4890 | Val Loss: 1.9134 | Val Font Top-1: 65.24% | Val Font Top-3: 85.36% | Val Style Top-1: 91.98% | Val Joint Acc: 60.46%`
 
 Basically:
-- `Val Font Top-3`: success in getting the actual font correct <- frankly, all I care about.
-- `Val Style Top-1`: success in getting the style (bold, italic, normal, etc.) correct.
-- `Val Joint Acc`: success in getting both correct.
+- `Val Font Top-3`: success rate in having the correct font appearing among top three predictions <- frankly, all I care about.
+- `Val Style Top-1`: success rate in getting the style (bold, italic, normal, etc.) correct.
+- `Val Joint Acc`: success rate where both are correct.
 
 Epoch 2:
 `Epoch 02/15 [398.7s] Train Loss: 1.7443 | Val Loss: 1.3207 | Val Font Top-1: 81.85% | Val Font Top-3: 95.25% | Val Style Top-1: 93.73% | Val Joint Acc: 76.74%`
@@ -242,7 +261,7 @@ Got me:
 ────────────────────────────────────────────────────────────────────────
 ```
 
-Ha!!! `Bodoni 72` was the correct font. It did that.
+Ha!!! `Bodoni 72` looks like the correct font. My network did it.
 Let's try the second font:
 
 ```text
@@ -267,8 +286,8 @@ Let's try the second font:
 ────────────────────────────────────────────────────────────────────────
 ```
 
-Yes!! `Didot` is quite right!
-
+Yes!! `Didot` looks quite right!
+🤗
 Unbelievable.
 
 ## Epilogue
@@ -289,6 +308,11 @@ Evidently, the correct tool for this job is a person attending an art [school](h
 You can check out the code here: https://github.com/menny/fonts-cnn.
 
 If you want a super good font detector, you can reach out and I can ask my daughter.
+
+## The detected fonts comparison
+Here is a sample of the fonts that were detected. Including the actual [Times New Roman](https://en.wikipedia.org/wiki/Times_New_Roman).
+
+<img src="/assets/img/fonts-comparison.png" alt="Comparison of detected fonts in this article" width="500" />
 
 ## Technical
 
@@ -315,7 +339,7 @@ The network topology is implemented in [`MultiHeadFontCNN` in `train.py`](https:
   ```
   Label smoothing (0.05) on the font head is essential: typography families often have nearly identical geometric siblings (e.g. *Arial* vs. *Helvetica* or *Didot* vs. *Bodoni*). Smoothing prevents the softmax logits from exploding into overconfident probability distributions.
 - **Optimization & Hardware**:
-  Trained with `AdamW` (`lr=1e-3`, `weight_decay=1e-4`) and a [`CosineAnnealingLR`](https://github.com/menny/fonts-cnn/blob/main/train.py#L452) schedule using Apple Silicon Metal Performance Shaders (`device='mps'`). Training 15 epochs took ~6.5 minutes for the macOS dataset (128s/epoch) and ~30 minutes for 400 Google Fonts.
+  Trained with `AdamW` (`lr=1e-3`, `weight_decay=1e-4`) and a [`CosineAnnealingLR`](https://github.com/menny/fonts-cnn/blob/main/train.py#L452) schedule using Apple Silicon Metal Performance Shaders (`device='mps'`). Training 15 epochs took ~30 minutes for the macOS dataset (128s/epoch) and ~110 minutes for 400 Google Fonts.
 
 ### 2. Synthetic Data Engineering & "Tofu" Filtering
 
