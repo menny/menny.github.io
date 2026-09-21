@@ -13,7 +13,7 @@ updates:
     reason: "Adding detected fonts comparison image"
 ---
 
-My (very non-technical) friend asked me to edit a screenshot for him. Nothing too hard: it's a screenshot of a letter, and he wanted to change a few words and numbers in it.
+My (very non-technical) friend asked me to edit a screenshot for him. Nothing too hard: it's an image of a flyer for a previous event, and he lost the original. A few words and numbers in it needed amending.
 I was like, "Sure, man. Come over, we'll do it on my laptop in a couple of minutes."
 
 Easy, right?
@@ -346,7 +346,7 @@ The network topology is implemented in [`MultiHeadFontCNN` in `train.py`](https:
 Training a font recognizer without thousands of labeled real-world photos requires synthetic data. However, generating synthetic patches with naïve rendering quickly exposes edge-case failure modes:
 
 - **The "Scale Blow-up" Bug in v1**:
-  In early iterations, rendering short numbers (like `"42"` or expiration dates) scaled text to fill the 256 × 256 canvas. A two-digit number blew up into massive, 180-pixel-high glyphs that bore no resemblance to real document typography. In [`generate_dataset_v2.py`](https://github.com/menny/fonts-cnn/blob/main/generate_dataset_v2.py), this was solved by:
+  In early iterations, rendering short numbers (like `42` or dates) scaled text to fill the 256 × 256 canvas. A two-digit number blew up into massive, 180-pixel-high glyphs that bore no resemblance to real document typography. In [`generate_dataset_v2.py`](https://github.com/menny/fonts-cnn/blob/main/generate_dataset_v2.py), this was solved by:
   1. Introducing balanced multi-line digit grids ([`TEMPLATES_NUMBER_MATRICES`](https://github.com/menny/fonts-cnn/blob/main/generate_dataset_v2.py#L61-L69)), ensuring complete numeric glyph representation (`0–9`) in realistic groupings.
   2. Adding [scale-clamped rendering](https://github.com/menny/fonts-cnn/blob/main/generate_dataset_v2.py#L324-L333), constraining glyph heights to a natural 28pt–42pt scale.
 - **Eliminating Missing-Glyph "Tofu" Boxes via `cmap` Verification**:
@@ -365,7 +365,7 @@ The final comedic punchline—where the CNN guessed *Bodoni 72* and *Didot*, whi
 - **Didone Serifs and Feature Proximity**:
   When retrained on macOS fonts, *Bodoni 72* and *Didot* topped the rankings. From a pure geometric feature standpoint, the network was picking up on the exact right visual family: high stroke contrast (dramatic contrast between thick vertical stems and razor-thin hairlines) and unbracketed horizontal serifs. In the feature space of the 512-D embedding, *Bodoni* and *Didot* sat right adjacent to the target sample.
 - **CNN Edge Detectors vs. Human Holistic Perception**:
-  The CNN looks at local edge gradients, stroke thicknesses, and localized pixel statistics. Netta, having studied typography and visual design, looked at the whole letter holistically: proportional balance, historical typeface conventions, and context. A human brain integrates semantic and visual context in milliseconds, whereas a specialized neural net remains bounded by its training distribution and loss function.
+  The CNN looks at local edge gradients, stroke thicknesses, and localized pixel statistics. Netta, having studied typography and visual design, looked at the whole text holistically: proportional balance, historical typeface conventions, and context. A human brain integrates semantic and visual context in milliseconds, whereas a specialized neural net remains bounded by its training distribution and loss function.
 
 Machine learning gave us a remarkably capable, lightweight tool built from scratch in an evening. But domain expertise (and an art school student) is still the best tool in the shed.
 
