@@ -49,17 +49,18 @@ NO!
 
 I need the right tool. And, evidently, LLMs are too _large_, I bet there are services on the web that just do that.
 `*google search...*`
-Got a bunch of them. Let me try a few, this will work for sure.
 
-AHHH SO MANY ADS! <- is the reason I am not linking the sites, no need to bump up their [PageRank](https://en.wikipedia.org/wiki/PageRank).
+Got a bunch of them (Adobe Fonts, YoFont, etc.). Let me try a few; this will work for sure.
 
-They say Avenir. Nope
+AHHH SO MANY ADS!
+
+One says Avenir. Nope.
 Another says Georgia. Nope.
-Even [Adobe Fonts](https://fonts.adobe.com/fonts/vs/upload) didn't detect the font.
 
-There is a problem here, my input (the screenshot) has low resolution, you can hardly see any kerning and serifs, it might also have some antialiasing.
+There was a compounded problem here: my input had low resolution and murky antialiasing, the sites clearly wanted to prioritize selling commercial fonts, and I was drowning in banners.
 
-💡
+*(In hindsight, [one](https://yofont.com/font-finder) tool actually did list the correct font, but it was buried near the bottom of the suggestions with negligible confidence, so I missed it).*
+
 I know what is the right tool here: [convolutional neural network](https://en.wikipedia.org/wiki/Convolutional_neural_network) — [CNNs are excellent with visual input](https://www.youtube.com/watch?v=n0QkWmOFnjs).
 
 ## Building the tool
@@ -106,7 +107,7 @@ Oh... still working. Mmm.
 
 _30 minutes later, still 1%_
 This is slow... Ooooh, I have like a few thousand fonts. Okay, gotcha. Let's limit it to the top 400 most popular fonts.
-A simple query to Google's Webfonts: `https://www.googleapis.com/webfonts/v1/webfonts?sort=popularity` gives us JSON.
+A simple query to Google's Webfonts: `https://www.googleapis.com/webfonts/v1/webfonts?sort=popularity&key=YOUR_API_KEY` gives us JSON.
 A bit more prompting, and our script can generate a synthetic dataset for those 400 fonts.
 
 ```bash
@@ -194,7 +195,7 @@ After a short consultation with Gemini (`I used Google Fonts, but my CNN can't d
 
 ### Adding more sources to the font set
 
-Okay, we also need to use the fonts macOS has (they ship a bunch of proprietary fonts under `/System/Library/Fonts/`). A bit of prompting, revised the dataset generation script, and ran it again.
+Okay, we also need to use the fonts macOS has (they ship a bunch of proprietary fonts under `/System/Library/Fonts/` - more on that in the technical section below). A bit of prompting, revised the dataset generation script, and ran it again.
 While I was looking at the code, I realized that digits are not represented in the dataset in a sufficient way. So I fixed that, too.
 
 ```bash
@@ -360,8 +361,13 @@ Training a font recognizer without thousands of labeled real-world photos requir
 
 The final comedic punchline—where the CNN guessed *Bodoni 72* and *Didot*, while Netta correctly identified *Times New Roman*—illustrates a core principle of machine learning:
 
-- **Closed-Set vs. Open-World Estimation**:
-  Discriminative CNN classifiers are closed-set estimators: their final layer is a softmax distribution across known training classes. When our first model was trained solely on Google Fonts, *Times New Roman* was literally not in its universe. The network yielded low confidence (15.9%) on *Teko* because it was forced to distribute probability among visually distant candidates.
+- **Closed-Set Estimation (and the macOS Supplemental Gotcha)**:
+  Discriminative CNN classifiers are closed-set estimators: their final layer is a softmax distribution across known training classes. If a font isn't in the dataset, the network cannot predict it.
+
+  In our first run (Google Fonts), *Times New Roman* was simply not in the catalog. But what about the macOS run?
+  As it turns out, on modern macOS, standard document fonts—including *Times New Roman*—are tucked away inside `/System/Library/Fonts/Supplemental/`, whereas `/System/Library/Fonts/` mostly contains system UI fonts. Because my dataset script only scanned the top-level directory, *Times New Roman was never in the training set!*
+
+  The network wasn't failing; it was doing the best it could with the universe it was given, finding the closest visual relatives (the high-contrast serifs of *Bodoni 72* and *Didot*).
 - **Didone Serifs and Feature Proximity**:
   When retrained on macOS fonts, *Bodoni 72* and *Didot* topped the rankings. From a pure geometric feature standpoint, the network was picking up on the exact right visual family: high stroke contrast (dramatic contrast between thick vertical stems and razor-thin hairlines) and unbracketed horizontal serifs. In the feature space of the 512-D embedding, *Bodoni* and *Didot* sat right adjacent to the target sample.
 - **CNN Edge Detectors vs. Human Holistic Perception**:
