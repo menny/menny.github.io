@@ -93,7 +93,7 @@ My goal is to experiment with different ways of 2D visualization using web canva
 I am a seasoned coder, I have a good grasp of TypeScript, but I am not an audio engineer and I know very little about audio formats.
 ```
 
-Good. First, Gemini told me it's a "fantastic project". That's nice *blushing*.
+Good. First, Gemini told me it's a "fantastic project". That's nice `*blushing*`.
 
 Then, Gemini gave me some really good pointers:
 
