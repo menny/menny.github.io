@@ -25,7 +25,7 @@ title: Let Me Explain Myself&hellip;
                 {% assign excerpt_text = post.excerpt | strip_html | strip %}
                 {% assign first_letter = excerpt_text | slice: 0 %}
                 {% assign rest_of_excerpt = excerpt_text | slice: 1, excerpt_text.size %}
-                <span class="first-letter-image-wrap" style="--first-letter-image-light: url('{{ img_path }}_light.png'); --first-letter-image-dark: url('{{ img_path }}_dark.png');" aria-hidden="true"></span><span class="sr-only">{{ first_letter }}</span><span itemprop="description">{{ rest_of_excerpt }}</span>
+                <span class="first-letter-image-wrap" style="--first-letter-image-light: url('{{ img_path }}_light.png'); --first-letter-image-dark: url('{{ img_path }}_dark.png');" aria-hidden="true"></span><span itemprop="description"><span class="sr-only">{{ first_letter }}</span>{{ rest_of_excerpt }}</span>
               {% else %}
                 <span itemprop="description">{{ post.excerpt | strip_html }}</span>
               {% endif %}

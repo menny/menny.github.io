@@ -781,8 +781,7 @@ body.dark-mode .content.has-first-letter-image>p:first-of-type::first-letter {
 }
 
 .first-letter-image-wrap {
-  display: inline-block;
-  vertical-align: baseline;
+  float: left;
   height: 100px;
   width: 78px;
   margin-right: 4px;
