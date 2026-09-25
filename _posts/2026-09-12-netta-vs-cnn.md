@@ -3,6 +3,7 @@ layout: post
 title: "Gemini, you're wrong a.k.a. Using the right tool"
 date: 2026-09-12 12:00:00
 categories: [ai]
+first_letter_image: "assets/first-letter/2026-09-12-netta-vs-cnn"
 tags: [productivity, design, system, funny]
 updates:
   - date: 2026-09-12 15:00:00
@@ -11,6 +12,8 @@ updates:
     reason: "Timing corrections, including font detection web services"
   - date: 2026-09-19 19:00:00
     reason: "Adding detected fonts comparison image"
+  - date: 2026-09-22 16:00:00
+    reason: "Add first-letter image, and fix a few new-lines"
 ---
 
 My (very non-technical) friend asked me to edit a screenshot for him. Nothing too hard: it's an image of a flyer for a previous event, and he lost the original. A few words and numbers in it needed amending.
@@ -47,14 +50,14 @@ At this point my friend _and_ my wife are completely rolling their eyes at me: "
 
 NO!
 
-I need the right tool. And, evidently, LLMs are too _large_, I bet there are services on the web that just do that.
+I need the right tool. And, evidently, LLMs are too _large_, I bet there are services on the web that just do that.<br>
 `*google search...*`
 
 Got a bunch of them (Adobe Fonts, YoFont, etc.). Let me try a few; this will work for sure.
 
 AHHH SO MANY ADS!
 
-One says Avenir. Nope.
+One says Avenir. Nope.<br>
 Another says Georgia. Nope.
 
 There was a compounded problem here: my input had low resolution and murky antialiasing, the sites clearly wanted to prioritize selling commercial fonts, and I was drowning in banners.
@@ -69,7 +72,7 @@ Building a CNN is really easy today. After years of [optimizing framework](https
 I also know what the (synthetic) dataset looks like: the resolution, the text, etc.
 Easy peasy.
 
-A couple of prompts, and we're done.
+A couple of prompts, and we're done.<br>
 First, a rough design:
 ```text
 Our goal is to create a Python script that uses a local neural network to identify font and style from a PNG file (black font, white background) - the font photo.
@@ -97,15 +100,15 @@ At this point, my friend has already gone home, my wife is watching a show, and 
 ## Running
 
 Okay, [downloading](https://github.com/menny/fonts-cnn/blob/main/download_google_fonts.py) takes a few minutes.
-Now, [generating](https://github.com/menny/fonts-cnn/blob/main/generate_dataset_v2.py) the synthetic dataset. That takes a while, sure...
+Now, [generating](https://github.com/menny/fonts-cnn/blob/main/generate_dataset_v2.py) the synthetic dataset. That takes a while, sure...<br>
 _An hour later_
 
 Mmm, still generating...
 
-_An hour later_
+_An hour later_<br>
 Oh... still working. Mmm.
 
-_30 minutes later, still 1%_
+_30 minutes later, still 1%_<br>
 This is slow... Ooooh, I have like a few thousand fonts. Okay, gotcha. Let's limit it to the top 400 most popular fonts.
 A simple query to Google's Webfonts: `https://www.googleapis.com/webfonts/v1/webfonts?sort=popularity&key=YOUR_API_KEY` gives us JSON.
 A bit more prompting, and our script can generate a synthetic dataset for those 400 fonts.
@@ -188,7 +191,7 @@ In seconds, I get:
      Bold-Italic  :   0.0%  [░░░░░░░░░░░░░░]
 ────────────────────────────────────────────────────────────────────────
 ```
-Oh... that's low confidence 😕
+Oh... that's low confidence 😕<br>
 Plus, none of those is the font from the screenshot.
 
 After a short consultation with Gemini (`I used Google Fonts, but my CNN can't detect the actual font....`): it is likely because the font is a proprietary font which Google Fonts does not have.
@@ -262,7 +265,7 @@ Got me:
 ────────────────────────────────────────────────────────────────────────
 ```
 
-Ha!!! `Bodoni 72` looks like the correct font. My network did it.
+Ha!!! `Bodoni 72` looks like the correct font. My network did it.<br>
 Let's try the second font:
 
 ```text
@@ -287,8 +290,8 @@ Let's try the second font:
 ────────────────────────────────────────────────────────────────────────
 ```
 
-Yes!! `Didot` looks quite right!
-🤗
+Yes!! `Didot` looks quite right!<br>
+🤗<br>
 Unbelievable.
 
 ## Epilogue
@@ -296,9 +299,9 @@ I edited the screenshot with the detected fonts. Sent it to my friend, who said,
 
 I was happy and excited, so I decided to show off to my family. My wife was proud, I believe.
 
-Then I went to my daughter.
-Me: "Hey Netta, check it out. My friend wanted me to edit this screenshot text and I needed to figure out the right font for this text. And..."
-Netta, cutting me off: "Yes, it's Times New Roman. Regular."
+Then I went to my daughter.<br>
+Me: "Hey Netta, check it out. My friend wanted me to edit this screenshot text and I needed to figure out the right font for this text. And..."<br>
+Netta, cutting me off: "Yes, it's Times New Roman. Regular."<br>
 Me: .....
 
 `*running to my laptop, checking with Gimp, realizing she is 100% correct.*`
